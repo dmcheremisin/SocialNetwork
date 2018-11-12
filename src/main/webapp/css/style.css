@@ -1,0 +1,25 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.layout-positioner {
+    margin: 0 auto;
+    width: 600px;
+    padding: 10px;
+}
+.layout-positioner::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.index-top-header {
+    text-align: center;
+}
+.button {
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 10px;
+    padding: 7px;
+}
