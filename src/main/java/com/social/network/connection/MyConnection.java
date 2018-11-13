@@ -16,8 +16,8 @@ public abstract class MyConnection implements Connection {
     private static final Logger logger = Logger.getLogger(MyConnection.class);
 
     static MyConnection create(Connection connection,
-                               Queue<MyConnection> freeConnections,
-                               Queue<MyConnection> usedConnections) throws SQLException {
+                               Queue<Connection> freeConnections,
+                               Queue<Connection> usedConnections) throws SQLException {
 
         connection.setAutoCommit(true);
 

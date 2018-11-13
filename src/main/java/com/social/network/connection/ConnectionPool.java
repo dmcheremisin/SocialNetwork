@@ -28,8 +28,8 @@ public class ConnectionPool {
 
     private static ConnectionPool cp;
 
-    private Queue<MyConnection> freeConnections;
-    private Queue<MyConnection> usedConnections;
+    private Queue<Connection> freeConnections;
+    private Queue<Connection> usedConnections;
 
     private ConnectionPool() throws ClassNotFoundException, SQLException {
         this.freeConnections = new ArrayBlockingQueue<>(DB_MAX_CONNECTIONS);
@@ -45,7 +45,7 @@ public class ConnectionPool {
         logger.info("Connection pool is initialized");
     }
 
-    private static ConnectionPool getConnectionPool() throws SQLException, ClassNotFoundException {
+    public static ConnectionPool getConnectionPool() throws SQLException, ClassNotFoundException {
         if (cp == null) {
             synchronized (ConnectionPool.class) {
                 if(cp == null) {
@@ -57,9 +57,9 @@ public class ConnectionPool {
     }
 
 
-    public static MyConnection getConnection() {
+    public Connection getConnection() {
         try {
-            MyConnection connection = getConnectionPool().freeConnections.poll();
+            Connection connection = getConnectionPool().freeConnections.poll();
             getConnectionPool().usedConnections.offer(connection);
             return connection;
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class ConnectionPool {
         }
     }
 
-    public static void returnConnection(MyConnection connection) {
+    public void returnConnection(Connection connection) {
         try {
             if (getConnectionPool().usedConnections.remove(connection)) {
                 getConnectionPool().freeConnections.add(connection);
@@ -92,17 +92,21 @@ public class ConnectionPool {
         }
     }
 
-    public static void onDestroy(){
-        closeConnections(cp.freeConnections);
-        closeConnections(cp.usedConnections);
+    public void onDestroy(){
+        try {
+            closeConnections(getConnectionPool().freeConnections);
+            closeConnections(getConnectionPool().usedConnections);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         logger.info("All connections are closed");
     }
 
-    private static void closeConnections(Queue<MyConnection> queue) {
-        MyConnection connection;
+    private void closeConnections(Queue<Connection> queue) {
+        Connection connection;
         while((connection = queue.poll()) != null) {
             try {
-                connection.reallyClose();
+                ((MyConnection)connection).reallyClose();
             } catch (SQLException e) {
                 logger.error("Can't really close connection in the queue");
             }
