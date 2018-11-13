@@ -8,6 +8,10 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>com.social.network.listeners.ContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>Initial commit</servlet-name>
         <servlet-class>com.social.network.controllers.InitialCommitServlet</servlet-class>
