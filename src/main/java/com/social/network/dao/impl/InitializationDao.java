@@ -1,6 +1,7 @@
-package com.social.network.dao;
+package com.social.network.dao.impl;
 
 import com.social.network.connection.ConnectionPool;
+import com.social.network.dao.Connective;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -17,25 +18,20 @@ import java.util.List;
 public class InitializationDao {
     private static final Logger logger = Logger.getLogger(InitializationDao.class);
 
-    private ConnectionPool cp;
+    private Connective connective;
     private final File sqlSchema;
     private final File sqlDump;
 
-    public InitializationDao() {
-        try {
-            cp = ConnectionPool.getConnectionPool();
-            ClassLoader classLoader = getClass().getClassLoader();
-            sqlSchema = new File(classLoader.getResource("schema.sql").getFile());
-            sqlDump = new File(classLoader.getResource("dump.sql").getFile());
-        } catch (SQLException | ClassNotFoundException e) {
-            logger.error("Can't initialize data base");
-            throw new RuntimeException("Can't initialize data base");
-        }
+    public InitializationDao(Connective connective) {
+        this.connective = connective;
+        ClassLoader classLoader = getClass().getClassLoader();
+        sqlSchema = new File(classLoader.getResource("schema.sql").getFile());
+        sqlDump = new File(classLoader.getResource("dump.sql").getFile());
     }
 
     public void initializeStubData() {
-        try(Connection con = cp.getConnection();
-            Statement stmt = con.createStatement();) {
+        try (Connection con = connective.getConnection();
+             Statement stmt = con.createStatement();) {
 
             StringBuilder schemaBatch = fileToSqlBatch(sqlSchema);
             stmt.addBatch(schemaBatch.toString());
@@ -43,6 +39,7 @@ public class InitializationDao {
             stmt.addBatch(dumpBatch.toString());
 
             stmt.executeBatch();
+            logger.info("All data is initialized successfully");
         } catch (SQLException e) {
             logger.error("Something went wrong with initialization of schema and dump of the data base");
             throw new RuntimeException("Something went wrong with initialization of schema and dump of the data base");

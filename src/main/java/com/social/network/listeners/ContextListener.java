@@ -1,6 +1,7 @@
 package com.social.network.listeners;
 
-import com.social.network.dao.InitializationDao;
+import com.social.network.connection.ConnectionPool;
+import com.social.network.dao.impl.InitializationDao;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContextEvent;
@@ -17,8 +18,13 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        InitializationDao initializationDao = new InitializationDao();
-        initializationDao.initializeStubData();
+        InitializationDao initializationDao = null;
+        try {
+            initializationDao = new InitializationDao(ConnectionPool.getConnectionPool()::getConnection);
+            initializationDao.initializeStubData();
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.error("Can't initialize database schema and data");
+        }
     }
 
     @Override
