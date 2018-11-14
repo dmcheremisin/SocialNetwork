@@ -1,7 +1,6 @@
 package com.social.network.dao;
 
-import com.social.network.connection.ConnectionPool;
-import com.social.network.exceptions.PersistException;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +12,7 @@ import java.util.List;
  * Created by Dmitrii on 14.11.2018.
  */
 public abstract class AbstractJdbcDAO<T extends Identifiable> implements GenericDao<T> {
+    protected static final Logger logger = Logger.getLogger(AbstractJdbcDAO.class);
 
     private static final String WHERE_ID = " WHERE ID = ?";
     private Connective connective;
@@ -23,9 +23,9 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
     public abstract String getTableName();
     public abstract String getInsertQuery();
     public abstract String getUpdateQuery();
-    public abstract PreparedStatement prepareStatementForUpdate (PreparedStatement st, T entity) throws SQLException, PersistException;
-    public abstract PreparedStatement prepareStatementForInsert (PreparedStatement st, T entity) throws PersistException;
-    public abstract List<T> parseResultSet (ResultSet rs) throws PersistException;
+    public abstract PreparedStatement prepareStatementForUpdate (PreparedStatement st, T entity) throws SQLException;
+    public abstract PreparedStatement prepareStatementForInsert (PreparedStatement st, T entity) throws SQLException;
+    public abstract List<T> parseResultSet (ResultSet rs);
 
     private String getSelectQuery() {
         return "SELECT * FROM " + getTableName();
@@ -34,74 +34,66 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
         return "DELETE FROM " + getTableName() + WHERE_ID;
     }
 
-    public T get(int id) throws PersistException {
+    public T get(int id) {
         String sql = getSelectQuery() + WHERE_ID;
-        List<T> list;
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
-            list = parseResultSet(rs);
-        } catch (Exception e) {
-            throw new PersistException(e);
+            List<T> list  = parseResultSet(rs);
+            return list.get(0);
+        } catch (SQLException e) {
+            logger.error(String.format("Can't get object with id=%s in the database", id));
+            throw new RuntimeException();
         }
-        if (list == null || list.size() == 0 || list.size() > 1) {
-            throw new PersistException("Can't find unique object in the database");
-        }
-        return list.get(0);
     }
 
-    public void insert(T entity) throws PersistException {
+    public void insert(T entity) {
         String sql = getInsertQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             prepareStatementForInsert(stm, entity);
-            int i = stm.executeUpdate();
-            if (i != 1) {
-                throw new PersistException("On insert more than 1 record returned: " + i);
-            }
-        } catch (Exception e) {
-            throw new PersistException(e);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(String.format("Can't insert object with id=%s in the database", entity.getId()));
+            throw new RuntimeException();
         }
     }
 
-    public void update(T entity) throws PersistException {
+    public void update(T entity) {
         String sql = getUpdateQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             prepareStatementForUpdate(stm, entity);
-            int i = stm.executeUpdate();
-            if (i != 1) {
-                throw new PersistException("On insert more than 1 record returned: " + i);
-            }
-        } catch (Exception e) {
-            throw new PersistException(e);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(String.format("Can't update object with id=%s in the database", entity.getId()));
+            throw new RuntimeException();
         }
     }
 
-    public void delete(T entity) throws PersistException {
+    public void delete(T entity) {
         String sql = getDeleteQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             stm.setInt(1, entity.getId());
-            int i = stm.executeUpdate();
-            if (i != 1) {
-                throw new PersistException("On delete more than 1 record returned: " + i);
-            }
-        } catch (Exception e) {
-            throw new PersistException(e);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(String.format("Can't delete object with id=%s from the database", entity.getId()));
+            throw new RuntimeException();
         }
     }
 
     @Override
-    public List<T> getAll() throws PersistException {
+    public List<T> getAll() {
         String sql = getSelectQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
-        } catch (Exception e) {
-            throw new PersistException(e.getMessage());
+        } catch (SQLException e) {
+            logger.error("Can't get all entities from the database");
+            throw new RuntimeException();
         }
     }
 

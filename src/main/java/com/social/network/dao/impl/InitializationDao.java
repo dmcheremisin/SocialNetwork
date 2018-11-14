@@ -1,6 +1,5 @@
 package com.social.network.dao.impl;
 
-import com.social.network.connection.ConnectionPool;
 import com.social.network.dao.Connective;
 import org.apache.log4j.Logger;
 

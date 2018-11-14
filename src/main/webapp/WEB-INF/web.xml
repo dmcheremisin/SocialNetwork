@@ -12,13 +12,22 @@
         <listener-class>com.social.network.listeners.ContextListener</listener-class>
     </listener>
 
+    <filter>
+        <filter-name>UtfEight</filter-name>
+        <filter-class>com.social.network.filters.Utf8Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UtfEight</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
-        <servlet-name>Initial commit</servlet-name>
-        <servlet-class>com.social.network.controllers.InitialCommitServlet</servlet-class>
+        <servlet-name>Registration</servlet-name>
+        <servlet-class>com.social.network.controllers.RegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Initial commit</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>Registration</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
 </web-app>

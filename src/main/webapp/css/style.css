@@ -17,6 +17,10 @@ body {
 .index-top-header {
     text-align: center;
 }
+.index-register {
+    text-align: left;
+    width: 400px;
+}
 .button {
     background-color: cornflowerblue;
     color: white;

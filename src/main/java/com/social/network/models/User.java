@@ -12,10 +12,11 @@ public class User implements Identifiable {
     private String firstName;
     private String lastName;
     private Date dob;
-    private String sex;
+    private int sex;
     private String phone;
     private String email;
-    private String role;
+    private String password;
+    private int role;
     private Boolean blocked;
 
     public Integer getId() {
@@ -50,11 +51,11 @@ public class User implements Identifiable {
         this.dob = dob;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -74,11 +75,19 @@ public class User implements Identifiable {
         this.email = email;
     }
 
-    public String getRole() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

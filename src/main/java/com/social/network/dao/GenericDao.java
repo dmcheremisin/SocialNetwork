@@ -1,6 +1,5 @@
 package com.social.network.dao;
 
-import com.social.network.exceptions.PersistException;
 import java.util.List;
 
 /**
@@ -8,18 +7,13 @@ import java.util.List;
  */
 public interface GenericDao<T> {
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public T get(int key) throws PersistException;
+    public T get(int key);
 
-    /** Создает новую запись и соответствующий ей объект */
-    public void insert(T object) throws PersistException;
+    public void insert(T object);
 
-    /** Сохраняет состояние объекта в базе данных */
-    public void update(T object) throws PersistException;
+    public void update(T object);
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(T object) throws PersistException;
+    public void delete(T object);
 
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<T> getAll() throws PersistException;
+    public List<T> getAll();
 }

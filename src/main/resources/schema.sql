@@ -14,7 +14,7 @@ CREATE TABLE users(
   sex int,
   phone varchar(20),
   email varchar(100),
-  passwordhash VARCHAR(100),
+  password VARCHAR(100),
   role int NOT NULL,
   blocked BOOLEAN DEFAULT FALSE,
   INDEX (email),
@@ -38,3 +38,8 @@ CREATE TABLE messages (
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (usersender) REFERENCES users(id)
 );
+INSERT INTO roles VALUES (null, 'admin');
+INSERT INTO roles VALUES (null, 'user');
+
+INSERT INTO sexes VALUES (null, 'male');
+INSERT INTO sexes VALUES (null, 'female');
