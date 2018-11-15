@@ -46,12 +46,12 @@
     <div class="container">
         <h1>Social network facilities:</h1>
         <ul class="list-inline">
-            <li>Registration</li>
-            <li>Authorization</li>
-            <li>Profile view and change</li>
-            <li>User search</li>
-            <li>Friends</li>
-            <li>Messages</li>
+            <li>&bull; Registration</li>
+            <li>&bull; Authorization</li>
+            <li>&bull; Profile view and change</li>
+            <li>&bull; User search</li>
+            <li>&bull; Friends</li>
+            <li>&bull; Messages</li>
         </ul>
         <hr />
         <p>Join social network and become a member with full capabilities!</p>
