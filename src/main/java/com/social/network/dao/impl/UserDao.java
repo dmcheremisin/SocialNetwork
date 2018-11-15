@@ -50,9 +50,16 @@ public class UserDao extends AbstractJdbcDAO<User> {
     public PreparedStatement prepareStatementForInsert(PreparedStatement st, User entity) throws SQLException {
         st.setString(1, entity.getFirstName());
         st.setString(2, entity.getLastName());
-        Date date = new Date(entity.getDob().getTime());
+        Date date = null;
+        if(entity.getDob() != null) {
+            date = new Date(entity.getDob().getTime());
+        }
         st.setDate(3, date);
-        st.setInt(4, entity.getSex());
+        if(entity.getSex() != null) {
+            st.setInt(4, entity.getSex());
+        } else {
+            st.setInt(4, 1);
+        }
         st.setString(5, entity.getPhone());
         st.setString(6, entity.getEmail());
         st.setString(7, entity.getPassword());
@@ -79,7 +86,9 @@ public class UserDao extends AbstractJdbcDAO<User> {
                 user.setId(id);
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
-                user.setDob(new Date(dob.getTime()));
+                if(dob != null){
+                    user.setDob(new Date(dob.getTime()));
+                }
                 user.setSex(sex);
                 user.setPhone(phone);
                 user.setEmail(email);

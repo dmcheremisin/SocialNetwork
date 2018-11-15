@@ -28,8 +28,25 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String firstname = req.getParameter("firstname");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String passwordConfirmation = req.getParameter("password-confirm");
+        if (password.equals(passwordConfirmation)) {
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+
+            userDao.insert(user);
+        } else {
+            throw new RuntimeException("Passwords doesn't match");
+        }
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
+
+    }
+}
+/*
+Full registration
+String firstname = req.getParameter("firstname");
             String lastname = req.getParameter("lastname");
             String dob = req.getParameter("dob");
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,14 +63,4 @@ public class RegistrationServlet extends HttpServlet {
             user.setPhone(phone);
             user.setEmail(email);
             user.setPassword(password);
-
-            userDao.insert(user);
-
-        } catch (ParseException e) {
-            logger.error("Can't parse or create user data");
-            throw new RuntimeException();
-        }
-        req.getRequestDispatcher("index.html").forward(req, resp);
-
-    }
-}
+ */

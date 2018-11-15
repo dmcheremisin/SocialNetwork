@@ -5,8 +5,12 @@
          version="3.1">
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <location>/error.jsp</location>
+    </error-page>
 
     <listener>
         <listener-class>com.social.network.listeners.ContextListener</listener-class>

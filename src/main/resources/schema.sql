@@ -4,13 +4,13 @@ CREATE TABLE roles (
 );
 CREATE TABLE sexes (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  sex VARCHAR(6)
+  sex VARCHAR(10)
 );
 CREATE TABLE users(
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(100),
   lastname VARCHAR(100),
-  dob DATE NOT NULL,
+  dob DATE DEFAULT NULL,
   sex int,
   phone varchar(20),
   email varchar(100),
@@ -41,5 +41,6 @@ CREATE TABLE messages (
 INSERT INTO roles VALUES (null, 'admin');
 INSERT INTO roles VALUES (null, 'user');
 
+INSERT INTO sexes VALUES (null, 'undefined');
 INSERT INTO sexes VALUES (null, 'male');
 INSERT INTO sexes VALUES (null, 'female');

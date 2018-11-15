@@ -1,29 +1,8 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+.navbar-custom {
+    background-color:#2b50c0;
+    color:#ffffff;
+    border-radius:0;
 }
-.layout-positioner {
-    margin: 0 auto;
-    width: 600px;
-    padding: 10px;
-}
-.layout-positioner::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-.index-top-header {
-    text-align: center;
-}
-.index-register {
-    text-align: left;
-    width: 400px;
-}
-.button {
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 10px;
-    padding: 7px;
+.navbar-custom .navbar-brand {
+    color: #ecf0f1;
 }

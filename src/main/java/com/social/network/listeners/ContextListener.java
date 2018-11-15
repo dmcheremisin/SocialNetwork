@@ -6,11 +6,9 @@ import com.social.network.dao.impl.InitializationDao;
 import com.social.network.dao.impl.UserDao;
 import org.apache.log4j.Logger;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import static com.social.network.connection.ConnectionPool.getConnectionPool;
