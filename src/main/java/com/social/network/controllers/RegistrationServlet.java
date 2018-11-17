@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             throw new RuntimeException("Passwords doesn't match");
         }
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("profile.jsp").forward(req, resp);
 
     }
 }

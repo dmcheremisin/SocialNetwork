@@ -1,0 +1,63 @@
+.navbar-custom {
+    background-color:#2b50c0;
+    color:#ffffff;
+    border-radius:0;
+}
+.navbar-custom .navbar-brand {
+    color: #ecf0f1;
+}
+.jumbotron {
+    background-color: #fff;
+}
+.icon-bar {
+    background-color: white;
+}
+.social-img {
+    width: 200px;
+    height:200px;
+}
+.social-img-profile {
+    width: 200px;
+    height:200px;
+    float: left;
+}
+.sidebar-header {
+    text-align: center;
+    margin-top: 20px;
+}
+.panel{
+    margin-left: 1px;
+    margin-right: 1px;
+    width:100%;
+}
+.profile-block::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.image-upload{
+    width: 200px;
+    height: 200px;
+}
+.image-drop{
+    width: 208px;
+    height: 208px;
+    float: left;
+    text-align: center;
+    line-height: 208px;
+}
+.btn-vertical {
+    padding-top: 70px;
+}
+.btn-left {
+    margin-left: 70px;
+}
+.border-dotted {
+    border: 1px dotted black;
+}
+.border-dotted-big {
+    border: 2px dotted black;
+}
+.drop-text {
+    font-size: 18px;
+}
