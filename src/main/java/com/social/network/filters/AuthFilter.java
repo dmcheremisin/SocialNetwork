@@ -1,6 +1,5 @@
 package com.social.network.filters;
 
-import com.social.network.constants.Role;
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.User;
 import com.social.network.utils.ServerUtils;
@@ -19,12 +18,12 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.social.network.utils.ServerUtils.getConfigUrls;
+import static com.social.network.utils.ServerUtils.setRoleToRequest;
 import static com.social.network.utils.ServerUtils.stringIsNotEmpty;
 
 public class AuthFilter implements Filter {
     private UserDao userDao;
     private List<String> allowedUrls;
-
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -74,12 +73,6 @@ public class AuthFilter implements Filter {
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-    }
-
-    private void setRoleToRequest(HttpServletRequest request, User user) {
-        int role = user.getRole();
-        Role roleModel = Role.getRoleByKey(role);
-        request.setAttribute("role", roleModel.getRoleString());
     }
 
     @Override

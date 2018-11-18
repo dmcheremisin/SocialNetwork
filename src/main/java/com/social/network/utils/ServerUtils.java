@@ -1,6 +1,9 @@
 package com.social.network.utils;
 
-import javax.servlet.ServletContext;
+import com.social.network.constants.Role;
+import com.social.network.models.User;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,5 +34,11 @@ public class ServerUtils {
         List<String> urls = new ArrayList<>();
         Collections.addAll(urls, split);
         return urls;
+    }
+
+    public static void setRoleToRequest(HttpServletRequest request, User user) {
+        int role = user.getRole();
+        Role roleModel = Role.getRoleByKey(role);
+        request.setAttribute("role", roleModel.getRoleString());
     }
 }
