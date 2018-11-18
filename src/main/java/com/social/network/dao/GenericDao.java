@@ -9,7 +9,7 @@ public interface GenericDao<T> {
 
     public T get(int key);
 
-    public void insert(T object);
+    public T insert(T object);
 
     public void update(T object);
 

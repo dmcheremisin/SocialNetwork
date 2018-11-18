@@ -10,8 +10,8 @@
     <title>Index</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/custom.css" rel="stylesheet">
 
 </head>
 <body>
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">Social Network</a>
+            <a class="navbar-brand" href="../../">Social Network</a>
         </div>
         <div class="navbar-collapse collapse">
             <div class="navbar-right">
@@ -40,7 +40,7 @@
         <div class="col-md-3">
             <div class="sidebar-header" style="text-align: center; margin-top: 20px;">
                 <div class="card">
-                    <img class="img-circle img-thumbnail social-img" src="./img/noname.svg" alt="Your profile image">
+                    <img class="img-circle img-thumbnail social-img" src="../../img/noname.svg" alt="Your profile image">
                 </div>
                 <h4>Your name</h4>
             </div>
@@ -59,6 +59,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Admin menu</h3>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-success">Make admin</a>
                 </div>
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-danger">Block user</a>
@@ -149,8 +152,8 @@
 </div>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/profile-dnd.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/profile-dnd.js"></script>
 </body>
 </html>

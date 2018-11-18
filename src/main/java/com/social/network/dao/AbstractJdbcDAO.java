@@ -1,5 +1,6 @@
 package com.social.network.dao;
 
+import com.social.network.connection.Connective;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
     protected static final Logger logger = Logger.getLogger(AbstractJdbcDAO.class);
 
     private static final String WHERE_ID = " WHERE ID = ?";
-    private Connective connective;
+    protected Connective connective;
 
     public AbstractJdbcDAO(Connective connective) {
         this.connective = connective;
@@ -27,7 +28,7 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
     public abstract PreparedStatement prepareStatementForInsert (PreparedStatement st, T entity) throws SQLException;
     public abstract List<T> parseResultSet (ResultSet rs);
 
-    private String getSelectQuery() {
+    protected String getSelectQuery() {
         return "SELECT * FROM " + getTableName();
     }
     private String getDeleteQuery() {
@@ -48,13 +49,22 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
         }
     }
 
-    public void insert(T entity) {
+    public T insert(T entity) {
         String sql = getInsertQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             prepareStatementForInsert(stm, entity);
-            stm.executeUpdate();
+            int rows = stm.executeUpdate();
+            try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int id = generatedKeys.getInt(1);
+                    return get(id);
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             logger.error(String.format("Can't insert object with id=%s in the database", entity.getId()));
             throw new RuntimeException();
         }

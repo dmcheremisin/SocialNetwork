@@ -1,7 +1,7 @@
 package com.social.network.listeners;
 
-import com.social.network.connection.ConnectionPool;
-import com.social.network.dao.Connective;
+import com.social.network.connection.impl.ConnectionPool;
+import com.social.network.connection.Connective;
 import com.social.network.dao.impl.InitializationDao;
 import com.social.network.dao.impl.UserDao;
 import org.apache.log4j.Logger;
@@ -11,7 +11,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.SQLException;
 
-import static com.social.network.connection.ConnectionPool.getConnectionPool;
+import static com.social.network.connection.impl.ConnectionPool.getConnectionPool;
 
 /**
  * Created by Dmitrii on 13.11.2018.

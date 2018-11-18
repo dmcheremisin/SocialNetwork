@@ -14,18 +14,6 @@ public class ServerUtils {
         return stringIsNotEmpty(str) && str.matches("\\d+");
     }
 
-    public static boolean isUserDataValid(String name, String age){
-        return stringIsNotEmpty(name) && isInteger(age);
-    }
-
-    public static <T> T getDaoByKey(ServletContext servletContext, String key, Class<T> clazz) {
-        Object dao = servletContext.getAttribute(key);
-        if(!(dao.getClass()).isAssignableFrom(clazz)){
-            throw new RuntimeException("Something went wrong with the repository.");
-        }
-        return (T) dao;
-    }
-
     public static String getRequestedUrl(String str) {
         Pattern pattern = Pattern.compile("^.*\\/([a-zA-Z0-9\\-]*)(\\?.*)?$");
         Matcher matcher = pattern.matcher(str);

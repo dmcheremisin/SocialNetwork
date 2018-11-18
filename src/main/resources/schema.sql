@@ -38,8 +38,8 @@ CREATE TABLE messages (
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (usersender) REFERENCES users(id)
 );
-INSERT INTO roles VALUES (null, 'admin');
-INSERT INTO roles VALUES (null, 'user');
+INSERT INTO roles VALUES (1, 'admin');
+INSERT INTO roles VALUES (2, 'member');
 
 INSERT INTO sexes VALUES (null, 'undefined');
 INSERT INTO sexes VALUES (null, 'male');

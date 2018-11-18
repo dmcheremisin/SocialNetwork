@@ -1,4 +1,4 @@
-package com.social.network.dao;
+package com.social.network.connection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

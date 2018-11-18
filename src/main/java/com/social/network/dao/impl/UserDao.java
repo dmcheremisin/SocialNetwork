@@ -1,9 +1,10 @@
 package com.social.network.dao.impl;
 
 import com.social.network.dao.AbstractJdbcDAO;
-import com.social.network.dao.Connective;
+import com.social.network.connection.Connective;
 import com.social.network.models.User;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,4 +105,20 @@ public class UserDao extends AbstractJdbcDAO<User> {
         return users;
     }
 
+    public User getUserByCredentials(String email, String password) {
+        String sql = getSelectQuery() + " WHERE email = ? AND password = ?";
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(sql);) {
+            stm.setString(1, email);
+            stm.setString(2, password);
+            ResultSet rs = stm.executeQuery();
+            List<User> list  = parseResultSet(rs);
+            if(list.size() == 1) {
+                return list.get(0);
+            }
+        } catch (SQLException e) {
+            logger.error(String.format("No user found with such credentials email = %s and password = ****", email));
+        }
+        return null;
+    }
 }
