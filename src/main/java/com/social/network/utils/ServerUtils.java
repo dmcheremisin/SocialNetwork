@@ -1,6 +1,9 @@
 package com.social.network.utils;
 
 import javax.servlet.ServletContext;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,5 +24,12 @@ public class ServerUtils {
             return matcher.group(1);
         }
         return null;
+    }
+
+    public static List<String> getConfigUrls(String str) {
+        String[] split = str.split(",");
+        List<String> urls = new ArrayList<>();
+        Collections.addAll(urls, split);
+        return urls;
     }
 }

@@ -3,6 +3,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <context-param>
+        <param-name>allowedUrls</param-name>
+        <param-value>/css/,/fonts/,/img/,/js/</param-value>
+    </context-param>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

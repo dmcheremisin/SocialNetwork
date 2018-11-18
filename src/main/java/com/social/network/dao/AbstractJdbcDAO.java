@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
     public T insert(T entity) {
         String sql = getInsertQuery();
         try(Connection con = connective.getConnection();
-            PreparedStatement stm = con.prepareStatement(sql);) {
+            PreparedStatement stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             prepareStatementForInsert(stm, entity);
             int rows = stm.executeUpdate();
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
