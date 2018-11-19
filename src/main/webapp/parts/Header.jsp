@@ -30,12 +30,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <c:if test="${user == null}">
-                <form class="navbar-form navbar-right">
+                <form action="/login" method="post" class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
+                        <input type="text" name="email" placeholder="Email" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
+                        <input type="password" name="password" placeholder="Password" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-success">Login</button>
                 </form>
@@ -44,7 +44,7 @@
                 <a href="#" class="navbar-brand">Ru</a>
                 <a href="#" class="navbar-brand">En</a>
                 <c:if test="${user != null}">
-                    <a href="#" class="navbar-brand">Logout</a>
+                    <a href="/logout" class="navbar-brand">Logout</a>
                 </c:if>
             </div>
         </div>
