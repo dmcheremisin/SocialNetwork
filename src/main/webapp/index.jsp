@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="./parts/Header.jsp">
+<jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Social Network" />
 </jsp:include>
 
@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<jsp:include page="./parts/Footer.jsp" />
+<jsp:include page="parts/footer.jsp" />

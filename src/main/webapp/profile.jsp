@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="parts/Header.jsp">
+<jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
 
@@ -21,13 +21,13 @@
                     <h3 class="panel-title">User menu</h3>
                 </div>
                 <div class="list-group">
-                    <a href="/profile.jsp" class="list-group-item">Profile</a>
+                    <a href="/profile" class="list-group-item">Profile</a>
                     <a href="./messages" class="list-group-item">Messages</a>
                     <a href="./friends" class="list-group-item">Friends</a>
                     <a href="./users" class="list-group-item">Users</a>
                 </div>
             </div>
-            <c:if test="${role} eq 'admin'">
+            <c:if test="${role eq 'admin'}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Admin menu</h3>
@@ -56,7 +56,7 @@
             </div>
             <div class="profile-block">
                 <h2>Your profile.</h2>
-                <form action="/changeProfile" method="post">
+                <form action="/profile" method="post">
                     <div class="panel panel-default">
                         <div class="list-group">
 
@@ -65,12 +65,12 @@
                                                                  id="email" value="${user.email}" disabled/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="firstname">First name: <input type="text" name="firstname"
+                                <label for="firstname">First name: <input type="text" name="firstName"
                                                                           class="form-control" value="${user.firstName}"
                                                                           id="firstname"/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="lastname">Last name: <input type="text" name="lastname"
+                                <label for="lastname">Last name: <input type="text" name="lastName"
                                                                         class="form-control" value="${user.lastName}"
                                                                         id="lastname"/></label>
                             </div>
@@ -81,11 +81,11 @@
                             </div>
                             <div class="list-group-item"> Gender:
                                 <label class="radio-inline">
-                                    <input type="radio" name="sex" value="1" <c:if test="${user.sex == 1}">selected</c:if> >
+                                    <input type="radio" name="sex" value="2" <c:if test="${user.sex == 2}">checked</c:if> >
                                     Male
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="sex" value="2" <c:if test="${user.sex == 2}">selected</c:if> >
+                                    <input type="radio" name="sex" value="3" <c:if test="${user.sex == 3}">checked</c:if> >
                                     Female
                                 </label>
                             </div>
@@ -130,6 +130,6 @@
     </div>
 </div>
 
-<jsp:include page="parts/Footer.jsp" >
+<jsp:include page="parts/footer.jsp" >
     <jsp:param name="specificScript" value="js/profile-dnd.js" />
 </jsp:include>

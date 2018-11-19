@@ -44,26 +44,6 @@ public class RegistrationServlet extends HttpServlet {
             throw new RuntimeException("Passwords doesn't match");
         }
         req.getRequestDispatcher("/profile.jsp").forward(req, resp);
-
+        resp.sendRedirect("/profile");
     }
 }
-/*
-Full registration
-String firstname = req.getParameter("firstname");
-            String lastname = req.getParameter("lastname");
-            String dob = req.getParameter("dob");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = format.parse(dob);
-            Integer sex = Integer.parseInt(req.getParameter("sex"));
-            String phone = req.getParameter("phone");
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
-            User user = new User();
-            user.setFirstName(firstname);
-            user.setLastName(lastname);
-            user.setDob(date);
-            user.setSex(sex);
-            user.setPhone(phone);
-            user.setEmail(email);
-            user.setPassword(password);
- */
