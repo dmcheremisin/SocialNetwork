@@ -73,4 +73,23 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>com.social.network.controllers.UploadAvatarServlet</servlet-class>
+        <init-param>
+            <param-name>uploadDir</param-name>
+            <param-value>avatars</param-value>
+        </init-param>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>52428800</max-request-size>
+            <file-size-threshold>4194304</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
 </web-app>

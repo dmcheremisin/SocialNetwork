@@ -39,7 +39,7 @@ $("button.btn-left").click(function (event) {
     console.log(file);
     formData.append("file", file);
     $.ajax({
-        url: './index.html',
+        url: '/upload',
         type: 'POST',
         data: formData,
         processData: false,
