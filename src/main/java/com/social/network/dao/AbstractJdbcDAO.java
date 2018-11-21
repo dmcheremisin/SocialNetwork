@@ -55,7 +55,7 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             prepareStatementForInsert(stm, entity);
-            int rows = stm.executeUpdate();
+            stm.executeUpdate();
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
@@ -71,12 +71,13 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
         }
     }
 
-    public void update(T entity) {
+    public T update(T entity) {
         String sql = getUpdateQuery();
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(sql);) {
             prepareStatementForUpdate(stm, entity);
             stm.executeUpdate();
+            return get(entity.getId());
         } catch (SQLException e) {
             logger.error(String.format("Can't update object with id=%s in the database", entity.getId()));
             throw new RuntimeException();

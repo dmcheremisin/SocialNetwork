@@ -11,7 +11,16 @@
         <div class="col-md-3">
             <div class="sidebar-header" style="text-align: center; margin-top: 20px;">
                 <div class="card">
-                    <img class="img-circle img-thumbnail social-img" src="img/noname.svg" alt="Your profile image">
+                    <c:choose>
+                        <c:when test="${empty user.image}">
+                            <img class="img-circle img-thumbnail social-img" src="img/noname.svg"
+                                 alt="Your profile image">
+                        </c:when>
+                        <c:otherwise>
+                            <img class="img-circle img-thumbnail social-img" src="avatars/${user.image}"
+                                 alt="Your profile image">
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <h4>Your name</h4>
             </div>
@@ -131,5 +140,5 @@
 </div>
 
 <jsp:include page="parts/footer.jsp" >
-    <jsp:param name="specificScript" value="js/profile-dnd.js" />
+    <jsp:param name="specificScript" value="js/profile.js" />
 </jsp:include>

@@ -11,7 +11,7 @@ public interface GenericDao<T> {
 
     public T insert(T object);
 
-    public void update(T object);
+    public T update(T object);
 
     public void delete(T object);
 

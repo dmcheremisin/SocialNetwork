@@ -81,6 +81,10 @@
             <param-name>uploadDir</param-name>
             <param-value>avatars</param-value>
         </init-param>
+        <init-param>
+            <param-name>allowedExtensions</param-name>
+            <param-value>jpg,png,gif,jpeg</param-value>
+        </init-param>
         <multipart-config>
             <max-file-size>10485760</max-file-size>
             <max-request-size>52428800</max-request-size>

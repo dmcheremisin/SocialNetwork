@@ -17,6 +17,7 @@ CREATE TABLE users(
   password VARCHAR(100),
   role int NOT NULL,
   blocked BOOLEAN DEFAULT FALSE,
+  image VARCHAR(30),
   INDEX (email),
   FOREIGN KEY (role) REFERENCES roles(id),
   FOREIGN KEY (sex) REFERENCES sexes(id)

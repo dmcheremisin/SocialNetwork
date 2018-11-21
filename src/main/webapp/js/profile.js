@@ -43,9 +43,8 @@ $("button.btn-left").click(function (event) {
         type: 'POST',
         data: formData,
         processData: false,
-        contentType: false,
-        success: function(data){
-            alert(data);
-        }
+        contentType: false
+    }).then(function () {
+        window.location.reload();
     });
 });

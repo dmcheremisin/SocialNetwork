@@ -18,6 +18,7 @@ public class User implements Identifiable {
     private String password;
     private Integer role;
     private Boolean blocked;
+    private String image;
 
     public Integer getId() {
         return id;
@@ -97,5 +98,13 @@ public class User implements Identifiable {
 
     public void setBlocked(Boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

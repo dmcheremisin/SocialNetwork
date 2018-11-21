@@ -14,7 +14,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by Dmitrii on 13.11.2018.
  */
-public class ConnectionPool implements Connective {
+public class ConnectionPool {
     public static final String CAN_T_GET_CONNECTION_FROM_POOL = "Can't get connection from the pool";
     public static final String CAN_RETURN_CONNECTION_TO_THE_POOL = "Can' return connection to the pool";
 

@@ -27,7 +27,7 @@ public class UserDao extends AbstractJdbcDAO<User> {
 
     @Override
     public String getInsertQuery() {
-        return "INSERT INTO " + getTableName() + " VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, 2, 'false');";
+        return "INSERT INTO " + getTableName() + " VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, 2, 'false', NULL);";
     }
 
     @Override
@@ -82,6 +82,7 @@ public class UserDao extends AbstractJdbcDAO<User> {
                 String password = rs.getString("password");
                 Integer role = rs.getInt("role");
                 Boolean blocked = rs.getBoolean("blocked");
+                String image = rs.getString("image");
 
                 User user = new User();
                 user.setId(id);
@@ -96,6 +97,7 @@ public class UserDao extends AbstractJdbcDAO<User> {
                 user.setPassword(password);
                 user.setRole(role);
                 user.setBlocked(blocked);
+                user.setImage(image);
 
                 users.add(user);
             }
@@ -120,5 +122,19 @@ public class UserDao extends AbstractJdbcDAO<User> {
             logger.error(String.format("No user found with such credentials email = %s and password = ****", email));
         }
         return null;
+    }
+
+    public User updateImage(User user) {
+        String sql = "UPDATE USERS SET image=? WHERE id=?";
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, user.getImage());
+            stm.setInt(2, user.getId());
+            stm.executeUpdate();
+            return get(user.getId());
+        } catch (SQLException e) {
+            logger.error(String.format("Can't update object with id=%s in the database", user.getId()));
+            throw new RuntimeException();
+        }
     }
 }
