@@ -137,4 +137,18 @@ public class UserDao extends AbstractJdbcDAO<User> {
             throw new RuntimeException();
         }
     }
+
+    public User updatePassword(User user) {
+        String sql = "UPDATE USERS SET password=? WHERE id=?";
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, user.getPassword());
+            stm.setInt(2, user.getId());
+            stm.executeUpdate();
+            return get(user.getId());
+        } catch (SQLException e) {
+            logger.error(String.format("Can't update object with id=%s in the database", user.getId()));
+            throw new RuntimeException();
+        }
+    }
 }

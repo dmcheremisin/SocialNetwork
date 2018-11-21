@@ -2,6 +2,7 @@ package com.social.network.filters;
 
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.User;
+import com.social.network.utils.Encryption;
 import com.social.network.utils.ServerUtils;
 
 import javax.servlet.Filter;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static com.social.network.utils.ServerUtils.getConfigUrls;
 import static com.social.network.utils.ServerUtils.setRoleToRequest;
-import static com.social.network.utils.ServerUtils.stringIsNotEmpty;
+import static com.social.network.utils.ServerUtils.isNotEmpty;
 
 public class AuthFilter implements Filter {
     private UserDao userDao;
@@ -62,17 +63,21 @@ public class AuthFilter implements Filter {
             setRoleToRequest(request, user);
 
             filterChain.doFilter(request, response);
-        } else if(stringIsNotEmpty(email) && stringIsNotEmpty(password) &&
-                (user = userDao.getUserByCredentials(email, password)) != null) {
-            HttpSession newSession = request.getSession();
-            newSession.setAttribute("user", user);
+            return;
+        } else if(isNotEmpty(email) && isNotEmpty(password)) {
+            password = Encryption.encryptPassword(password);
 
-            setRoleToRequest(request, user);
+            if((user = userDao.getUserByCredentials(email, password)) != null) {
+                HttpSession newSession = request.getSession();
+                newSession.setAttribute("user", user);
 
-            filterChain.doFilter(request, response);
-        } else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+                setRoleToRequest(request, user);
+
+                filterChain.doFilter(request, response);
+                return;
+            }
         }
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override

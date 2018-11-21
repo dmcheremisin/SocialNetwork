@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 
 public class ServerUtils {
 
-    public static boolean stringIsNotEmpty(String str) {
+    public static boolean isNotEmpty(String str) {
         return str != null && str.length() > 0;
     }
 
     public static boolean isInteger(String str) {
-        return stringIsNotEmpty(str) && str.matches("\\d+");
+        return isNotEmpty(str) && str.matches("\\d+");
     }
 
     public static String getRequestedUrl(String str) {

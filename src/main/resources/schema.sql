@@ -14,7 +14,7 @@ CREATE TABLE users(
   sex int,
   phone varchar(20),
   email varchar(100),
-  password VARCHAR(100),
+  password VARCHAR(128),
   role int NOT NULL,
   blocked BOOLEAN DEFAULT FALSE,
   image VARCHAR(30),

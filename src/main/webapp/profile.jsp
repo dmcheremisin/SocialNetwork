@@ -11,16 +11,12 @@
         <div class="col-md-3">
             <div class="sidebar-header" style="text-align: center; margin-top: 20px;">
                 <div class="card">
-                    <c:choose>
-                        <c:when test="${empty user.image}">
-                            <img class="img-circle img-thumbnail social-img" src="img/noname.svg"
-                                 alt="Your profile image">
-                        </c:when>
-                        <c:otherwise>
-                            <img class="img-circle img-thumbnail social-img" src="avatars/${user.image}"
-                                 alt="Your profile image">
-                        </c:otherwise>
-                    </c:choose>
+                    <c:if test="${empty user.image}">
+                        <img class="img-circle img-thumbnail social-img" src="img/noname.svg" alt="Your profile image">
+                    </c:if>
+                    <c:if test="${not empty user.image}">
+                        <img class="img-circle img-thumbnail social-img" src="avatars/${user.image}" alt="Your profile image">
+                    </c:if>
                 </div>
                 <h4>Your name</h4>
             </div>
@@ -110,25 +106,25 @@
             </div>
             <div class="profile-block">
                 <h2>Change password</h2>
-                <form action="/changePassword" method="post">
+                <form action="/updatePassword" method="post">
                     <div class="panel panel-default">
                         <div class="list-group">
 
                             <div class="list-group-item">
-                                <label for="oldpassword">Old Password: <input type="password" name="oldpassword"
+                                <label for="oldpassword">Old Password: <input type="password" name="oldPassword"
                                                                               class="form-control"
                                                                               id="oldpassword"/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="newpassword">New Password: <input type="password" name="newpassword"
+                                <label for="password">New Password: <input type="password" name="password"
                                                                               class="form-control"
-                                                                              id="newpassword"/></label>
+                                                                              id="password"/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="repeatpassword">Repeat Password: <input type="password"
-                                                                                    name="repeatpassword"
+                                <label for="password-confirm">Repeat Password: <input type="password"
+                                                                                    name="password-confirm"
                                                                                     class="form-control"
-                                                                                    id="repeatpassword"/></label>
+                                                                                    id="password-confirm"/></label>
                             </div>
                         </div>
                     </div>

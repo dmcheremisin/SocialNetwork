@@ -3,6 +3,7 @@ package com.social.network.controllers;
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.User;
 import com.social.network.utils.Encryption;
+import com.social.network.utils.ServerUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -12,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.social.network.utils.ServerUtils.setRoleToRequest;
+import static com.social.network.utils.Encryption.encryptPassword;
 
 /**
  * Created by Dmitrii on 14.11.2018.
  */
-public class RegistrationServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(RegistrationServlet.class);
+public class UpdatePasswordServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(UpdatePasswordServlet.class);
+    public static final String PASSWORDS_DOESN_T_MATCH = "Passwords do not match";
 
     private UserDao userDao;
 
@@ -29,21 +31,23 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
+        HttpSession session = req.getSession(false);
+        User user = (User) session.getAttribute("user");
+        String oldPassword = user.getPassword();
+
+        String oldPasswordForm = req.getParameter("oldPassword");
         String password = req.getParameter("password");
         String passwordConfirmation = req.getParameter("password-confirm");
-        if (password.equals(passwordConfirmation)) {
-            User user = new User();
-            user.setEmail(email);
-            password = Encryption.encryptPassword(password);
+        if (password.equals(passwordConfirmation) &&
+                ServerUtils.isNotEmpty(oldPasswordForm) && oldPassword.equals(encryptPassword(oldPasswordForm))) {
+            password = encryptPassword(password);
             user.setPassword(password);
 
-            User insertedUser = userDao.insert(user);
-            HttpSession session = req.getSession();
-            session.setAttribute("user", insertedUser);
-            setRoleToRequest(req, insertedUser);
+            User updatedUser = userDao.updatePassword(user);
+            session.setAttribute("user", updatedUser);
         } else {
-            throw new RuntimeException("Passwords doesn't match");
+            logger.error(PASSWORDS_DOESN_T_MATCH);
+            throw new RuntimeException(PASSWORDS_DOESN_T_MATCH);
         }
         resp.sendRedirect("/profile");
     }

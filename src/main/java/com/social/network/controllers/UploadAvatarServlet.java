@@ -43,7 +43,6 @@ public class UploadAvatarServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
 
-
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
@@ -65,7 +64,6 @@ public class UploadAvatarServlet extends HttpServlet {
         }
     }
 
-
     private String extractFileExtension(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
@@ -73,7 +71,7 @@ public class UploadAvatarServlet extends HttpServlet {
             if (s.trim().startsWith("filename")) {
                 String fileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
                 String fileExtension = getFileExtension(fileName);
-                if (ServerUtils.stringIsNotEmpty(fileExtension)){
+                if (ServerUtils.isNotEmpty(fileExtension)){
                     return fileExtension;
                 }
             }

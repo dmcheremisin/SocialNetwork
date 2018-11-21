@@ -73,7 +73,6 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Upload</servlet-name>
         <servlet-class>com.social.network.controllers.UploadAvatarServlet</servlet-class>
@@ -94,6 +93,15 @@
     <servlet-mapping>
         <servlet-name>Upload</servlet-name>
         <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdatePassword</servlet-name>
+        <servlet-class>com.social.network.controllers.UpdatePasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdatePassword</servlet-name>
+        <url-pattern>/updatePassword</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -19,7 +19,7 @@ import java.util.Date;
  * Created by Dmitrii on 19.11.2018.
  */
 public class ProfileServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(RegistrationServlet.class);
+    private static final Logger logger = Logger.getLogger(ProfileServlet.class);
 
     private UserDao userDao;
 
@@ -39,29 +39,29 @@ public class ProfileServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         try {
             String firstName = req.getParameter("firstName");
-            if (ServerUtils.stringIsNotEmpty(firstName)){
+            if (ServerUtils.isNotEmpty(firstName)){
                 user.setFirstName(req.getParameter("firstName"));
             }
 
             String lastName = req.getParameter("lastName");
-            if (ServerUtils.stringIsNotEmpty(lastName)){
+            if (ServerUtils.isNotEmpty(lastName)){
                 user.setLastName(lastName);
             }
 
             String dob = req.getParameter("dob");
-            if (ServerUtils.stringIsNotEmpty(dob)){
+            if (ServerUtils.isNotEmpty(dob)){
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = format.parse(dob);
                 user.setDob(date);
             }
 
             String sex = req.getParameter("sex");
-            if (ServerUtils.stringIsNotEmpty(sex) && ServerUtils.isInteger(sex)){
+            if (ServerUtils.isNotEmpty(sex) && ServerUtils.isInteger(sex)){
                 user.setSex(Integer.parseInt(sex));
             }
 
             String phone = req.getParameter("phone");
-            if (ServerUtils.stringIsNotEmpty(phone)){
+            if (ServerUtils.isNotEmpty(phone)){
                 user.setPhone(phone);
             }
 
