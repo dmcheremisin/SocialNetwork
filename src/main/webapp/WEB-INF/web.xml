@@ -5,7 +5,7 @@
          version="3.1">
     <context-param>
         <param-name>allowedUrls</param-name>
-        <param-value>/css/,/fonts/,/img/,/js/</param-value>
+        <param-value>/css/,/fonts/,/img/,/js/,/register</param-value>
     </context-param>
 
     <welcome-file-list>

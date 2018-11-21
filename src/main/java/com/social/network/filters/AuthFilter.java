@@ -47,10 +47,6 @@ public class AuthFilter implements Filter {
             return;
         }
         String requestedPath = ServerUtils.getRequestedUrl(url);
-        if(requestedPath != null && (requestedPath.equals("") || requestedPath.equals("register"))) {
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -61,6 +57,11 @@ public class AuthFilter implements Filter {
             user = (User) session.getAttribute("user");
 
             setRoleToRequest(request, user);
+
+            if(requestedPath.equals("")) {
+                response.sendRedirect("/profile");
+                return;
+            }
 
             filterChain.doFilter(request, response);
             return;
@@ -76,8 +77,11 @@ public class AuthFilter implements Filter {
                 filterChain.doFilter(request, response);
                 return;
             }
+        } else if(requestedPath.equals("")) {
+            filterChain.doFilter(request, response);
+            return;
         }
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.sendRedirect("/");
     }
 
     @Override
