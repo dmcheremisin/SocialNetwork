@@ -44,8 +44,7 @@ CREATE VIEW USERMESSAGE AS
          r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
   from messages as m
     join users as s on m.usersender =  s.id
-    join users as r on m.userreceiver = r.id
-  ORDER BY m.dt;
+    join users as r on m.userreceiver = r.id;
 
 INSERT INTO roles VALUES (1, 'admin');
 INSERT INTO roles VALUES (2, 'member');
