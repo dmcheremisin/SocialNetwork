@@ -21,6 +21,16 @@
                     <div class="btn-vertical">
                         <button class="btn btn-lg btn-success btn-left">Update avatar</button>
                     </div>
+                    <div class="image-right">
+                        <div class="card">
+                            <c:if test="${empty user.image}">
+                                <img class="img-circle img-thumbnail social-img" src="img/noname.svg" alt="Your profile image">
+                            </c:if>
+                            <c:if test="${not empty user.image}">
+                                <img class="img-circle img-thumbnail social-img" src="avatars/${user.image}" alt="Your profile image">
+                            </c:if>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="profile-block">

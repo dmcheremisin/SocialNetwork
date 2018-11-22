@@ -5,7 +5,7 @@
          version="3.1">
     <context-param>
         <param-name>allowedUrls</param-name>
-        <param-value>/css/,/fonts/,/img/,/js/,/register</param-value>
+        <param-value>/css/,/fonts/,/img/,/js/,/avatars/,/register</param-value>
     </context-param>
 
     <welcome-file-list>
@@ -102,6 +102,24 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/updatePassword</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Messages</servlet-name>
+        <servlet-class>com.social.network.controllers.MessagesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Messages</servlet-name>
+        <url-pattern>/messages</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Conversation</servlet-name>
+        <servlet-class>com.social.network.controllers.ConversationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Conversation</servlet-name>
+        <url-pattern>/conversation</url-pattern>
     </servlet-mapping>
 
 </web-app>
