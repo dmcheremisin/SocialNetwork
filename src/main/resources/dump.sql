@@ -7,3 +7,6 @@ INSERT INTO friendship VALUES (1, 3, 'true');
 INSERT INTO friendship VALUES (2, 3, 'true');
 
 INSERT INTO messages VALUES ('2018-07-09 10:11:12', 1, 2, 'Привет! Как дела?');
+INSERT INTO messages VALUES ('2018-07-09 10:11:12', 2, 1, 'Привет! Спасибо, хорошо=)');
+INSERT INTO messages VALUES ('2018-07-09 10:11:12', 3, 1, 'Привет! Я тоже с Вами иду!');
+INSERT INTO messages VALUES ('2018-07-09 10:11:12', 3, 2, 'Привет! Я тоже с Вами иду!');

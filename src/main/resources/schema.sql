@@ -22,7 +22,6 @@ CREATE TABLE users(
   FOREIGN KEY (role) REFERENCES roles(id),
   FOREIGN KEY (sex) REFERENCES sexes(id)
 );
-CREATE VIEW userrole AS SELECT users.id as userid, roles.role as role FROM users JOIN roles ON users.role=roles.id;
 CREATE TABLE friendship (
   usersender int,
   userreceiver int,
@@ -35,10 +34,19 @@ CREATE TABLE messages (
   usersender int,
   userreceiver int,
   message TEXT,
-  INDEX (dt),
+  INDEX (usersender),
+  INDEX (userreceiver),
   FOREIGN KEY (usersender) REFERENCES users(id),
-  FOREIGN KEY (usersender) REFERENCES users(id)
+  FOREIGN KEY (userreceiver) REFERENCES users(id)
 );
+CREATE VIEW USERMESSAGE AS
+  SELECT m.dt as dt, m.message as message, s.id as senderId, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
+         r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
+  from messages as m
+    join users as s on m.usersender =  s.id
+    join users as r on m.userreceiver = r.id
+  ORDER BY m.dt;
+
 INSERT INTO roles VALUES (1, 'admin');
 INSERT INTO roles VALUES (2, 'member');
 
