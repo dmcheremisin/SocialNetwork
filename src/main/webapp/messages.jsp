@@ -19,15 +19,18 @@
                     <div class="panel-heading">
                         <div class="card">
                             <c:if test="${empty message.sender.image}">
-                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />${message.sender.firstName}</a>
+                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />
+                                        ${message.sender.firstName} ${message.sender.lastName}
+                                </a>
                             </c:if>
                             <c:if test="${not empty message.sender.image}">
-                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./avatars/${message.sender.image}" /> ${message.sender.firstName}</a>
+                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./avatars/${message.sender.image}" />
+                                        ${message.sender.firstName} ${message.sender.lastName}
+                                </a>
                             </c:if>
-
                         </div>
                     </div>
-                    <div class="panel-body"><a href="/conversation">${message.date} ${message.message}</a></div>
+                    <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
                 </div>
             </c:forEach>
         </div>

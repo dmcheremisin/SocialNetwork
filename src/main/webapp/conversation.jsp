@@ -9,40 +9,45 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <jsp:include page="parts/userMenu.jsp" />
+            <jsp:include page="parts/userMenu.jsp"/>
         </div>
         <div class="col-md-9">
             <h2>Conversation</h2>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="card">
-                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" alt="Your profile image" />Mike</a>
+            <c:forEach items="${conversation}" var="message">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="card">
+                            <c:if test="${empty message.sender.image}">
+                                <a href="#">
+                                    <img class="img-circle img-thumbnail img-message" src="./img/noname.svg"/>
+                                        ${message.sender.firstName} ${message.sender.lastName}
+                                </a>
+                            </c:if>
+                            <c:if test="${not empty message.sender.image}">
+                                <a href="#">
+                                    <img class="img-circle img-thumbnail img-message" src="./avatars/${message.sender.image}"/>
+                                        ${message.sender.firstName} ${message.sender.lastName}
+                                </a>
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <a href="/conversation?companion=${message.sender.id}">${message.date} ${message.message}</a>
                     </div>
                 </div>
-                <div class="panel-body"><div class="message-left">22.11.2018 12:25</div> <div class="message-left">Hello! How are you?</div></div>
+            </c:forEach>
+            <div class="panel-heading">
+                New message
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="card">
-                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" alt="Your profile image" />You</a>
+            <div class="panel-body">
+                <form method="post">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
                     </div>
-                </div>
-                <div class="panel-body"><div class="message-left">22.11.2018 13:35</div> <div class="message-left">I'm fine thank you =)</div></div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    New message
-                </div>
-                <div class="panel-body">
-                    <form method="post">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" value="Send &raquo" class="btn btn-success"/></label>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Send &raquo" class="btn btn-success"/></label>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

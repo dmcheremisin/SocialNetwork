@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -79,13 +81,15 @@ public class MessagesDao {
 
                 Integer id = rs.getInt("id");
                 LocalDateTime dateTime = rs.getTimestamp("dt").toLocalDateTime();
+                DateTimeFormatter shortDt = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+                String dateString = shortDt.format(dateTime);
                 String message = rs.getString("message");
 
                 User userSender = getUserFromRow(rs, "sid", "sfirstname", "slastname", "simage");
                 User userReceiver = getUserFromRow(rs, "rid", "rfirstname", "rlastname", "rimage");
 
                 messageModel.setId(id);
-                messageModel.setDate(dateTime);
+                messageModel.setDate(dateString);
                 messageModel.setMessage(message);
                 messageModel.setSender(userSender);
                 messageModel.setReceiver(userReceiver);

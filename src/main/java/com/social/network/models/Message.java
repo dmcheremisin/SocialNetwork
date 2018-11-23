@@ -10,10 +10,11 @@ import java.util.Date;
  */
 public class Message implements Identifiable {
     private Integer id;
-    private LocalDateTime date;
+    private String date;
     private String message;
     private User sender;
     private User receiver;
+    private Integer companion;
 
     @Override
     public Integer getId() {
@@ -25,11 +26,11 @@ public class Message implements Identifiable {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -55,5 +56,13 @@ public class Message implements Identifiable {
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;
+    }
+
+    public Integer getCompanion() {
+        return companion;
+    }
+
+    public void setCompanion(Integer companion) {
+        this.companion = companion;
     }
 }

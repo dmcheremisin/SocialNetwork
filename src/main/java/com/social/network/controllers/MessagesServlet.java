@@ -31,20 +31,26 @@ public class MessagesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
-        Integer userId = user.getId();
+        int userId = user.getId();
+
         List<Message> lastMessages = messagesDao.getLastMessages(userId);
         lastMessages = lastMessages.stream()
                 .sorted(Comparator.comparing(Message::getDate))
                 .collect(Collectors.toList());
+
         Map<Integer, Message> filteredMessages = new HashMap<>();
         lastMessages.forEach(m -> {
+                    int companion;
                     if (m.getSender().getId() == userId) {
-                        filteredMessages.put(m.getReceiver().getId(), m);
+                        companion = m.getReceiver().getId();
                     } else {
-                        filteredMessages.put(m.getSender().getId(), m);
+                        companion = m.getSender().getId();
                     }
+                    m.setCompanion(companion);
+                    filteredMessages.put(companion, m);
                 }
         );
+
         req.setAttribute("lastMessages", filteredMessages.values());
         req.getRequestDispatcher("messages.jsp").forward(req, resp);
     }
