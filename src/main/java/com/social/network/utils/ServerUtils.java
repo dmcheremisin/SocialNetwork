@@ -21,12 +21,12 @@ public class ServerUtils {
     }
 
     public static String getRequestedUrl(String str) {
-        Pattern pattern = Pattern.compile("^.*\\/([a-zA-Z0-9\\-]*)(\\?.*)?$");
+        Pattern pattern = Pattern.compile("^.*/([a-zA-Z0-9\\-]*)(\\?.*)?$");
         Matcher matcher = pattern.matcher(str);
         if(matcher.matches()){
             return matcher.group(1);
         }
-        return null;
+        return "";
     }
 
     public static List<String> getConfigUrls(String str) {

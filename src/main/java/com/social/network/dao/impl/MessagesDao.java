@@ -57,7 +57,7 @@ public class MessagesDao {
 
     public void addMessage(int sender, int receiver, String message){
         try(Connection con = connective.getConnection();
-            PreparedStatement stm = con.prepareStatement(SELECT_BOTH_QUERY);) {
+            PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
             Date date = new Date(new java.util.Date().getTime());
             stm.setDate(1, date);
             stm.setInt(2, sender);

@@ -3,6 +3,7 @@ package com.social.network.listeners;
 import com.social.network.connection.impl.ConnectionPool;
 import com.social.network.connection.Connective;
 import com.social.network.dao.impl.InitializationDao;
+import com.social.network.dao.impl.MessagesDao;
 import com.social.network.dao.impl.UserDao;
 import org.apache.log4j.Logger;
 
@@ -27,8 +28,13 @@ public class ContextListener implements ServletContextListener {
             initializationDao.initializeStubData();
 
             ServletContext servletContext = servletContextEvent.getServletContext();
+
             UserDao userDao = new UserDao(connective);
+            MessagesDao messagesDao = new MessagesDao(connective);
+
             servletContext.setAttribute("userDao", userDao);
+            servletContext.setAttribute("messagesDao", messagesDao);
+
         } catch (SQLException | ClassNotFoundException e) {
             logger.error("Can't initialize database schema and data");
         }

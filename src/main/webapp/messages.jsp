@@ -14,30 +14,22 @@
         <div class="col-md-9">
             <h2>Messages</h2>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="card">
-                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" alt="Your profile image" /> Mike</a>
+            <c:forEach items="${lastMessages}" var="message">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="card">
+                            <c:if test="${empty message.sender.image}">
+                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />${message.sender.firstName}</a>
+                            </c:if>
+                            <c:if test="${not empty message.sender.image}">
+                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./avatars/${message.sender.image}" /> ${message.sender.firstName}</a>
+                            </c:if>
+
+                        </div>
                     </div>
+                    <div class="panel-body"><a href="/conversation">${message.message}</a></div>
                 </div>
-                <div class="panel-body"><a href="/conversation">Hello! How are you?</a></div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="card">
-                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" alt="Your profile image" /> Andrew</a>
-                    </div>
-                </div>
-                <div class="panel-body"><a href="/conversation">Hi! I just wanted to remind you about tomorrow meeting?</a></div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="card">
-                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" alt="Your profile image" /> Liza</a>
-                    </div>
-                </div>
-                <div class="panel-body"><a href="/conversation">Hello! Are you going to club today?</a></div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>
