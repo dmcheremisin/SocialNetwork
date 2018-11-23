@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class MessagesDao {
     private static final Logger logger = Logger.getLogger(MessagesDao.class);
     private Connective connective;
     private String SELECT_LAST_QUERY = "SELECT * FROM lastusermessage WHERE sid = ? OR rid = ? ";
-    private String SELECT_BOTH_QUERY = "SELECT * FROM usermessage WHERE (sid = ? and rid = ?) OR (sid = ? and rid = ?);";
+    private String SELECT_BOTH_QUERY = "SELECT * FROM usermessage WHERE (sid = ? AND rid = ?) OR (sid = ? AND rid = ?);";
     private String INSERT_QUERY = "INSERT INTO messages VALUES(NULL, ?, ?, ?, ?);";
 
     public MessagesDao(Connective connective) {
@@ -28,8 +29,8 @@ public class MessagesDao {
     }
 
     public List<Message> getLastMessages(Integer userId) {
-        try(Connection con = connective.getConnection();
-            PreparedStatement stm = con.prepareStatement(SELECT_LAST_QUERY);) {
+        try (Connection con = connective.getConnection();
+             PreparedStatement stm = con.prepareStatement(SELECT_LAST_QUERY);) {
             stm.setInt(1, userId);
             stm.setInt(2, userId);
             ResultSet rs = stm.executeQuery();
@@ -41,8 +42,8 @@ public class MessagesDao {
     }
 
     public List<Message> getBothMessages(Integer sender, Integer receiver) {
-        try(Connection con = connective.getConnection();
-            PreparedStatement stm = con.prepareStatement(SELECT_BOTH_QUERY);) {
+        try (Connection con = connective.getConnection();
+             PreparedStatement stm = con.prepareStatement(SELECT_BOTH_QUERY);) {
             stm.setInt(1, sender);
             stm.setInt(2, receiver);
             stm.setInt(3, receiver);
@@ -55,9 +56,9 @@ public class MessagesDao {
         }
     }
 
-    public void addMessage(int sender, int receiver, String message){
-        try(Connection con = connective.getConnection();
-            PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
+    public void addMessage(int sender, int receiver, String message) {
+        try (Connection con = connective.getConnection();
+             PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
             Date date = new Date(new java.util.Date().getTime());
             stm.setDate(1, date);
             stm.setInt(2, sender);
@@ -77,16 +78,14 @@ public class MessagesDao {
                 Message messageModel = new Message();
 
                 Integer id = rs.getInt("id");
-                Date dt = rs.getDate("dt");
+                LocalDateTime dateTime = rs.getTimestamp("dt").toLocalDateTime();
                 String message = rs.getString("message");
 
                 User userSender = getUserFromRow(rs, "sid", "sfirstname", "slastname", "simage");
                 User userReceiver = getUserFromRow(rs, "rid", "rfirstname", "rlastname", "rimage");
 
                 messageModel.setId(id);
-                if(dt != null){
-                    messageModel.setDate(new Date(dt.getTime()));
-                }
+                messageModel.setDate(dateTime);
                 messageModel.setMessage(message);
                 messageModel.setSender(userSender);
                 messageModel.setReceiver(userReceiver);

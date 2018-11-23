@@ -27,7 +27,7 @@
 
                         </div>
                     </div>
-                    <div class="panel-body"><a href="/conversation">${message.message}</a></div>
+                    <div class="panel-body"><a href="/conversation">${message.date} ${message.message}</a></div>
                 </div>
             </c:forEach>
         </div>
