@@ -2,11 +2,13 @@ INSERT INTO USERS VALUES (null, 'Дима', 'Ч', '1987-09-28', 2, '+7 999 235 6
 INSERT INTO USERS VALUES (null, 'Аня', 'Ч', '1988-05-23', 3, '+7 888 236 9485', 'user@user.ru', 'f6b07b6c1340e947b861def5f8b092d8ee710826dc56bd175bdc8f3a16b0b8acf853c64786a710dedf9d1524d61e32504e27d60de159af110bc3941490731578', 2, 'false', null);
 INSERT INTO USERS VALUES (null, 'Марк', 'Ч', '2015-03-17', 2, '', 'new@new.ru', 'ca9879bd727ba3bd815f05fe6b9e4640c774b61cc8f141295542cefc1b7b8fc6e3daf3f656555cdec355894e7af48964e88994d960f41ba8f61f7a05d5ddbd07', 2, 'false', null);
 
-INSERT INTO friendship VALUES (1, 2, 'true');
-INSERT INTO friendship VALUES (1, 3, 'true');
-INSERT INTO friendship VALUES (2, 3, 'true');
+INSERT INTO friendship VALUES (null, 1, 2, 'true');
+INSERT INTO friendship VALUES (null, 1, 3, 'true');
+INSERT INTO friendship VALUES (null, 2, 3, 'true');
 
-INSERT INTO messages VALUES ('2018-07-09 10:11:12', 1, 2, 'Привет! Как дела?');
-INSERT INTO messages VALUES ('2018-07-09 10:11:12', 2, 1, 'Привет! Спасибо, хорошо=)');
-INSERT INTO messages VALUES ('2018-07-09 10:11:12', 3, 1, 'Привет! Я тоже с Вами иду!');
-INSERT INTO messages VALUES ('2018-07-09 10:11:12', 3, 2, 'Привет! Я тоже с Вами иду!');
+INSERT INTO messages VALUES (null, '2018-07-09 10:11:12', 1, 2, 'Привет! Как дела?');
+INSERT INTO messages VALUES (null, '2018-07-10 10:11:12', 2, 1, 'Привет! Спасибо, хорошо=)');
+INSERT INTO messages VALUES (null, '2018-07-11 10:11:12', 3, 1, 'Привет! Я тоже с Вами иду!');
+INSERT INTO messages VALUES (null, '2018-07-12 10:11:12', 3, 2, 'Привет! Я тоже с Вами иду!');
+INSERT INTO messages VALUES (null, '2018-07-13 10:11:12', 1, 2, 'Чего делаешь?');
+INSERT INTO messages VALUES (null, '2018-07-14 10:11:12', 2, 1, 'На Каток собираюсь');

@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -69,7 +69,7 @@ public class UserDao extends AbstractJdbcDAO<User> {
 
     @Override
     public List<User> parseResultSet(ResultSet rs) {
-        List<User> users = new ArrayList<>();
+        List<User> users = new LinkedList<>();
         try {
             while (rs.next()) {
                 int id = rs.getInt("id");
