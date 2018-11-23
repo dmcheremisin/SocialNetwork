@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MessagesServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(MessagesServlet.class);
@@ -27,8 +31,21 @@ public class MessagesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
-        List<Message> lastMessages = messagesDao.getLastMessages(user.getId());
-        req.setAttribute("lastMessages", lastMessages);
+        Integer userId = user.getId();
+        List<Message> lastMessages = messagesDao.getLastMessages(userId);
+        lastMessages = lastMessages.stream()
+                .sorted(Comparator.comparing(Message::getDate))
+                .collect(Collectors.toList());
+        Map<Integer, Message> filteredMessages = new HashMap<>();
+        lastMessages.forEach(m -> {
+                    if (m.getSender().getId() == userId) {
+                        filteredMessages.put(m.getReceiver().getId(), m);
+                    } else {
+                        filteredMessages.put(m.getSender().getId(), m);
+                    }
+                }
+        );
+        req.setAttribute("lastMessages", filteredMessages.values());
         req.getRequestDispatcher("messages.jsp").forward(req, resp);
     }
 }
