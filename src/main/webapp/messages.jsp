@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
 
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
@@ -18,16 +19,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="card">
-                            <c:if test="${empty message.sender.image}">
-                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />
-                                        ${message.sender.firstName} ${message.sender.lastName}
-                                </a>
-                            </c:if>
-                            <c:if test="${not empty message.sender.image}">
-                                <a href="#"><img class="img-circle img-thumbnail img-message" src="./avatars/${message.sender.image}" />
-                                        ${message.sender.firstName} ${message.sender.lastName}
-                                </a>
-                            </c:if>
+                            <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
                         </div>
                     </div>
                     <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>

@@ -32,10 +32,16 @@ public class ConversationServlet extends HttpServlet {
         int userId = user.getId();
 
         String companion = req.getParameter("companion");
-        if(isInteger(companion)){
+        if (isInteger(companion)) {
             int companionId = Integer.parseInt(companion);
+            User companionUser;
             List<Message> bothMessages = messagesDao.getBothMessages(userId, companionId);
+
+            Message message = bothMessages.get(0);
+            companionUser = message.getSender().getId() == companionId ? message.getSender() : message.getReceiver();
+
             req.setAttribute("conversation", bothMessages);
+            req.setAttribute("companionUser", companionUser);
         }
 
         req.getRequestDispatcher("conversation.jsp").forward(req, resp);

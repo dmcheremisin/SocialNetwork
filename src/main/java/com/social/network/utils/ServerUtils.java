@@ -5,6 +5,7 @@ import com.social.network.models.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,5 +41,9 @@ public class ServerUtils {
         int role = user.getRole();
         Role roleModel = Role.getRoleByKey(role);
         request.setAttribute("role", roleModel.getRoleString());
+    }
+
+    public static boolean notEmpty(Collection collection){
+        return !(collection == null || collection.size() == 0);
     }
 }
