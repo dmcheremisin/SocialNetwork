@@ -1,77 +1,57 @@
 package com.social.network.controllers;
 
+import com.social.network.dao.impl.MessagesDao;
 import com.social.network.dao.impl.UserDao;
+import com.social.network.models.Message;
 import com.social.network.models.User;
-import com.social.network.utils.ServerUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Comparator;
+import java.util.List;
 
+import static com.social.network.controllers.MessagesServlet.setCompanionToMessage;
 import static com.social.network.utils.ServerUtils.getUserFromSession;
+import static com.social.network.utils.ServerUtils.isInteger;
 
-/**
- * Created by Dmitrii on 19.11.2018.
- */
 public class ProfileServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ProfileServlet.class);
 
     private UserDao userDao;
+    private MessagesDao messagesDao;
 
     @Override
     public void init() throws ServletException {
         userDao = (UserDao) getServletContext().getAttribute("userDao");
+        messagesDao = (MessagesDao) getServletContext().getAttribute("messagesDao");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("profile.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = getUserFromSession(req);
-        try {
-            String firstName = req.getParameter("firstName");
-            if (ServerUtils.isNotBlank(firstName)){
-                user.setFirstName(req.getParameter("firstName"));
-            }
-
-            String lastName = req.getParameter("lastName");
-            if (ServerUtils.isNotBlank(lastName)){
-                user.setLastName(lastName);
-            }
-
-            String dob = req.getParameter("dob");
-            if (ServerUtils.isNotBlank(dob)){
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = format.parse(dob);
-                user.setDob(date);
-            }
-
-            String sex = req.getParameter("sex");
-            if (ServerUtils.isNotBlank(sex) && ServerUtils.isInteger(sex)){
-                user.setSex(Integer.parseInt(sex));
-            }
-
-            String phone = req.getParameter("phone");
-            if (ServerUtils.isNotBlank(phone)){
-                user.setPhone(phone);
-            }
-
-            userDao.update(user);
-
-            doGet(req, resp);
-        } catch (ParseException e) {
-            logger.error("Can't parse user data parameters");
-            throw new RuntimeException();
+        int userId;
+        String id = req.getParameter("id");
+        if(isInteger(id)) {
+            userId = Integer.parseInt(id);
+        } else {
+            User user = getUserFromSession(req);
+            userId = user.getId();
         }
+        User user = userDao.get(userId);
+        req.setAttribute("profileUser", user);
+
+        List<Message> recentMessages = messagesDao.getRecentMessages(userId);
+        Message recent = recentMessages.stream()
+                .sorted(Comparator.comparing(Message::getDate))
+                .reduce((one, two) -> two)
+                .orElse(null);
+        if(recent != null) {
+            setCompanionToMessage(userId, recent);
+            req.setAttribute("message", recent);
+        }
+        req.getRequestDispatcher("profile.jsp").forward(req, resp);
     }
 }

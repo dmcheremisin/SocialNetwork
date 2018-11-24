@@ -30,10 +30,20 @@
     margin-right: 1px;
     width:100%;
 }
+.panel-right {
+    float: right;
+    width: 70%;
+}
 .profile-block::after {
     content: "";
     display: table;
     clear: both;
+}
+.profile-before {
+    margin-top: 20px;
+}
+.profile-friend {
+    margin-right:10px;
 }
 .image-upload {
     width: 200px;
@@ -73,4 +83,9 @@
 }
 .image-right {
     float: right;
+}
+.image-left {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
 }

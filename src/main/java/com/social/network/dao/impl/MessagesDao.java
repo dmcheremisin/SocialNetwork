@@ -32,7 +32,7 @@ public class MessagesDao {
         this.connective = connective;
     }
 
-    public List<Message> getLastMessages(Integer userId) {
+    public List<Message> getRecentMessages(Integer userId) {
         try (Connection con = connective.getConnection();
              PreparedStatement stm = con.prepareStatement(SELECT_LAST_QUERY);) {
             stm.setInt(1, userId);

@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -34,25 +33,30 @@ public class MessagesServlet extends HttpServlet {
         User user = getUserFromSession(req);
         int userId = user.getId();
 
-        List<Message> lastMessages = messagesDao.getLastMessages(userId);
-        lastMessages = lastMessages.stream()
+        List<Message> recentMessages = messagesDao.getRecentMessages(userId);
+        recentMessages = recentMessages.stream()
                 .sorted(Comparator.comparing(Message::getDate))
                 .collect(Collectors.toList());
 
         Map<Integer, Message> filteredMessages = new HashMap<>();
-        lastMessages.forEach(m -> {
-                    int companion;
-                    if (m.getSender().getId() == userId) {
-                        companion = m.getReceiver().getId();
-                    } else {
-                        companion = m.getSender().getId();
-                    }
-                    m.setCompanion(companion);
+        recentMessages.forEach(m -> {
+            int companion = setCompanionToMessage(userId, m);
                     filteredMessages.put(companion, m);
                 }
         );
 
-        req.setAttribute("lastMessages", filteredMessages.values());
+        req.setAttribute("recentMessages", filteredMessages.values());
         req.getRequestDispatcher("messages.jsp").forward(req, resp);
+    }
+
+    public static int setCompanionToMessage(int userId, Message m) {
+        int companion;
+        if (m.getSender().getId() == userId) {
+            companion = m.getReceiver().getId();
+        } else {
+            companion = m.getSender().getId();
+        }
+        m.setCompanion(companion);
+        return companion;
     }
 }

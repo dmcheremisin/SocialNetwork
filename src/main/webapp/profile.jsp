@@ -13,93 +13,59 @@
             <jsp:include page="parts/userMenu.jsp" />
         </div>
         <div class="col-md-9">
-            <h2>Your avatar.</h2>
-            <div class="profile-block">
-                <div>
-                    <div class="image-drop border-dotted" ondrop="dragAndDrop(event)" ondragover="dragEnter(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
-                        <p class="drop-text">Drop your image here.</p>
+            <div class="profile-block profile-before">
+                <div class="image-left">
+                    <div class="card">
+                        <avatar:ProfileImage user="${profileUser}" />
+                        <h3>Tyrion Lanister</h3>
                     </div>
-                    <div class="btn-vertical">
-                        <button class="btn btn-lg btn-success btn-left">Update avatar</button>
-                    </div>
-                    <div class="image-right">
-                        <div class="card">
-                            <avatar:ProfileImage user="${user}" />
+                </div>
+
+                <div class="panel-right">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Profile Info</h3>
+                        </div>
+                        <div class="list-group">
+                            <p class="list-group-item">First name: ${profileUser.firstName}</p>
+                            <p class="list-group-item">Last name: ${profileUser.lastName}</p>
+                            <p class="list-group-item">Birth date: ${profileUser.dob}</p>
+                            <p class="list-group-item">Gender:
+                                <c:if test="${profileUser.sex == 2}">Male</c:if>
+                                <c:if test="${profileUser.sex == 3}">Female</c:if>
+                            </p>
+                            <p class="list-group-item">Phone: ${profileUser.phone}</p>
+                            <p class="list-group-item">Email: ${profileUser.email}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="profile-block">
-                <h2>Your profile.</h2>
-                <form action="/profile" method="post">
-                    <div class="panel panel-default">
-                        <div class="list-group">
-
-                            <div class="list-group-item">
-                                <label for="email">Email: <input type="text" name="email" class="form-control"
-                                                                 id="email" value="${user.email}" disabled/></label>
+                <c:if test="${user.id eq profileUser.id}">
+                    <h3>Recent Message:</h3>
+                    <c:if test="${not empty message}">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="card">
+                                    <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
+                                </div>
                             </div>
-                            <div class="list-group-item">
-                                <label for="firstname">First name: <input type="text" name="firstName"
-                                                                          class="form-control" value="${user.firstName}"
-                                                                          id="firstname"/></label>
-                            </div>
-                            <div class="list-group-item">
-                                <label for="lastname">Last name: <input type="text" name="lastName"
-                                                                        class="form-control" value="${user.lastName}"
-                                                                        id="lastname"/></label>
-                            </div>
-                            <div class="list-group-item">
-                                <label for="dob">Birth date: <input type="date" name="dob"
-                                                                    class="form-control" value="${user.dob}"
-                                                                    id="dob"/></label>
-                            </div>
-                            <div class="list-group-item"> Gender:
-                                <label class="radio-inline">
-                                    <input type="radio" name="sex" value="2" <c:if test="${user.sex == 2}">checked</c:if> >
-                                    Male
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="sex" value="3" <c:if test="${user.sex == 3}">checked</c:if> >
-                                    Female
-                                </label>
-                            </div>
-                            <div class="list-group-item">
-                                <label for="phone">Phone: <input type="text" name="phone"
-                                                                 class="form-control" value="${user.phone}"
-                                                                 id="phone"/></label>
-                            </div>
+                            <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-success">Change profile</button>
-                </form>
+                    </c:if>
+                    <c:if test="${empty message}">
+                        <h2>No messages found</h2>
+                    </c:if>
+                </c:if>
             </div>
             <div class="profile-block">
-                <h2>Change password</h2>
-                <form action="/updatePassword" method="post">
-                    <div class="panel panel-default">
-                        <div class="list-group">
-
-                            <div class="list-group-item">
-                                <label for="oldpassword">Old Password: <input type="password" name="oldPassword"
-                                                                              class="form-control"
-                                                                              id="oldpassword"/></label>
-                            </div>
-                            <div class="list-group-item">
-                                <label for="password">New Password: <input type="password" name="password"
-                                                                              class="form-control"
-                                                                              id="password"/></label>
-                            </div>
-                            <div class="list-group-item">
-                                <label for="password-confirm">Repeat Password: <input type="password"
-                                                                                    name="password-confirm"
-                                                                                    class="form-control"
-                                                                                    id="password-confirm"/></label>
-                            </div>
-                        </div>
+                <h3>Friends:</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a class="profile-friend" href="profile.html"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />Cersei</a>
+                        <a class="profile-friend" href="profile.html"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg"/>Jaime</a>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success">Change password</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>

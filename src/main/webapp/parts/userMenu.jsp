@@ -14,7 +14,7 @@
         <a href="/messages" class="list-group-item">Messages</a>
         <a href="/friends" class="list-group-item">Friends</a>
         <a href="/users" class="list-group-item">Users</a>
-        <a href="/profile" class="list-group-item">Settings</a>
+        <a href="/settings" class="list-group-item">Settings</a>
     </div>
 </div>
 <c:if test="${role eq 'admin'}">

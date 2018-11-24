@@ -74,6 +74,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Settings</servlet-name>
+        <servlet-class>com.social.network.controllers.SettingsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Settings</servlet-name>
+        <url-pattern>/settings</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Upload</servlet-name>
         <servlet-class>com.social.network.controllers.UploadAvatarServlet</servlet-class>
         <init-param>

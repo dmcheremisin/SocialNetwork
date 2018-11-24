@@ -15,7 +15,7 @@
         <div class="col-md-9">
             <h2>Messages</h2>
 
-            <c:forEach items="${lastMessages}" var="message">
+            <c:forEach items="${recentMessages}" var="message">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="card">
