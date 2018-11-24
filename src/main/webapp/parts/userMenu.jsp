@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="sidebar-header">
-    <h4>Your name</h4>
-</div>
+<div class="sidebar-header"></div>
 <div class="panel panel-default ">
     <div class="panel-heading">
         <h3 class="panel-title">User menu</h3>
