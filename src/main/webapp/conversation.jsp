@@ -33,7 +33,8 @@
                 <div class="panel-body">
                     <form method="post">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <textarea class="form-control" rows="5" name="message"></textarea>
+                            <input type="hidden" name="companion" value="${companionUser.id}" >
                         </div>
                         <div class="form-group">
                             <input type="submit" name="submit" value="Send &raquo" class="btn btn-success"/></label>

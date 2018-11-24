@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.social.network.utils.ServerUtils.getUserFromSession;
 import static com.social.network.utils.ServerUtils.isInteger;
+import static com.social.network.utils.ServerUtils.isNotBlank;
 
 public class ConversationServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ConversationServlet.class);
@@ -27,8 +29,7 @@ public class ConversationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("user");
+        User user = getUserFromSession(req);
         int userId = user.getId();
 
         String companion = req.getParameter("companion");
@@ -45,5 +46,20 @@ public class ConversationServlet extends HttpServlet {
         }
 
         req.getRequestDispatcher("conversation.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = getUserFromSession(req);
+
+        String companion = req.getParameter("companion");
+        String message = req.getParameter("message");
+
+        if (isInteger(companion) && isNotBlank(message)) {
+            int companionId = Integer.parseInt(companion);
+            messagesDao.addMessage(user.getId(), companionId, message);
+        }
+
+        doGet(req, resp);
     }
 }

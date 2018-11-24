@@ -20,7 +20,7 @@ import java.util.List;
 
 import static com.social.network.utils.ServerUtils.getConfigUrls;
 import static com.social.network.utils.ServerUtils.setRoleToRequest;
-import static com.social.network.utils.ServerUtils.isNotEmpty;
+import static com.social.network.utils.ServerUtils.isNotBlank;
 
 public class AuthFilter implements Filter {
     private UserDao userDao;
@@ -65,7 +65,7 @@ public class AuthFilter implements Filter {
 
             filterChain.doFilter(request, response);
             return;
-        } else if(isNotEmpty(email) && isNotEmpty(password)) {
+        } else if(isNotBlank(email) && isNotBlank(password)) {
             password = Encryption.encryptPassword(password);
 
             if((user = userDao.getUserByCredentials(email, password)) != null) {

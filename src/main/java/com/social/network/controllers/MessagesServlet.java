@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.social.network.utils.ServerUtils.getUserFromSession;
+
 public class MessagesServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(MessagesServlet.class);
 
@@ -29,8 +31,7 @@ public class MessagesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("user");
+        User user = getUserFromSession(req);
         int userId = user.getId();
 
         List<Message> lastMessages = messagesDao.getLastMessages(userId);

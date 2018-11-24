@@ -2,8 +2,10 @@ package com.social.network.utils;
 
 import com.social.network.constants.Role;
 import com.social.network.models.User;
+import com.sun.deploy.net.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,12 +15,26 @@ import java.util.regex.Pattern;
 
 public class ServerUtils {
 
-    public static boolean isNotEmpty(String str) {
-        return str != null && str.length() > 0;
+    public static boolean isNotBlank(String str) {
+        return !isBlank(str);
+    }
+
+    public static boolean isBlank(String str) {
+        int strLen;
+        if (str != null && (strLen = str.length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(str.charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
     }
 
     public static boolean isInteger(String str) {
-        return isNotEmpty(str) && str.matches("\\d+");
+        return isNotBlank(str) && str.matches("\\d+");
     }
 
     public static String getRequestedUrl(String str) {
@@ -45,5 +61,10 @@ public class ServerUtils {
 
     public static boolean notEmpty(Collection collection){
         return !(collection == null || collection.size() == 0);
+    }
+
+    public static User getUserFromSession(HttpServletRequest req) {
+        HttpSession session = req.getSession(false);
+        return (User) session.getAttribute("user");
     }
 }

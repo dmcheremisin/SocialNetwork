@@ -2,7 +2,6 @@ package com.social.network.controllers;
 
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.User;
-import com.social.network.utils.Encryption;
 import com.social.network.utils.ServerUtils;
 import org.apache.log4j.Logger;
 
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static com.social.network.utils.Encryption.encryptPassword;
+import static com.social.network.utils.ServerUtils.getUserFromSession;
 
 /**
  * Created by Dmitrii on 14.11.2018.
@@ -32,14 +32,14 @@ public class UpdatePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("user");
+        User user = getUserFromSession(req);
         String oldPassword = user.getPassword();
 
         String oldPasswordForm = req.getParameter("oldPassword");
         String password = req.getParameter("password");
         String passwordConfirmation = req.getParameter("password-confirm");
         if (password.equals(passwordConfirmation) &&
-                ServerUtils.isNotEmpty(oldPasswordForm) && oldPassword.equals(encryptPassword(oldPasswordForm))) {
+                ServerUtils.isNotBlank(oldPasswordForm) && oldPassword.equals(encryptPassword(oldPasswordForm))) {
             password = encryptPassword(password);
             user.setPassword(password);
 

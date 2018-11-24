@@ -17,7 +17,7 @@ public abstract class AbstractJdbcDAO<T extends Identifiable> implements Generic
     protected static final Logger logger = Logger.getLogger(AbstractJdbcDAO.class);
 
     private static final String WHERE_ID = " WHERE ID = ?";
-    protected Connective connective;
+    protected final Connective connective;
 
     public AbstractJdbcDAO(Connective connective) {
         this.connective = connective;

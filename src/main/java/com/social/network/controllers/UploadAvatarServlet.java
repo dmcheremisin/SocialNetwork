@@ -71,7 +71,7 @@ public class UploadAvatarServlet extends HttpServlet {
             if (s.trim().startsWith("filename")) {
                 String fileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
                 String fileExtension = getFileExtension(fileName);
-                if (ServerUtils.isNotEmpty(fileExtension)){
+                if (ServerUtils.isNotBlank(fileExtension)){
                     return fileExtension;
                 }
             }

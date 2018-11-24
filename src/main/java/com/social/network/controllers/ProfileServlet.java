@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.social.network.utils.ServerUtils.getUserFromSession;
+
 /**
  * Created by Dmitrii on 19.11.2018.
  */
@@ -35,33 +37,32 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("user");
+        User user = getUserFromSession(req);
         try {
             String firstName = req.getParameter("firstName");
-            if (ServerUtils.isNotEmpty(firstName)){
+            if (ServerUtils.isNotBlank(firstName)){
                 user.setFirstName(req.getParameter("firstName"));
             }
 
             String lastName = req.getParameter("lastName");
-            if (ServerUtils.isNotEmpty(lastName)){
+            if (ServerUtils.isNotBlank(lastName)){
                 user.setLastName(lastName);
             }
 
             String dob = req.getParameter("dob");
-            if (ServerUtils.isNotEmpty(dob)){
+            if (ServerUtils.isNotBlank(dob)){
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = format.parse(dob);
                 user.setDob(date);
             }
 
             String sex = req.getParameter("sex");
-            if (ServerUtils.isNotEmpty(sex) && ServerUtils.isInteger(sex)){
+            if (ServerUtils.isNotBlank(sex) && ServerUtils.isInteger(sex)){
                 user.setSex(Integer.parseInt(sex));
             }
 
             String phone = req.getParameter("phone");
-            if (ServerUtils.isNotEmpty(phone)){
+            if (ServerUtils.isNotBlank(phone)){
                 user.setPhone(phone);
             }
 

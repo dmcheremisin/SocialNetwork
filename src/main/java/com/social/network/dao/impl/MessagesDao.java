@@ -21,7 +21,9 @@ import java.util.List;
  */
 public class MessagesDao {
     private static final Logger logger = Logger.getLogger(MessagesDao.class);
-    private Connective connective;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    private final Connective connective;
     private String SELECT_LAST_QUERY = "SELECT * FROM lastusermessage WHERE sid = ? OR rid = ? ";
     private String SELECT_BOTH_QUERY = "SELECT * FROM usermessage WHERE (sid = ? AND rid = ?) OR (sid = ? AND rid = ?);";
     private String INSERT_QUERY = "INSERT INTO messages VALUES(NULL, ?, ?, ?, ?);";
@@ -61,8 +63,8 @@ public class MessagesDao {
     public void addMessage(int sender, int receiver, String message) {
         try (Connection con = connective.getConnection();
              PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
-            Date date = new Date(new java.util.Date().getTime());
-            stm.setDate(1, date);
+            LocalDateTime now = LocalDateTime.now();
+            stm.setString(1, DATE_TIME_FORMATTER.format(now));
             stm.setInt(2, sender);
             stm.setInt(3, receiver);
             stm.setString(4, message);
