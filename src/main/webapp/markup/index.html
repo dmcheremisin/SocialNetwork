@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Index</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="navbar navbar-custom  navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">Social Network</a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Вход</button>
+            </form>
+            <div class="navbar-right">
+                <a href="#" class="navbar-brand">Ru</a>
+                <a href="#" class="navbar-brand">En</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Social network facilities:</h1>
+        <ul class="list-inline">
+            <li>&bull; Registration</li>
+            <li>&bull; Authorization</li>
+            <li>&bull; Profile view and change</li>
+            <li>&bull; User search</li>
+            <li>&bull; Friends</li>
+            <li>&bull; Messages</li>
+        </ul>
+        <hr/>
+        <p>Join social network and become a member with full capabilities!</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <h1>Register today!</h1>
+            <div class="form-group">
+                <form action="/register" method="post">
+                    <div class="form-group">
+                        <label for="firstname">First name: <input type="text" name="firstname" class="form-control"
+                                                                  id="firstname"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last name: <input type="text" name="lastname" class="form-control"
+                                                                id="lastname"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Birth date: <input type="date" name="dob" class="form-control"
+                                                            id="dob"/></label>
+                    </div>
+                    <div class="form-group"> Gender:
+                        <label class="radio-inline"><input type="radio" name="sex" value="1">M</label>
+                        <label class="radio-inline"><input type="radio" name="sex" value="2">F</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone: <input type="text" name="phone" class="form-control"
+                                                         id="phone"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email: <input type="text" name="email" class="form-control"
+                                                         id="email"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password: <input type="password" name="password" class="form-control"
+                                                               id="password"/></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" value="Зарегистрироваться &raquo"
+                               class="btn btn-lg btn-success"/></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <hr/>
+    <footer>
+        <p>&copy Все права защищены</p>
+    </footer>
+</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>

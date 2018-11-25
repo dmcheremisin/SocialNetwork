@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Index</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="navbar navbar-custom  navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">Social Network</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class="navbar-right">
+                <a href="#" class="navbar-brand">Ru</a>
+                <a href="#" class="navbar-brand">En</a>
+                <a href="#" class="navbar-brand">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="sidebar-header"></div>
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User menu</h3>
+                </div>
+                <div class="list-group">
+                    <a href="./profile.html" class="list-group-item">Profile</a>
+                    <a href="./messages.html" class="list-group-item">Messages</a>
+                    <a href="./friends.html" class="list-group-item">Friends</a>
+                    <a href="./users.html" class="list-group-item">Users</a>
+                    <a href="./settings.html" class="list-group-item">Settings</a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Admin menu</h3>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-success">Make admin</a>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-danger">Block user</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h2>Conversation with <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/2.png" />Cersei</a></h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card">
+                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/1.jpg" />Tyrion</a>
+                    </div>
+                </div>
+                <div class="panel-body"><div class="message-left">22.11.2018 12:25</div> <div class="message-left">Hello! How are you?</div></div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card">
+                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/2.png" />Cersei</a>
+                    </div>
+                </div>
+                <div class="panel-body"><div class="message-left">22.11.2018 13:35</div> <div class="message-left">I'm fine thank you =)</div></div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="card">
+                        <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/1.jpg" />Tyrion</a>
+                    </div>
+                </div>
+                <div class="panel-body"><div class="message-left">22.11.2018 13:35</div> <div class="message-left">I'm fine thank you =)</div></div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    New message
+                </div>
+                <div class="panel-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                            <input type="hidden" name="to" value="2" >
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" value="Send &raquo" class="btn btn-success"/></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr/>
+    <footer>
+        <p>&copy Все права защищены</p>
+    </footer>
+</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/profile-dnd.js"></script>
+</body>
+</html>

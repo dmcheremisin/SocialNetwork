@@ -2,7 +2,6 @@ package com.social.network.utils;
 
 import com.social.network.constants.Role;
 import com.social.network.models.User;
-import com.sun.deploy.net.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
