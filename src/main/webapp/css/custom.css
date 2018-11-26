@@ -104,3 +104,12 @@
     border:0;
     background:transparent;
 }
+.table > tbody > tr:first-child > td {
+    border: none;
+}
+.table-half{
+    width: 40%;
+}
+.profile-info {
+    width: 70%;
+}

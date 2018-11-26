@@ -1,6 +1,7 @@
 package com.social.network.controllers;
 
 import com.social.network.dao.impl.MessagesDao;
+import com.social.network.dao.impl.UserDao;
 import com.social.network.models.Message;
 import com.social.network.models.User;
 import org.apache.log4j.Logger;
@@ -13,17 +14,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-import static com.social.network.utils.ServerUtils.getUserFromSession;
-import static com.social.network.utils.ServerUtils.isInteger;
-import static com.social.network.utils.ServerUtils.isNotBlank;
+import static com.social.network.utils.ServerUtils.*;
 
 public class ConversationServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ConversationServlet.class);
 
+    private UserDao userDao;
     private MessagesDao messagesDao;
 
     @Override
     public void init() throws ServletException {
+        userDao = (UserDao) getServletContext().getAttribute("userDao");
         messagesDao = (MessagesDao) getServletContext().getAttribute("messagesDao");
     }
 
@@ -35,11 +36,8 @@ public class ConversationServlet extends HttpServlet {
         String companion = req.getParameter("companion");
         if (isInteger(companion)) {
             int companionId = Integer.parseInt(companion);
-            User companionUser;
+            User companionUser = userDao.get(companionId);
             List<Message> bothMessages = messagesDao.getBothMessages(userId, companionId);
-
-            Message message = bothMessages.get(0);
-            companionUser = message.getSender().getId() == companionId ? message.getSender() : message.getReceiver();
 
             req.setAttribute("conversation", bothMessages);
             req.setAttribute("companionUser", companionUser);

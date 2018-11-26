@@ -14,31 +14,48 @@
         </div>
         <div class="col-md-9">
             <div class="profile-block margin-top">
-                <div class="image-left">
-                    <div class="card">
-                        <avatar:ProfileImage user="${profileUser}" />
-                        <h3>Tyrion Lanister</h3>
-                    </div>
-                </div>
-
-                <div class="panel-right">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3>Profile Info</h3>
-                        </div>
-                        <div class="list-group">
-                            <p class="list-group-item">First name: ${profileUser.firstName}</p>
-                            <p class="list-group-item">Last name: ${profileUser.lastName}</p>
-                            <p class="list-group-item">Birth date: ${profileUser.dob}</p>
-                            <p class="list-group-item">Gender:
-                                <c:if test="${profileUser.sex == 2}">Male</c:if>
-                                <c:if test="${profileUser.sex == 3}">Female</c:if>
-                            </p>
-                            <p class="list-group-item">Phone: ${profileUser.phone}</p>
-                            <p class="list-group-item">Email: ${profileUser.email}</p>
-                        </div>
-                    </div>
-                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <div class="card">
+                                <avatar:ProfileImage user="${profileUser}"/>
+                                <h3>Tyrion Lanister</h3>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <form method="post" action="/friends">
+                                            <button class="btn btn-success" type="submit">Add to friends</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="/friends">
+                                            <button class="btn btn-info" type="submit">Send message</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="profile-info">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>Profile Info</h3>
+                                </div>
+                                <div class="list-group">
+                                    <p class="list-group-item">First name: ${profileUser.firstName}</p>
+                                    <p class="list-group-item">Last name: ${profileUser.lastName}</p>
+                                    <p class="list-group-item">Birth date: ${profileUser.dob}</p>
+                                    <p class="list-group-item">Gender:
+                                        <c:if test="${profileUser.sex == 2}">Male</c:if>
+                                        <c:if test="${profileUser.sex == 3}">Female</c:if>
+                                    </p>
+                                    <p class="list-group-item">Phone: ${profileUser.phone}</p>
+                                    <p class="list-group-item">Email: ${profileUser.email}</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="profile-block">
                 <c:if test="${user.id eq profileUser.id}">

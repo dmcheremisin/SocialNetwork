@@ -34,6 +34,7 @@
                             <tr>
                                 <td>
                                         <avatar:Avatar user="${friendRequest.userSender}"/>
+                                </td>
                                 <td>
                                     <button class="btn btn-success">Accept</button>
                                 </td>
@@ -60,14 +61,12 @@
                             <tr>
                                 <td>
                                         <avatar:Avatar user="${friend.friend}"/>
-                                <td>
-                                    <button class="btn btn-success">Accept</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger">Decline</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-info">Message</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger">Remove</button>
                                 </td>
                             </tr>
                         </c:forEach>

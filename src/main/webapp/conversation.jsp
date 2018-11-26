@@ -16,16 +16,18 @@
             <h2>Conversation with
                 <avatar:Avatar user="${companionUser}" />
             </h2>
-            <c:forEach items="${conversation}" var="message">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="card">
-                            <avatar:Avatar user="${message.sender}" />
+            <c:if test="${not empty conversation}">
+                <c:forEach items="${conversation}" var="message">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="card">
+                                <avatar:Avatar user="${message.sender}" />
+                            </div>
                         </div>
+                        <div class="panel-body">${message.date} ${message.message}</a></div>
                     </div>
-                    <div class="panel-body">${message.date} ${message.message}</a></div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </c:if>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New message
