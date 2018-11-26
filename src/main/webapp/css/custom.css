@@ -39,8 +39,11 @@
     display: table;
     clear: both;
 }
-.profile-before {
+.margin-top {
     margin-top: 20px;
+}
+.friends-top {
+    margin-top: 30px;
 }
 .profile-friend {
     margin-right:10px;

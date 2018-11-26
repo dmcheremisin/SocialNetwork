@@ -4,7 +4,7 @@
 <div class="container">
     <hr/>
     <footer>
-        <p>&copy All rights reserved</p>
+        <p>&copy; All rights reserved</p>
     </footer>
 </div>
 

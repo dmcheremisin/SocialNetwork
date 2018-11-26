@@ -13,7 +13,7 @@
             <jsp:include page="parts/userMenu.jsp" />
         </div>
         <div class="col-md-9">
-            <div class="profile-block profile-before">
+            <div class="profile-block margin-top">
                 <div class="image-left">
                     <div class="card">
                         <avatar:ProfileImage user="${profileUser}" />
