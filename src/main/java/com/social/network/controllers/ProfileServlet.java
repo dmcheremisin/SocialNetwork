@@ -1,5 +1,6 @@
 package com.social.network.controllers;
 
+import com.social.network.dao.impl.FriendsDao;
 import com.social.network.dao.impl.MessagesDao;
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.Message;
@@ -23,33 +24,39 @@ public class ProfileServlet extends HttpServlet {
 
     private UserDao userDao;
     private MessagesDao messagesDao;
+    private FriendsDao friendsDao;
 
     @Override
     public void init() throws ServletException {
         userDao = (UserDao) getServletContext().getAttribute("userDao");
         messagesDao = (MessagesDao) getServletContext().getAttribute("messagesDao");
+        friendsDao = (FriendsDao) getServletContext().getAttribute("friendsDao");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId;
         String id = req.getParameter("id");
+        User userFromSession = getUserFromSession(req);
+        User userFromRequest = null;
+        boolean showAddToFriends = false;
         if(isInteger(id)) {
             userId = Integer.parseInt(id);
-        } else {
-            User user = getUserFromSession(req);
-            userId = user.getId();
+            userFromRequest = userDao.get(userId);
+            boolean usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
+            showAddToFriends = userId != userFromSession.getId() && !usersHaveFriendship;
         }
-        User user = userDao.get(userId);
-        req.setAttribute("profileUser", user);
+        User profileUser = userFromRequest == null ? userFromSession : userFromRequest;
+        req.setAttribute("profileUser", profileUser);
+        req.setAttribute("showAddToFriends", showAddToFriends);
 
-        List<Message> recentMessages = messagesDao.getRecentMessages(userId);
+        List<Message> recentMessages = messagesDao.getRecentMessages(profileUser.getId());
         Message recent = recentMessages.stream()
                 .sorted(Comparator.comparing(Message::getDate))
                 .reduce((one, two) -> two)
                 .orElse(null);
         if(recent != null) {
-            setCompanionToMessage(userId, recent);
+            setCompanionToMessage(profileUser.getId(), recent);
             req.setAttribute("message", recent);
         }
         req.getRequestDispatcher("profile.jsp").forward(req, resp);

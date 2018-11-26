@@ -104,7 +104,7 @@
     border:0;
     background:transparent;
 }
-.table > tbody > tr:first-child > td {
+.table > tbody > tr > td {
     border: none;
 }
 .table-half{

@@ -19,6 +19,7 @@ public class FriendsDao {
 
     public static final String FRIENDS_OF_USER = "SELECT * FROM user_friends_requests where (sid = ? or rid = ?) and accepted = TRUE";
     public static final String FRIENDS_REQUESTS_OF_USER = "SELECT * FROM user_friends_requests where rid = ? and accepted = FALSE";
+    public static final String FRIENDSHIP = "SELECT * FROM user_friends_requests where (sid = ? and rid = ?) or (sid = ? and rid = ?)";
 
     private final Connective connective;
 
@@ -45,6 +46,21 @@ public class FriendsDao {
             stm.setInt(1, userId);
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
+        } catch (SQLException e) {
+            logger.error("Can't get all user friends entities from the database");
+            throw new RuntimeException();
+        }
+    }
+
+    public boolean checkUsersHaveFriendship(int user, int friend) {
+        try (Connection con = connective.getConnection();
+             PreparedStatement stm = con.prepareStatement(FRIENDSHIP)) {
+            stm.setInt(1, user);
+            stm.setInt(2, friend);
+            stm.setInt(3, friend);
+            stm.setInt(4, user);
+            ResultSet rs = stm.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             logger.error("Can't get all user friends entities from the database");
             throw new RuntimeException();

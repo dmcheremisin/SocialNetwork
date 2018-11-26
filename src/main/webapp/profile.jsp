@@ -23,16 +23,24 @@
                             </div>
                             <table class="table">
                                 <tr>
-                                    <td>
-                                        <form method="post" action="/friends">
-                                            <button class="btn btn-success" type="submit">Add to friends</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form method="post" action="/friends">
-                                            <button class="btn btn-info" type="submit">Send message</button>
-                                        </form>
-                                    </td>
+                                    <c:if test="${showAddToFriends}">
+                                        <td>
+                                            <form method="post" action="/friends">
+                                                <button class="btn btn-success" type="submit">Add to friends</button>
+                                            </form>
+                                        </td>
+                                    </c:if>
+                                </tr>
+                                <tr>
+                                    <c:if test="${profileUser.id != user.id}">
+                                        <td>
+                                            <form method="get" action="/conversation">
+                                                <button class="btn btn-info" name="companion" value="${profileUser.id}"
+                                                        type="submit">Send message
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </table>
                         </td>
