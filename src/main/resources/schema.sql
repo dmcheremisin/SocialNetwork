@@ -27,6 +27,8 @@ CREATE TABLE friendship (
   usersender int,
   userreceiver int,
   accepted BOOLEAN,
+  INDEX (usersender),
+  INDEX (userreceiver),
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (userreceiver) REFERENCES users(id)
 );
@@ -41,14 +43,14 @@ CREATE TABLE messages (
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (userreceiver) REFERENCES users(id)
 );
-CREATE VIEW usermessage AS
+CREATE VIEW user_message AS
   SELECT m.id, m.dt as dt, m.message as message, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
          r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
   from messages as m
     join users as s on m.usersender =  s.id
     join users as r on m.userreceiver = r.id;
 
-CREATE VIEW lastusermessage AS
+CREATE VIEW last_user_message AS
   SELECT m.id, m.dt as dt, m.message as message, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
                r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
   from messages as m
@@ -60,6 +62,13 @@ CREATE VIEW lastusermessage AS
           FROM messages
           GROUP BY usersender, userreceiver
         );
+
+CREATE VIEW user_friends_requests AS
+  SELECT f.id, f.accepted as accepted, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
+               r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
+  from friendship as f
+    join users as s on f.usersender =  s.id
+    join users as r on f.userreceiver = r.id;
 
 INSERT INTO roles VALUES (1, 'admin');
 INSERT INTO roles VALUES (2, 'member');

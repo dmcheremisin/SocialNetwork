@@ -28,67 +28,54 @@
 
             <div class="friends-top">
                 <h3>Friends requests</h3>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/sansa.jpg"/>Sansa Stark</a>
-                        <td>
-                            <button class="btn btn-success">Accept</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger">Decline</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-info">Message</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/arya.jpg"/>Arya Stark</a>
-                        <td>
-                            <button class="btn btn-success">Accept</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger">Decline</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-info">Message</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <c:if test="${not empty friendsRequests}">
+                    <table class="table">
+                        <c:forEach var="friendRequest" items="${friendsRequests}">
+                            <tr>
+                                <td>
+                                        <avatar:Avatar user="${friendRequest.userSender}"/>
+                                <td>
+                                    <button class="btn btn-success">Accept</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger">Decline</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info">Message</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+                <c:if test="${empty friendsRequests}">
+                    <h4>No requests yet...</h4>
+                </c:if>
             </div>
 
             <div class="friends-top">
                 <h3>Your friends</h3>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/2.png"/>Cersei
-                                Lanister</a>
-                        <td>
-                            <button class="btn btn-info">Message</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger">Remove</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#"><img class="img-circle img-thumbnail img-message" src="./img/3.jpeg"/>Jaime
-                                Lanister</a>
-                        </td>
-                        <td>
-                            <button class="btn btn-info">Message</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger">Remove</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <c:if test="${not empty friends}">
+                    <table class="table">
+                        <c:forEach var="friend" items="${friends}">
+                            <tr>
+                                <td>
+                                        <avatar:Avatar user="${friend.friend}"/>
+                                <td>
+                                    <button class="btn btn-success">Accept</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger">Decline</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info">Message</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+                <c:if test="${empty friends}">
+                    <h4>No friends yet...</h4>
+                </c:if>
             </div>
         </div>
     </div>

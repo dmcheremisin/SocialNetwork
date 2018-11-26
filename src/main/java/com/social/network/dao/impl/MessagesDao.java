@@ -24,8 +24,8 @@ public class MessagesDao {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final Connective connective;
-    private String SELECT_LAST_QUERY = "SELECT * FROM lastusermessage WHERE sid = ? OR rid = ? ";
-    private String SELECT_BOTH_QUERY = "SELECT * FROM usermessage WHERE (sid = ? AND rid = ?) OR (sid = ? AND rid = ?);";
+    private String SELECT_LAST_QUERY = "SELECT * FROM last_user_message WHERE sid = ? OR rid = ? ";
+    private String SELECT_BOTH_QUERY = "SELECT * FROM user_message WHERE (sid = ? AND rid = ?) OR (sid = ? AND rid = ?);";
     private String INSERT_QUERY = "INSERT INTO messages VALUES(NULL, ?, ?, ?, ?);";
 
     public MessagesDao(Connective connective) {
@@ -104,7 +104,7 @@ public class MessagesDao {
         return messages;
     }
 
-    private User getUserFromRow(ResultSet rs, String id, String firstName, String lastName, String image) throws SQLException {
+    static User getUserFromRow(ResultSet rs, String id, String firstName, String lastName, String image) throws SQLException {
         Integer userId = rs.getInt(id);
         String userFirstName = rs.getString(firstName);
         String userLastName = rs.getString(lastName);
