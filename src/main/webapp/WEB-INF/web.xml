@@ -74,6 +74,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Friends</servlet-name>
+        <servlet-class>com.social.network.controllers.FriendsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Friends</servlet-name>
+        <url-pattern>/friends</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Settings</servlet-name>
         <servlet-class>com.social.network.controllers.SettingsServlet</servlet-class>
     </servlet>
