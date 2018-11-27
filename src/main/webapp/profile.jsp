@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
 
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
@@ -18,26 +18,26 @@
                     <tr>
                         <td>
                             <div class="card">
-                                <avatar:ProfileImage user="${profileUser}"/>
-                                <h3>Tyrion Lanister</h3>
+                                <socialTags:ProfileImage user="${profileUser}"/>
+                                <h3>${profileUser.firstName} ${profileUser.lastName}</h3>
                             </div>
                             <table class="table">
-                                <tr>
-                                    <c:if test="${showAddToFriends}">
-                                        <td>
-                                            <form method="post" action="/friends">
-                                                <button class="btn btn-success" type="submit">Add to friends</button>
-                                            </form>
-                                        </td>
-                                    </c:if>
-                                    <c:if test="${profileUser.id != user.id && !showAddToFriends}">
-                                        <td>
-                                            <a href="/friends" class="btn btn-success">Friend <span class="glyphicon glyphicon-ok"></span></a>
-                                        </td>
-                                    </c:if>
-                                </tr>
-                                <tr>
-                                    <c:if test="${profileUser.id != user.id}">
+                                <c:if test="${profileUser.id != user.id}">
+                                    <tr>
+                                        <c:if test="${profileUser.id != user.id}">
+                                            <c:if test="${!usersHaveFriendship}">
+                                                <td>
+                                                    <socialTags:friendsActionForm user="${profileUser}" button="success" action="addToFriends" name="Add to friends" />
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${usersHaveFriendship}">
+                                                <td>
+                                                    <a href="/friends" class="btn btn-success">Friend <span class="glyphicon glyphicon-ok"></span></a>
+                                                </td>
+                                            </c:if>
+                                        </c:if>
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <form method="get" action="/conversation">
                                                 <button class="btn btn-info" name="companion" value="${profileUser.id}"
@@ -45,8 +45,8 @@
                                                 </button>
                                             </form>
                                         </td>
-                                    </c:if>
-                                </tr>
+                                    </tr>
+                                </c:if>
                             </table>
                         </td>
                         <td class="profile-info">
@@ -77,7 +77,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="card">
-                                    <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
+                                    <socialTags:Avatar user="${message.sender}" />&nbsp; to &nbsp;<socialTags:Avatar user="${message.receiver}" />
                                 </div>
                             </div>
                             <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
@@ -94,7 +94,7 @@
                     <div class="panel-body">
                         <c:if test="${not empty friends}">
                             <c:forEach var="friend" items="${friends}">
-                                <span class="profile-friend"><avatar:Avatar user="${friend.friend}"/></span>
+                                <span class="profile-friend"><socialTags:Avatar user="${friend.friend}"/></span>
                             </c:forEach>
                         </c:if>
                         <c:if test="${empty friends}">

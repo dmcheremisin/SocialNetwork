@@ -40,18 +40,17 @@ public class ProfileServlet extends HttpServlet {
         String id = req.getParameter("id");
         User userFromSession = getUserFromSession(req);
         User userFromRequest = null;
-        boolean showAddToFriends = false;
+        boolean usersHaveFriendship = false;
         if(isInteger(id)) {
             userId = Integer.parseInt(id);
             userFromRequest = userDao.get(userId);
-            boolean usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
-            showAddToFriends = userId != userFromSession.getId() && !usersHaveFriendship;
+            usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
         }
         User profileUser = userFromRequest == null ? userFromSession : userFromRequest;
         List<UserFriend> friends = friendsDao.getFriends(profileUser.getId());
 
         req.setAttribute("profileUser", profileUser);
-        req.setAttribute("showAddToFriends", showAddToFriends);
+        req.setAttribute("usersHaveFriendship", usersHaveFriendship);
         req.setAttribute("friends", friends);
 
         List<Message> recentMessages = messagesDao.getRecentMessages(profileUser.getId());

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
 
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
@@ -33,16 +33,16 @@
                         <c:forEach var="friendRequest" items="${friendsRequests}">
                             <tr>
                                 <td>
-                                        <avatar:Avatar user="${friendRequest.userSender}"/>
+                                    <socialTags:Avatar user="${friendRequest.friend}"/>
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info">Message</a>
                                 </td>
                                 <td>
-                                    <button class="btn btn-success">Accept</button>
+                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="success" action="accept" name="Accept" />
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger">Decline</button>
+                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="danger" action="decline" name="Decline" />
                                 </td>
                             </tr>
                         </c:forEach>
@@ -54,19 +54,40 @@
             </div>
 
             <div class="friends-top">
+                <h3>Your requests</h3>
+                <c:if test="${not empty usersRequests}">
+                    <table class="table">
+                        <c:forEach var="userRequest" items="${usersRequests}">
+                            <tr>
+                                <td>
+                                    <socialTags:Avatar user="${userRequest.friend}"/>
+                                </td>
+                                <td>
+                                    <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info">Message</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+                <c:if test="${empty usersRequests}">
+                    <h4>No requests yet...</h4>
+                </c:if>
+            </div>
+
+            <div class="friends-top">
                 <h3>Your friends</h3>
                 <c:if test="${not empty friends}">
                     <table class="table">
                         <c:forEach var="friend" items="${friends}">
                             <tr>
                                 <td>
-                                        <avatar:Avatar user="${friend.friend}"/>
+                                    <socialTags:Avatar user="${friend.friend}"/>
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info">Message</a>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger">Remove</button>
+                                    <socialTags:friendsActionForm user="${friend.friend}" button="danger" action="remove" name="Remove" />
                                 </td>
                             </tr>
                         </c:forEach>
