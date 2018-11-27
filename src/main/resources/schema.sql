@@ -13,7 +13,7 @@ CREATE TABLE users(
   dob DATE DEFAULT NULL,
   sex int,
   phone varchar(20),
-  email varchar(100),
+  email varchar(100) UNIQUE,
   password VARCHAR(128),
   role int NOT NULL,
   blocked BOOLEAN DEFAULT FALSE,

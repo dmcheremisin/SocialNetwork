@@ -107,8 +107,9 @@
 .table > tbody > tr > td {
     border: none;
 }
-.table-half{
-    width: 40%;
+.friends > tbody > tr > td {
+    width: 25%;
+    vertical-align: middle;
 }
 .profile-info {
     width: 70%;

@@ -29,7 +29,7 @@
             <div class="friends-top">
                 <h3>Friends requests</h3>
                 <c:if test="${not empty friendsRequests}">
-                    <table class="table">
+                    <table class="table friends">
                         <c:forEach var="friendRequest" items="${friendsRequests}">
                             <tr>
                                 <td>
@@ -56,7 +56,7 @@
             <div class="friends-top">
                 <h3>Your requests</h3>
                 <c:if test="${not empty usersRequests}">
-                    <table class="table">
+                    <table class="table friends">
                         <c:forEach var="userRequest" items="${usersRequests}">
                             <tr>
                                 <td>
@@ -65,6 +65,8 @@
                                 <td>
                                     <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info">Message</a>
                                 </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -77,7 +79,7 @@
             <div class="friends-top">
                 <h3>Your friends</h3>
                 <c:if test="${not empty friends}">
-                    <table class="table">
+                    <table class="table friends">
                         <c:forEach var="friend" items="${friends}">
                             <tr>
                                 <td>
@@ -89,6 +91,7 @@
                                 <td>
                                     <socialTags:friendsActionForm user="${friend.friend}" button="danger" action="remove" name="Remove" />
                                 </td>
+                                <td>&nbsp;</td>
                             </tr>
                         </c:forEach>
                     </table>
