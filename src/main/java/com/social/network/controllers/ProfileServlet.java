@@ -5,6 +5,7 @@ import com.social.network.dao.impl.MessagesDao;
 import com.social.network.dao.impl.UserDao;
 import com.social.network.models.Message;
 import com.social.network.models.User;
+import com.social.network.models.UserFriend;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -47,8 +48,11 @@ public class ProfileServlet extends HttpServlet {
             showAddToFriends = userId != userFromSession.getId() && !usersHaveFriendship;
         }
         User profileUser = userFromRequest == null ? userFromSession : userFromRequest;
+        List<UserFriend> friends = friendsDao.getFriends(profileUser.getId());
+
         req.setAttribute("profileUser", profileUser);
         req.setAttribute("showAddToFriends", showAddToFriends);
+        req.setAttribute("friends", friends);
 
         List<Message> recentMessages = messagesDao.getRecentMessages(profileUser.getId());
         Message recent = recentMessages.stream()

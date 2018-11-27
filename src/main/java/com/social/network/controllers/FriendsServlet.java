@@ -33,7 +33,6 @@ public class FriendsServlet extends HttpServlet {
         req.setAttribute("friendsRequests", friendsRequests);
         req.setAttribute("friends", friends);
 
-        friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
 
         req.getRequestDispatcher("friends.jsp").forward(req, resp);
     }

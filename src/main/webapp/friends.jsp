@@ -36,13 +36,13 @@
                                         <avatar:Avatar user="${friendRequest.userSender}"/>
                                 </td>
                                 <td>
+                                    <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info">Message</a>
+                                </td>
+                                <td>
                                     <button class="btn btn-success">Accept</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger">Decline</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-info">Message</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -63,7 +63,7 @@
                                         <avatar:Avatar user="${friend.friend}"/>
                                 </td>
                                 <td>
-                                    <button class="btn btn-info">Message</button>
+                                    <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info">Message</a>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger">Remove</button>

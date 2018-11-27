@@ -15,16 +15,21 @@
         <div class="col-md-9">
             <h2>Messages</h2>
 
-            <c:forEach items="${recentMessages}" var="message">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="card">
-                            <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
+            <c:if test="${not empty recentMessages}">
+                <c:forEach items="${recentMessages}" var="message">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="card">
+                                <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
+                            </div>
                         </div>
+                        <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
                     </div>
-                    <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty recentMessages}">
+                <h4>No messages yet...</h4>
+            </c:if>
         </div>
     </div>
 </div>

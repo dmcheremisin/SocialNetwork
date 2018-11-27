@@ -27,25 +27,29 @@ public class FriendsDao {
         this.connective = connective;
     }
 
-    public List<UserFriend> getFriends(Integer userId) {
+    public List<UserFriend> getFriends(int userId) {
         try (Connection con = connective.getConnection();
              PreparedStatement stm = con.prepareStatement(FRIENDS_OF_USER)) {
             stm.setInt(1, userId);
             stm.setInt(2, userId);
             ResultSet rs = stm.executeQuery();
-            return parseResultSet(rs);
+            List<UserFriend> friends = parseResultSet(rs);
+            friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
+            return friends;
         } catch (SQLException e) {
             logger.error("Can't get all user friends entities from the database");
             throw new RuntimeException();
         }
     }
 
-    public List<UserFriend> getFriendsRequests(Integer userId) {
+    public List<UserFriend> getFriendsRequests(int userId) {
         try (Connection con = connective.getConnection();
              PreparedStatement stm = con.prepareStatement(FRIENDS_REQUESTS_OF_USER)) {
             stm.setInt(1, userId);
             ResultSet rs = stm.executeQuery();
-            return parseResultSet(rs);
+            List<UserFriend> friends = parseResultSet(rs);
+            friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
+            return friends;
         } catch (SQLException e) {
             logger.error("Can't get all user friends entities from the database");
             throw new RuntimeException();

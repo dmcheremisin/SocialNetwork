@@ -30,6 +30,11 @@
                                             </form>
                                         </td>
                                     </c:if>
+                                    <c:if test="${profileUser.id != user.id && !showAddToFriends}">
+                                        <td>
+                                            <a href="/friends" class="btn btn-success">Friend <span class="glyphicon glyphicon-ok"></span></a>
+                                        </td>
+                                    </c:if>
                                 </tr>
                                 <tr>
                                     <c:if test="${profileUser.id != user.id}">
@@ -87,8 +92,14 @@
                 <h3>Friends:</h3>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <a class="profile-friend" href="profile.html"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg" />Cersei</a>
-                        <a class="profile-friend" href="profile.html"><img class="img-circle img-thumbnail img-message" src="./img/noname.svg"/>Jaime</a>
+                        <c:if test="${not empty friends}">
+                            <c:forEach var="friend" items="${friends}">
+                                <span class="profile-friend"><avatar:Avatar user="${friend.friend}"/></span>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty friends}">
+                            <h4>No friends yet...</h4>
+                        </c:if>
                     </div>
                 </div>
             </div>
