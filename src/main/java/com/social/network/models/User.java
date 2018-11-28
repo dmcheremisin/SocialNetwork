@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Dmitrii on 14.11.2018.
  */
 public class User implements Identifiable {
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
     private Date dob;
@@ -20,11 +20,11 @@ public class User implements Identifiable {
     private Boolean blocked;
     private String image;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

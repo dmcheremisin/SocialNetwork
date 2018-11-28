@@ -140,4 +140,13 @@
         <url-pattern>/conversation</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>com.social.network.controllers.UsersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
 </web-app>

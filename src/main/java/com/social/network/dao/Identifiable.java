@@ -5,6 +5,6 @@ package com.social.network.dao;
  */
 public interface Identifiable {
 
-    Integer getId();
-    void setId(Integer id);
+    int getId();
+    void setId(int id);
 }

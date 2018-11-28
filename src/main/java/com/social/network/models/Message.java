@@ -2,14 +2,11 @@ package com.social.network.models;
 
 import com.social.network.dao.Identifiable;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 /**
  * Created by Dmitrii on 23.11.2018.
  */
 public class Message implements Identifiable {
-    private Integer id;
+    private int id;
     private String date;
     private String message;
     private User sender;
@@ -17,12 +14,12 @@ public class Message implements Identifiable {
     private Integer companion;
 
     @Override
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
     @Override
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
