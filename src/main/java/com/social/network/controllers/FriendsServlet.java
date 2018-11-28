@@ -31,10 +31,25 @@ public class FriendsServlet extends HttpServlet {
         User user = getUserFromSession(req);
         int userId = user.getId();
 
+        String search = req.getParameter("search");
+
         List<UserFriend> friendsRequests = friendsDao.getFriendsRequests(userId);
+        if(isNotBlank(search)){
+            friendsRequests = friendsRequests.stream()
+                    .filter(f -> f.getFriend().getFirstName().toLowerCase().contains(search.toLowerCase()) ||
+                            f.getFriend().getLastName().toLowerCase().contains(search.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
         Map<Boolean, List<UserFriend>> groupBySender = friendsRequests.stream()
                 .collect(Collectors.partitioningBy(f -> f.getUserSender().getId() == userId));
+
         List<UserFriend> friends = friendsDao.getFriends(userId);
+        if(isNotBlank(search)){
+            friends = friends.stream()
+                    .filter(f -> f.getFriend().getFirstName().toLowerCase().contains(search.toLowerCase()) ||
+                            f.getFriend().getLastName().toLowerCase().contains(search.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
 
         req.setAttribute("usersRequests", groupBySender.get(true));
         req.setAttribute("friendsRequests", groupBySender.get(false));

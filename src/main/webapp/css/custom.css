@@ -114,3 +114,9 @@
 .profile-info {
     width: 70%;
 }
+.users {
+    width: 50%;
+}
+.users > tbody > tr > td {
+    vertical-align: middle;
+}

@@ -84,7 +84,7 @@
                         </div>
                     </c:if>
                     <c:if test="${empty message}">
-                        <h2>No messages found</h2>
+                        <h4>No messages found</h4>
                     </c:if>
                 </c:if>
             </div>
