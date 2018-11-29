@@ -53,8 +53,9 @@
                                 </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="datepicker">Birth date:<br />
-                                    <input type="text" name="dob" value="${user.dob}" id="datepicker" size="30">
+                                <label for="datepicker">Birth date:
+                                    <input type="text" name="dob" class="form-control" value="${user.dob}"
+                                           id="datepicker">
                                 </label>
                             </div>
                             <div class="list-group-item"> Gender:
