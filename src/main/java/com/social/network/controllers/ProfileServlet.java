@@ -1,8 +1,8 @@
 package com.social.network.controllers;
 
-import com.social.network.dao.impl.FriendsDao;
-import com.social.network.dao.impl.MessagesDao;
-import com.social.network.dao.impl.UserDao;
+import com.social.network.dao.FriendsDao;
+import com.social.network.dao.MessagesDao;
+import com.social.network.dao.UserDao;
 import com.social.network.models.Message;
 import com.social.network.models.User;
 import com.social.network.models.UserFriend;

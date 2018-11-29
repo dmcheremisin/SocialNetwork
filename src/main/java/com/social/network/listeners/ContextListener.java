@@ -2,10 +2,10 @@ package com.social.network.listeners;
 
 import com.social.network.connection.impl.ConnectionPool;
 import com.social.network.connection.Connective;
-import com.social.network.dao.impl.FriendsDao;
-import com.social.network.dao.impl.InitializationDao;
-import com.social.network.dao.impl.MessagesDao;
-import com.social.network.dao.impl.UserDao;
+import com.social.network.dao.FriendsDao;
+import com.social.network.dao.InitializationDao;
+import com.social.network.dao.MessagesDao;
+import com.social.network.dao.UserDao;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;

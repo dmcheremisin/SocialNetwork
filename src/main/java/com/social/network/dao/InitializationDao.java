@@ -1,4 +1,4 @@
-package com.social.network.dao.impl;
+package com.social.network.dao;
 
 import com.social.network.connection.Connective;
 import org.apache.log4j.Logger;

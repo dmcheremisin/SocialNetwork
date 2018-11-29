@@ -1,6 +1,6 @@
 package com.social.network.controllers;
 
-import com.social.network.dao.impl.UserDao;
+import com.social.network.dao.UserDao;
 import com.social.network.models.User;
 import com.social.network.utils.Encryption;
 import org.apache.log4j.Logger;

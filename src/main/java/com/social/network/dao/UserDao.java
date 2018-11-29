@@ -1,4 +1,4 @@
-package com.social.network.dao.impl;
+package com.social.network.dao;
 
 import com.social.network.connection.Connective;
 import com.social.network.models.User;

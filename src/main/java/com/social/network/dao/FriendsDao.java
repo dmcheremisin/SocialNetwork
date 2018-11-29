@@ -1,4 +1,4 @@
-package com.social.network.dao.impl;
+package com.social.network.dao;
 
 import com.social.network.connection.Connective;
 import com.social.network.models.User;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.social.network.dao.impl.MessagesDao.getUserFromRow;
+import static com.social.network.dao.MessagesDao.getUserFromRow;
 
 public class FriendsDao {
     private static final Logger logger = Logger.getLogger(MessagesDao.class);

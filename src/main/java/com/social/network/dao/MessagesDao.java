@@ -1,4 +1,4 @@
-package com.social.network.dao.impl;
+package com.social.network.dao;
 
 import com.social.network.connection.Connective;
 import com.social.network.models.Message;
@@ -6,7 +6,6 @@ import com.social.network.models.User;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
