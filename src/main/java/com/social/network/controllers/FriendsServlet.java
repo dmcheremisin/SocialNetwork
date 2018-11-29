@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.social.network.controllers.UsersServlet.searchByName;
 import static com.social.network.utils.ServerUtils.getUserFromSession;
 import static com.social.network.utils.ServerUtils.isInteger;
 import static com.social.network.utils.ServerUtils.isNotBlank;
@@ -35,9 +36,9 @@ public class FriendsServlet extends HttpServlet {
 
         List<UserFriend> friendsRequests = friendsDao.getFriendsRequests(userId);
         if(isNotBlank(search)){
+            String name = search.toLowerCase();
             friendsRequests = friendsRequests.stream()
-                    .filter(f -> f.getFriend().getFirstName().toLowerCase().contains(search.toLowerCase()) ||
-                            f.getFriend().getLastName().toLowerCase().contains(search.toLowerCase()))
+                    .filter(f -> searchByName(name, f.getFriend()))
                     .collect(Collectors.toList());
         }
         Map<Boolean, List<UserFriend>> groupBySender = friendsRequests.stream()
@@ -45,9 +46,9 @@ public class FriendsServlet extends HttpServlet {
 
         List<UserFriend> friends = friendsDao.getFriends(userId);
         if(isNotBlank(search)){
+            String name = search.toLowerCase();
             friends = friends.stream()
-                    .filter(f -> f.getFriend().getFirstName().toLowerCase().contains(search.toLowerCase()) ||
-                            f.getFriend().getLastName().toLowerCase().contains(search.toLowerCase()))
+                    .filter(f -> searchByName(name, f.getFriend()))
                     .collect(Collectors.toList());
         }
 
