@@ -14,14 +14,14 @@
         </div>
         <div class="col-md-9">
             <h2>Conversation with
-                <avatar:Avatar user="${companionUser}" />
+                <avatar:avatar user="${companionUser}" />
             </h2>
             <c:if test="${not empty conversation}">
                 <c:forEach items="${conversation}" var="message">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="card">
-                                <avatar:Avatar user="${message.sender}" />
+                                <avatar:avatar user="${message.sender}" />
                             </div>
                         </div>
                         <div class="panel-body">${message.date} ${message.message}</a></div>

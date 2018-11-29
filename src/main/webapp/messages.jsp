@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="card">
-                                <avatar:Avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:Avatar user="${message.receiver}" />
+                                <avatar:avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:avatar user="${message.receiver}" />
                             </div>
                         </div>
                         <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>

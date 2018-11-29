@@ -28,28 +28,14 @@
 
             <div class="friends-top">
                 <h3>Users:</h3>
-                <%--<table class="table users">--%>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<a href="#"><img class="img-circle img-thumbnail img-message" src="./img/sansa.jpg"/>Sansa Stark</a>--%>
-                        <%--<td>--%>
-                            <%--<button class="btn btn-success">Add to friends</button>--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<a href="#"><img class="img-circle img-thumbnail img-message" src="./img/arya.jpg"/>Arya Stark</a>--%>
-                        <%--<td>--%>
-                            <%--<span class="btn btn-success">Already friend <span class="glyphicon glyphicon-ok"></span></span>--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
                 <c:if test="${not empty users}">
                     <table class="table users">
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>
-                                    <socialTags:Avatar user="${user}"/>
+                                    <socialTags:avatar user="${user}"/>
+                                    ${user.dob},
+                                    <socialTags:gender user="${user}" />
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${user.id}" class="btn btn-info">Message</a>

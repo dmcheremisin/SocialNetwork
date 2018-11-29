@@ -18,7 +18,7 @@
                     <tr>
                         <td>
                             <div class="card">
-                                <socialTags:ProfileImage user="${profileUser}"/>
+                                <socialTags:profileImage user="${profileUser}"/>
                                 <h3>${profileUser.firstName} ${profileUser.lastName}</h3>
                             </div>
                             <table class="table">
@@ -59,8 +59,7 @@
                                     <p class="list-group-item">Last name: ${profileUser.lastName}</p>
                                     <p class="list-group-item">Birth date: ${profileUser.dob}</p>
                                     <p class="list-group-item">Gender:
-                                        <c:if test="${profileUser.sex == 2}">Male</c:if>
-                                        <c:if test="${profileUser.sex == 3}">Female</c:if>
+                                        <socialTags:gender user="${profileUser}" />
                                     </p>
                                     <p class="list-group-item">Phone: ${profileUser.phone}</p>
                                     <p class="list-group-item">Email: ${profileUser.email}</p>
@@ -77,7 +76,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="card">
-                                    <socialTags:Avatar user="${message.sender}" />&nbsp; to &nbsp;<socialTags:Avatar user="${message.receiver}" />
+                                    <socialTags:avatar user="${message.sender}" />&nbsp; to &nbsp;<socialTags:avatar user="${message.receiver}" />
                                 </div>
                             </div>
                             <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>
@@ -94,7 +93,7 @@
                     <div class="panel-body">
                         <c:if test="${not empty friends}">
                             <c:forEach var="friend" items="${friends}">
-                                <span class="profile-friend"><socialTags:Avatar user="${friend.friend}"/></span>
+                                <span class="profile-friend"><socialTags:avatar user="${friend.friend}"/></span>
                             </c:forEach>
                         </c:if>
                         <c:if test="${empty friends}">

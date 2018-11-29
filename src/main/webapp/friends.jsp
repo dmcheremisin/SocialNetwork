@@ -33,7 +33,7 @@
                         <c:forEach var="friendRequest" items="${friendsRequests}">
                             <tr>
                                 <td>
-                                    <socialTags:Avatar user="${friendRequest.friend}"/>
+                                    <socialTags:avatar user="${friendRequest.friend}"/>
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info">Message</a>
@@ -60,7 +60,7 @@
                         <c:forEach var="userRequest" items="${usersRequests}">
                             <tr>
                                 <td>
-                                    <socialTags:Avatar user="${userRequest.friend}"/>
+                                    <socialTags:avatar user="${userRequest.friend}"/>
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info">Message</a>
@@ -83,7 +83,7 @@
                         <c:forEach var="friend" items="${friends}">
                             <tr>
                                 <td>
-                                    <socialTags:Avatar user="${friend.friend}"/>
+                                    <socialTags:avatar user="${friend.friend}"/>
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info">Message</a>

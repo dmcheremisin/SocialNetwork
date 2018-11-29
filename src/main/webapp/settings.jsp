@@ -24,7 +24,7 @@
                     </div>
                     <div class="image-right">
                         <div class="card">
-                            <avatar:ProfileImage user="${user}" />
+                            <avatar:profileImage user="${user}" />
                         </div>
                     </div>
                 </div>
