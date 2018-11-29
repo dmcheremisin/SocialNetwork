@@ -19,6 +19,7 @@ import static com.social.network.utils.ServerUtils.setRoleToRequest;
  */
 public class RegistrationServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(RegistrationServlet.class);
+    private static final String PASSWORDS_DOESN_T_MATCH = "Passwords doesn't match";
 
     private UserDao userDao;
 
@@ -43,7 +44,8 @@ public class RegistrationServlet extends HttpServlet {
             session.setAttribute("user", insertedUser);
             setRoleToRequest(req, insertedUser);
         } else {
-            throw new RuntimeException("Passwords doesn't match");
+            logger.error(PASSWORDS_DOESN_T_MATCH);
+            throw new RuntimeException(PASSWORDS_DOESN_T_MATCH);
         }
         resp.sendRedirect("/profile");
     }

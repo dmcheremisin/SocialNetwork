@@ -21,6 +21,7 @@ import static com.social.network.utils.ServerUtils.getUserFromSession;
  */
 public class SettingsServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(SettingsServlet.class);
+    private static final String CAN_T_PARSE_USER_DATA_PARAMETERS = "Can't parse user data parameters";
 
     private UserDao userDao;
 
@@ -69,7 +70,7 @@ public class SettingsServlet extends HttpServlet {
 
             doGet(req, resp);
         } catch (ParseException e) {
-            logger.error("Can't parse user data parameters");
+            logger.error(CAN_T_PARSE_USER_DATA_PARAMETERS);
             throw new RuntimeException();
         }
     }

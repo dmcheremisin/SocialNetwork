@@ -16,6 +16,12 @@ import static com.social.network.dao.MessagesDao.getUserFromRow;
 
 public class FriendsDao {
     private static final Logger logger = Logger.getLogger(MessagesDao.class);
+    private static final String CAN_T_GET_ALL_USER_FRIENDS_ENTITIES = "Can't get all user friends entities from the database with id = ";
+    private static final String CAN_T_GET_ALL_USER_FRIENDS_REQUESTS = "Can't get all user friends requests from the database with id";
+    private static final String CAN_T_CHECK_FRIENDSHIP = "Can't check friendship for the users with ids: %s, %s";
+    private static final String CAN_T_INSERT_ADD_TO_FRIEND_REQUEST_USER_S_FRIEND_S = "Can't insert add to friend request -> user: %s, friend %s";
+    private static final String CAN_T_ACCEPT_FRIEND_REQUEST_USER_S_FRIEND_S = "Can't accept friend request -> user: %s, friend %s";
+    private static final String CAN_T_REMOVE_FRIEND_REQUEST_USER_S_FRIEND_S = "Can't remove friend request -> user: %s, friend %s";
 
     private static final String FRIENDS_OF_USER = "SELECT * FROM user_friends_requests where (sid = ? OR rid = ?) AND accepted = TRUE";
     private static final String FRIENDS_REQUESTS_OF_USER = "SELECT * FROM user_friends_requests WHERE (sid = ? OR rid = ?) AND accepted = FALSE";
@@ -25,7 +31,6 @@ public class FriendsDao {
             "UPDATE friendship set accepted = TRUE WHERE (usersender = ? AND userreceiver = ?) OR (usersender = ? AND userreceiver = ?)";
     private static final String DELETE_FRIEND_REQUEST =
             "DELETE FROM friendship WHERE (usersender = ? AND userreceiver = ?) OR (usersender = ? AND userreceiver = ?)";
-
 
     private final Connective connective;
 
@@ -43,8 +48,9 @@ public class FriendsDao {
             friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
             return friends;
         } catch (SQLException e) {
-            logger.error("Can't get all user friends entities from the database");
-            throw new RuntimeException();
+            String message = CAN_T_GET_ALL_USER_FRIENDS_ENTITIES + userId;
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -58,8 +64,9 @@ public class FriendsDao {
             friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
             return friends;
         } catch (SQLException e) {
-            logger.error("Can't get all user friends entities from the database");
-            throw new RuntimeException();
+            String message = CAN_T_GET_ALL_USER_FRIENDS_REQUESTS + userId;
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -73,8 +80,9 @@ public class FriendsDao {
             ResultSet rs = stm.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            logger.error("Can't get all user friends entities from the database");
-            throw new RuntimeException();
+            String message = String.format(CAN_T_CHECK_FRIENDSHIP, user, friend);
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
     
@@ -85,8 +93,9 @@ public class FriendsDao {
             stm.setInt(2, friendId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error(String.format("Can't insert add to friend request -> user: %s, friend %s", userId, friendId));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_INSERT_ADD_TO_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -99,8 +108,9 @@ public class FriendsDao {
             stm.setInt(4, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error(String.format("Can't accept friend request -> user: %s, friend %s", userId, friendId));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_ACCEPT_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -113,8 +123,9 @@ public class FriendsDao {
             stm.setInt(4, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error(String.format("Can't remove friend request -> user: %s, friend %s", userId, friendId));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_REMOVE_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 

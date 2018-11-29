@@ -4,6 +4,7 @@ import com.social.network.dao.UserDao;
 import com.social.network.models.User;
 import com.social.network.utils.Encryption;
 import com.social.network.utils.ServerUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -23,6 +24,10 @@ import static com.social.network.utils.ServerUtils.setRoleToRequest;
 import static com.social.network.utils.ServerUtils.isNotBlank;
 
 public class AuthFilter implements Filter {
+    private static final Logger logger = Logger.getLogger(AuthFilter.class);
+    public static final String REDIRECT_USER_TO_PROFILE_PAGE = "Redirect user to profile page from ";
+    public static final String USER_UNSUCCESSFULLY_TRIED_TO_LOG_IN = "User unsuccessfully tried to log in with email: ";
+
     private UserDao userDao;
     private List<String> allowedUrls;
 
@@ -59,6 +64,7 @@ public class AuthFilter implements Filter {
             setRoleToRequest(request, user);
 
             if(requestedPath.equals("")) {
+                logger.info(REDIRECT_USER_TO_PROFILE_PAGE + requestedPath);
                 response.sendRedirect("/profile");
                 return;
             }
@@ -76,6 +82,8 @@ public class AuthFilter implements Filter {
 
                 filterChain.doFilter(request, response);
                 return;
+            } else {
+                logger.info(USER_UNSUCCESSFULLY_TRIED_TO_LOG_IN + email);
             }
         } else if(requestedPath.equals("")) {
             filterChain.doFilter(request, response);

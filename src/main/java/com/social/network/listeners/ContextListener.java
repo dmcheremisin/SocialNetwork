@@ -20,6 +20,7 @@ import static com.social.network.connection.impl.ConnectionPool.getConnectionPoo
  */
 public class ContextListener implements ServletContextListener {
     private static final Logger logger = Logger.getLogger(ServletContextListener.class);
+    public static final String CAN_T_INITIALIZE_DATABASE_SCHEMA_AND_DATA = "Can't initialize database schema and data";
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
@@ -39,7 +40,8 @@ public class ContextListener implements ServletContextListener {
             servletContext.setAttribute("friendsDao", friendsDao);
 
         } catch (SQLException | ClassNotFoundException e) {
-            logger.error("Can't initialize database schema and data");
+            logger.error(CAN_T_INITIALIZE_DATABASE_SCHEMA_AND_DATA);
+            throw new RuntimeException(CAN_T_INITIALIZE_DATABASE_SCHEMA_AND_DATA);
         }
     }
 

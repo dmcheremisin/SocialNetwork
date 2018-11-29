@@ -21,6 +21,9 @@ import java.util.List;
 public class MessagesDao {
     private static final Logger logger = Logger.getLogger(MessagesDao.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final String CAN_T_GET_ALL_RECENT_MESSAGES = "Can't get all recent messages from the database for the user = ";
+    private static final String CAN_T_MESSAGES_FROM_THE_DATABASE_OF_USERS = "Can't messages from the database of users: %s, %s";
+    private static final String CAN_T_PARSE_MESSAGES_RESULT_SET = "Can't parse messages result set";
 
     private final Connective connective;
     private String SELECT_LAST_QUERY = "SELECT * FROM last_user_message WHERE sid = ? OR rid = ? ";
@@ -39,8 +42,9 @@ public class MessagesDao {
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            logger.error("Can't get all entities from the database");
-            throw new RuntimeException();
+            String message = CAN_T_GET_ALL_RECENT_MESSAGES + userId;
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -54,8 +58,9 @@ public class MessagesDao {
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            logger.error("Can't get all entities from the database");
-            throw new RuntimeException();
+            String message = String.format(CAN_T_MESSAGES_FROM_THE_DATABASE_OF_USERS, sender, receiver);
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -69,8 +74,9 @@ public class MessagesDao {
             stm.setString(4, message);
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Can't inset message to the database");
-            throw new RuntimeException();
+            String error = String.format("Can't inset message to the database sender = %s, receiver = %s, message = %s", sender, receiver, message);
+            logger.error(error);
+            throw new RuntimeException(error);
         }
     }
 
@@ -98,7 +104,8 @@ public class MessagesDao {
                 messages.add(messageModel);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(CAN_T_PARSE_MESSAGES_RESULT_SET);
+            throw new RuntimeException(CAN_T_PARSE_MESSAGES_RESULT_SET);
         }
         return messages;
     }

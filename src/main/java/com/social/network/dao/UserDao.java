@@ -13,6 +13,14 @@ import java.util.List;
  */
 public class UserDao{
     private static final Logger logger = Logger.getLogger(UserDao.class);
+    private static final String CREATION_OF_USER_FAILED_NO_ID_OBTAINED = "Creation of user failed, no id obtained.";
+    private static final String CAN_T_INSERT_USER_IN_THE_DATABASE = "Can't insert user in the database: ";
+    private static final String CAN_T_UPDATE_USER_WITH_ID_S_IN_THE_DATABASE = "Can't update user with id=%s in the database";
+    private static final String CAN_T_GET_ALL_USERS_FROM_THE_DATABASE = "Can't get all users from the database";
+    private static final String CAN_T_DELETE_USER_WITH_ID_S_FROM_THE_DATABASE = "Can't delete user with id=%s from the database";
+    private static final String CAN_T_UPDATE_IMAGE = "Can't update image of user with id=%s in the database";
+    private static final String CAN_T_UPDATE_USER_PASSWORD = "Can't update user with id=%s with new password in the database";
+    private static final String CAN_T_PARSE_USER_RESULT_SET = "Can't parse user result set";
     
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String SELECT_USER = "SELECT * FROM users WHERE id=?";
@@ -22,6 +30,7 @@ public class UserDao{
     private static final String SELECT_FROM_USERS_WHERE_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE email=? AND password=?";
     private static final String UPDATE_USERS_SET_IMAGE_WHERE_ID = "UPDATE USERS SET image=? WHERE id=?";
     private static final String UPDATE_USERS_SET_PASSWORD_WHERE_ID = "UPDATE USERS SET password=? WHERE id=?";
+
 
     private final Connective connective;
     
@@ -52,13 +61,14 @@ public class UserDao{
                     int id = generatedKeys.getInt(1);
                     return get(id);
                 } else {
-                    throw new SQLException("Creating user failed, no id obtained.");
+                    throw new SQLException(CREATION_OF_USER_FAILED_NO_ID_OBTAINED);
                 }
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            logger.error(String.format("Can't insert object with id=%s in the database", entity.getId()));
-            throw new RuntimeException();
+            String message = CAN_T_INSERT_USER_IN_THE_DATABASE + entity;
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -68,8 +78,9 @@ public class UserDao{
             prepareStatementForUpdate(stm, entity);
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error(String.format("Can't update object with id=%s in the database", entity.getId()));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_UPDATE_USER_WITH_ID_S_IN_THE_DATABASE, entity.getId());
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -79,8 +90,9 @@ public class UserDao{
             stm.setInt(1, entity.getId());
             stm.executeUpdate();
         } catch (SQLException e) {
-            logger.error(String.format("Can't delete object with id=%s from the database", entity.getId()));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_DELETE_USER_WITH_ID_S_FROM_THE_DATABASE, entity.getId());
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -91,8 +103,8 @@ public class UserDao{
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            logger.error("Can't get all entities from the database");
-            throw new RuntimeException();
+            logger.error(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
+            throw new RuntimeException(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
         }
     }
 
@@ -120,8 +132,9 @@ public class UserDao{
             stm.executeUpdate();
             return get(user.getId());
         } catch (SQLException e) {
-            logger.error(String.format("Can't update object with id=%s in the database", user.getId()));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_UPDATE_IMAGE, user.getId());
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -133,8 +146,9 @@ public class UserDao{
             stm.executeUpdate();
             return get(user.getId());
         } catch (SQLException e) {
-            logger.error(String.format("Can't update object with id=%s in the database", user.getId()));
-            throw new RuntimeException();
+            String message = String.format(CAN_T_UPDATE_USER_PASSWORD, user.getId());
+            logger.error(message);
+            throw new RuntimeException(message);
         }
     }
 
@@ -172,7 +186,7 @@ public class UserDao{
                 users.add(user);
             }
         }catch (Exception e) {
-            logger.error("Can't parse result set");
+            logger.error(CAN_T_PARSE_USER_RESULT_SET);
         }
         return users;
     }

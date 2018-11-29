@@ -17,6 +17,8 @@ import static com.social.network.utils.ServerUtils.*;
 
 public class ConversationServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ConversationServlet.class);
+    private static final String WRONG_COMPANION_PARAMETER = "Conversation: wrong companion parameter : ";
+    private static final String NO_COMPANION_WITH_SUCH_ID_OR_MESSAGE_IS_EMPTY = "No companion with id=%s or message is empty";
 
     private UserDao userDao;
     private MessagesDao messagesDao;
@@ -40,6 +42,10 @@ public class ConversationServlet extends HttpServlet {
 
             req.setAttribute("conversation", bothMessages);
             req.setAttribute("companionUser", companionUser);
+        } else {
+            String message = WRONG_COMPANION_PARAMETER + companion;
+            logger.error(message);
+            throw new RuntimeException(message);
         }
 
         req.getRequestDispatcher("conversation.jsp").forward(req, resp);
@@ -55,6 +61,10 @@ public class ConversationServlet extends HttpServlet {
         if (isInteger(companion) && isNotBlank(message)) {
             int companionId = Integer.parseInt(companion);
             messagesDao.addMessage(user.getId(), companionId, message);
+        } else {
+            String error = String.format(NO_COMPANION_WITH_SUCH_ID_OR_MESSAGE_IS_EMPTY, companion);
+            logger.error(error);
+            throw new RuntimeException(error);
         }
 
         doGet(req, resp);

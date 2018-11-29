@@ -37,6 +37,7 @@ public class UsersServlet extends HttpServlet {
         Stream<User> filterSessionUser = users.stream()
                 .filter(user -> user.getId() != userFromSession.getId());
         if(isNotBlank(search)){
+            logger.info("User search request: " + search);
             String name = search.toLowerCase();
             users = filterSessionUser
                     .filter(u -> searchByName(name, u))

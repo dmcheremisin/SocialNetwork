@@ -15,8 +15,10 @@ import java.util.concurrent.ArrayBlockingQueue;
  * Created by Dmitrii on 13.11.2018.
  */
 public class ConnectionPool {
-    public static final String CAN_T_GET_CONNECTION_FROM_POOL = "Can't get connection from the pool";
-    public static final String CAN_RETURN_CONNECTION_TO_THE_POOL = "Can' return connection to the pool";
+    private static final Logger logger = Logger.getLogger(ConnectionPool.class);
+
+    private static final String CAN_T_GET_CONNECTION_FROM_POOL = "Can't get connection from the pool";
+    private static final String CAN_RETURN_CONNECTION_TO_THE_POOL = "Can' return connection to the pool";
 
     private static ResourceBundle bundle = ResourceBundle.getBundle("connection");
     private static final String DB_DRIVER = bundle.getString("driver");
@@ -24,8 +26,6 @@ public class ConnectionPool {
     private static final String DB_USER_NAME = bundle.getString("user");
     private static final String DB_PASSWORD = bundle.getString("password");
     private static final int DB_MAX_CONNECTIONS = Integer.parseInt(bundle.getString("poolSize"));
-
-    private static final Logger logger = Logger.getLogger(ConnectionPool.class);
 
     private static ConnectionPool cp;
 
@@ -98,7 +98,7 @@ public class ConnectionPool {
             closeConnections(getConnectionPool().freeConnections);
             closeConnections(getConnectionPool().usedConnections);
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error("Can't close free and used connections");
         }
         logger.info("All connections are closed");
     }

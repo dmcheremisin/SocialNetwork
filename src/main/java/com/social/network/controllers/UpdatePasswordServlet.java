@@ -20,7 +20,7 @@ import static com.social.network.utils.ServerUtils.getUserFromSession;
  */
 public class UpdatePasswordServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UpdatePasswordServlet.class);
-    public static final String PASSWORDS_DOESN_T_MATCH = "Passwords do not match";
+    private static final String PASSWORDS_DOESN_T_MATCH = "Passwords do not match";
 
     private UserDao userDao;
 

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class InitializationDao {
     private static final Logger logger = Logger.getLogger(InitializationDao.class);
+    private static final String SOMETHING_WENT_WRONG_WITH_INITIALIZATION = "Something went wrong with initialization of schema and dump of the data base";
+    private static final String CAN_T_READ_SQL_BATCH = "Can't read sql batch";
 
     private Connective connective;
     private final File sqlSchema;
@@ -40,8 +42,8 @@ public class InitializationDao {
             stmt.executeBatch();
             logger.info("All data is initialized successfully");
         } catch (SQLException e) {
-            logger.error("Something went wrong with initialization of schema and dump of the data base");
-            throw new RuntimeException("Something went wrong with initialization of schema and dump of the data base");
+            logger.error(SOMETHING_WENT_WRONG_WITH_INITIALIZATION);
+            throw new RuntimeException(SOMETHING_WENT_WRONG_WITH_INITIALIZATION);
         }
     }
 
@@ -52,8 +54,8 @@ public class InitializationDao {
             lines.forEach(sb::append);
             return sb;
         } catch (IOException e) {
-            logger.error("Can't read sql batch");
-            throw new RuntimeException("Can't read sql batch");
+            logger.error(CAN_T_READ_SQL_BATCH);
+            throw new RuntimeException(CAN_T_READ_SQL_BATCH);
         }
     }
 

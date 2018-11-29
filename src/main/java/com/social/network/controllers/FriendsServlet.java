@@ -3,6 +3,7 @@ package com.social.network.controllers;
 import com.social.network.dao.FriendsDao;
 import com.social.network.models.User;
 import com.social.network.models.UserFriend;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,8 @@ import static com.social.network.utils.ServerUtils.isInteger;
 import static com.social.network.utils.ServerUtils.isNotBlank;
 
 public class FriendsServlet extends HttpServlet {
-
+    private static final Logger logger = Logger.getLogger(FriendsServlet.class);
+    private static final String FRIEND_WRONG_ACTION_REQUEST = "Friends action request with non-valid parameters action=%s , friend=%s";
     private FriendsDao friendsDao;
 
     @Override
@@ -36,6 +38,7 @@ public class FriendsServlet extends HttpServlet {
 
         List<UserFriend> friendsRequests = friendsDao.getFriendsRequests(userId);
         if(isNotBlank(search)){
+            logger.info("Friends search request: " + search);
             String name = search.toLowerCase();
             friendsRequests = friendsRequests.stream()
                     .filter(f -> searchByName(name, f.getFriend()))
@@ -80,6 +83,8 @@ public class FriendsServlet extends HttpServlet {
                     friendsDao.declineFriendRequest(userId, friendId);
                     break;
             }
+        } else {
+            logger.error(String.format(FRIEND_WRONG_ACTION_REQUEST, action, friend));
         }
         doGet(req, resp);
     }

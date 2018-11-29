@@ -22,6 +22,8 @@ import static com.social.network.utils.ServerUtils.isInteger;
 
 public class ProfileServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ProfileServlet.class);
+    private static final String PROFILE_REQUEST = "User with id=%s requested profile with id=%s";
+    private static final String WRONG_PROFILE_REQUEST_ID = "Wrong profile request id = ";
 
     private UserDao userDao;
     private MessagesDao messagesDao;
@@ -36,16 +38,25 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId;
-        String id = req.getParameter("id");
         User userFromSession = getUserFromSession(req);
+        String id = req.getParameter("id");
+        logger.info(String.format(PROFILE_REQUEST, userFromSession.getId(), id));
+
+        int userId;
         User userFromRequest = null;
         boolean usersHaveFriendship = false;
         if(isInteger(id)) {
             userId = Integer.parseInt(id);
-            userFromRequest = userDao.get(userId);
-            usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
+            if(userId != userFromSession.getId()) {
+                userFromRequest = userDao.get(userId);
+                usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
+            }
+        } else {
+            String message = WRONG_PROFILE_REQUEST_ID + id;
+            logger.info(message);
+            throw new RuntimeException(message);
         }
+
         User profileUser = userFromRequest == null ? userFromSession : userFromRequest;
         List<UserFriend> friends = friendsDao.getFriends(profileUser.getId());
 
