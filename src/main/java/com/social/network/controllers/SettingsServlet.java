@@ -51,9 +51,7 @@ public class SettingsServlet extends HttpServlet {
 
             String dob = req.getParameter("dob");
             if (ServerUtils.isNotBlank(dob)){
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = format.parse(dob);
-                user.setDob(date);
+                user.setDob(dob);
             }
 
             String sex = req.getParameter("sex");
@@ -69,7 +67,7 @@ public class SettingsServlet extends HttpServlet {
             userDao.update(user);
 
             doGet(req, resp);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             logger.error(CAN_T_PARSE_USER_DATA_PARAMETERS);
             throw new RuntimeException();
         }

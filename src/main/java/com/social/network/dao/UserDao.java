@@ -5,8 +5,15 @@ import com.social.network.models.User;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.social.network.utils.ServerUtils.isNotBlank;
 
 /**
  * Created by Dmitrii on 14.11.2018.
@@ -33,7 +40,9 @@ public class UserDao{
 
 
     private final Connective connective;
-    
+    public static final DateTimeFormatter SHORT_DT = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    public static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+
     public UserDao(Connective connective) {
         this.connective = connective;
     }
@@ -54,7 +63,8 @@ public class UserDao{
     public User insert(User entity) {
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);) {
-            prepareStatementForInsert(stm, entity);
+            stm.setString(6, entity.getEmail());
+            stm.setString(7, entity.getPassword());
             stm.executeUpdate();
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -173,7 +183,9 @@ public class UserDao{
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 if(dob != null){
-                    user.setDob(new Date(dob.getTime()));
+                    LocalDateTime dateTime = rs.getTimestamp("dob").toLocalDateTime();
+                    String dateString = SHORT_DT.format(dateTime);
+                    user.setDob(dateString);
                 }
                 user.setSex(sex);
                 user.setPhone(phone);
@@ -194,31 +206,19 @@ public class UserDao{
     private PreparedStatement prepareStatementForUpdate(PreparedStatement st, User entity) throws SQLException {
         st.setString(1, entity.getFirstName());
         st.setString(2, entity.getLastName());
-        Date date = new Date(entity.getDob().getTime());
-        st.setDate(3, date);
+        String dob = entity.getDob();
+        if(isNotBlank(dob)) {
+            try {
+                java.util.Date dateParsed = FORMAT.parse(dob);
+                Date date = new Date(dateParsed.getTime());
+                st.setDate(3, date);
+            } catch (ParseException e) {
+                logger.error("Can't parse date string = " + dob);
+            }
+        }
         st.setInt(4, entity.getSex());
         st.setString(5, entity.getPhone());
         st.setInt(6, entity.getId());
-        return st;
-    }
-
-
-    private PreparedStatement prepareStatementForInsert(PreparedStatement st, User entity) throws SQLException {
-        st.setString(1, entity.getFirstName());
-        st.setString(2, entity.getLastName());
-        Date date = null;
-        if(entity.getDob() != null) {
-            date = new Date(entity.getDob().getTime());
-        }
-        st.setDate(3, date);
-        if(entity.getSex() != null) {
-            st.setInt(4, entity.getSex());
-        } else {
-            st.setInt(4, 1);
-        }
-        st.setString(5, entity.getPhone());
-        st.setString(6, entity.getEmail());
-        st.setString(7, entity.getPassword());
         return st;
     }
 }

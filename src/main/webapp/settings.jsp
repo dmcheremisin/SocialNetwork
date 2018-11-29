@@ -37,22 +37,25 @@
 
                             <div class="list-group-item">
                                 <label for="email">Email: <input type="text" name="email" class="form-control"
-                                                                 id="email" value="${user.email}" disabled/></label>
+                                                                 id="email" value="${user.email}" disabled/>
+                                </label>
                             </div>
                             <div class="list-group-item">
                                 <label for="firstname">First name: <input type="text" name="firstName"
                                                                           class="form-control" value="${user.firstName}"
-                                                                          id="firstname"/></label>
+                                                                          id="firstname"/>
+                                </label>
                             </div>
                             <div class="list-group-item">
                                 <label for="lastname">Last name: <input type="text" name="lastName"
                                                                         class="form-control" value="${user.lastName}"
-                                                                        id="lastname"/></label>
+                                                                        id="lastname"/>
+                                </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="dob">Birth date: <input type="date" name="dob"
-                                                                    class="form-control" value="${user.dob}"
-                                                                    id="dob"/></label>
+                                <label for="datepicker">Birth date:<br />
+                                    <input type="text" name="dob" value="${user.dob}" id="datepicker" size="30">
+                                </label>
                             </div>
                             <div class="list-group-item"> Gender:
                                 <label class="radio-inline">

@@ -51,10 +51,6 @@ public class ProfileServlet extends HttpServlet {
                 userFromRequest = userDao.get(userId);
                 usersHaveFriendship = friendsDao.checkUsersHaveFriendship(userFromSession.getId(), userFromRequest.getId());
             }
-        } else {
-            String message = WRONG_PROFILE_REQUEST_ID + id;
-            logger.info(message);
-            throw new RuntimeException(message);
         }
 
         User profileUser = userFromRequest == null ? userFromSession : userFromRequest;

@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
 
 </head>
 <body>
@@ -110,6 +111,13 @@
                                 <label for="phone">Phone: <input type="text" name="phone" class="form-control"
                                                                  id="phone"/></label>
                             </div>
+                            <div class="list-group-item">
+                                <label for="datepicker">Birth date:<br/>
+                                    <input type="text" id="datepicker" size="30">
+                                </label>
+
+                            </div>
+
                         </div>
                     </div>
                     <button type="submit" class="btn btn-lg btn-success">Change profile</button>
@@ -154,5 +162,36 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/profile-dnd.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $( function() {
+        $.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: 'Пред',
+            nextText: 'След',
+            currentText: 'Сегодня',
+            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+                'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+                'Июл','Авг','Сен','Окт','Ноя','Дек'],
+            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+            dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+            weekHeader: 'Нед',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',};
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        var options = {
+                changeMonth: true,
+                changeYear: true,
+                highlightWeek: true,
+                yearRange: "-100:+0"
+            };
+        $( "#datepicker" ).datepicker(options);
+    } );
+</script>
 </body>
 </html>

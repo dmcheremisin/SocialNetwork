@@ -24,9 +24,8 @@
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>
-                                    <socialTags:avatar user="${user}"/>
-                                    ${user.dob},
-                                    <socialTags:gender user="${user}" />
+                                    <socialTags:avatar user="${user}"/><br />
+                                    ${user.dob}, <socialTags:gender user="${user}" />
                                 </td>
                                 <td>
                                     <a href="/conversation?companion=${user.id}" class="btn btn-info">Message</a>
