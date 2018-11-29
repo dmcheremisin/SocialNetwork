@@ -1,13 +1,12 @@
 package com.social.network.models;
 
-import com.social.network.dao.Identifiable;
 
 import java.util.Date;
 
 /**
  * Created by Dmitrii on 14.11.2018.
  */
-public class User implements Identifiable {
+public class User {
     private int id;
     private String firstName;
     private String lastName;

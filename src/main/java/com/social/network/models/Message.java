@@ -1,11 +1,10 @@
 package com.social.network.models;
 
-import com.social.network.dao.Identifiable;
 
 /**
  * Created by Dmitrii on 23.11.2018.
  */
-public class Message implements Identifiable {
+public class Message {
     private int id;
     private String date;
     private String message;
@@ -13,12 +12,10 @@ public class Message implements Identifiable {
     private User receiver;
     private Integer companion;
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }

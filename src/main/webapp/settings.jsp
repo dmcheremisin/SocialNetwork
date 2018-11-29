@@ -31,7 +31,7 @@
             </div>
             <div class="profile-block">
                 <h2>Your profile.</h2>
-                <form action="/profile" method="post">
+                <form action="/settings" method="post">
                     <div class="panel panel-default">
                         <div class="list-group">
 
