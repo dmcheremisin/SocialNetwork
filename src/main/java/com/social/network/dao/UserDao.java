@@ -1,6 +1,7 @@
 package com.social.network.dao;
 
 import com.social.network.connection.Connective;
+import com.social.network.constants.Role;
 import com.social.network.models.User;
 import org.apache.log4j.Logger;
 
@@ -27,6 +28,8 @@ public class UserDao{
     private static final String CAN_T_DELETE_USER_WITH_ID_S_FROM_THE_DATABASE = "Can't delete user with id=%s from the database";
     private static final String CAN_T_UPDATE_IMAGE = "Can't update image of user with id=%s in the database";
     private static final String CAN_T_UPDATE_USER_PASSWORD = "Can't update user with id=%s with new password in the database";
+    private static final String CAN_T_BLOCK_UNBLOCK_USER = "Can't block user with id=% and blocked flag=%s";
+    private static final String CAN_T_SET_PRIVILEGES_USER = "Can't set privileges to user with id=% and role=%s";
     private static final String CAN_T_PARSE_USER_RESULT_SET = "Can't parse user result set";
     
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
@@ -37,6 +40,8 @@ public class UserDao{
     private static final String SELECT_FROM_USERS_WHERE_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE email=? AND password=?";
     private static final String UPDATE_USERS_SET_IMAGE_WHERE_ID = "UPDATE USERS SET image=? WHERE id=?";
     private static final String UPDATE_USERS_SET_PASSWORD_WHERE_ID = "UPDATE USERS SET password=? WHERE id=?";
+    private static final String BLOCK_UNBLOCK_USER = "UPDATE USERS SET blocked=? WHERE id=?";
+    private static final String SET_PRIVILEGES_USER = "UPDATE USERS SET role=? WHERE id=?";
 
 
     private final Connective connective;
@@ -157,6 +162,32 @@ public class UserDao{
             return get(user.getId());
         } catch (SQLException e) {
             String message = String.format(CAN_T_UPDATE_USER_PASSWORD, user.getId());
+            logger.error(message);
+            throw new RuntimeException(message);
+        }
+    }
+
+    public void blockUnblock(Integer userId, boolean blocked) {
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(BLOCK_UNBLOCK_USER)) {
+            stm.setBoolean(1, blocked);
+            stm.setInt(2, userId);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            String message = String.format(CAN_T_BLOCK_UNBLOCK_USER, userId, blocked);
+            logger.error(message);
+            throw new RuntimeException(message);
+        }
+    }
+
+    public void setPriviliges(Integer userId, Role role) {
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(SET_PRIVILEGES_USER)) {
+            stm.setInt(1, role.getKey());
+            stm.setInt(2, userId);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            String message = String.format(CAN_T_SET_PRIVILEGES_USER, userId, role.getRoleString());
             logger.error(message);
             throw new RuntimeException(message);
         }

@@ -23,6 +23,9 @@ public enum Role {
     public String getRoleString() {
         return role;
     }
+    public int getKey(){
+        return key;
+    }
 
     public static Role getRoleByKey(int key){
         for (Role value : Role.values()) {

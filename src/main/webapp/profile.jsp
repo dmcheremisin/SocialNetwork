@@ -67,6 +67,26 @@
                             </div>
                         </td>
                     </tr>
+                    <c:if test="${role eq 'admin'}">
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Admin menu</h3>
+                                    </div>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-success disabled">Make admin</a>
+                                        <a href="#" class="list-group-item list-group-item-success">Make usual user</a>
+                                    </div>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-danger">Block user</a>
+                                        <a href="#" class="list-group-item list-group-item-danger disabled">Unblock user</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:if>
                 </table>
             </div>
             <div class="profile-block">
