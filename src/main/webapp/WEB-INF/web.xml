@@ -149,4 +149,13 @@
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminMenu</servlet-name>
+        <servlet-class>com.social.network.controllers.AdminMenuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminMenu</servlet-name>
+        <url-pattern>/adminAction</url-pattern>
+    </servlet-mapping>
+
 </web-app>

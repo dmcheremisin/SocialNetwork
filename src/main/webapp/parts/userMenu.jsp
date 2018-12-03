@@ -15,16 +15,3 @@
         <a href="/settings" class="list-group-item">Settings</a>
     </div>
 </div>
-<c:if test="${role eq 'admin'}">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Admin menu</h3>
-        </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-success">Make admin</a>
-        </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-danger">Block user</a>
-        </div>
-    </div>
-</c:if>

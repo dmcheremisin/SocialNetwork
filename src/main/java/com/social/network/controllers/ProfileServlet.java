@@ -1,5 +1,6 @@
 package com.social.network.controllers;
 
+import com.social.network.constants.Role;
 import com.social.network.dao.FriendsDao;
 import com.social.network.dao.MessagesDao;
 import com.social.network.dao.UserDao;
@@ -57,6 +58,8 @@ public class ProfileServlet extends HttpServlet {
         List<UserFriend> friends = friendsDao.getFriends(profileUser.getId());
 
         req.setAttribute("profileUser", profileUser);
+        Role profileUserRole = Role.getRoleByKey(profileUser.getRole());
+        req.setAttribute("profileUserRole", profileUserRole.getRoleString());
         req.setAttribute("usersHaveFriendship", usersHaveFriendship);
         req.setAttribute("friends", friends);
 

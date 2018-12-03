@@ -93,13 +93,25 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Admin menu</h3>
                                 </div>
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-success disabled">Make admin</a>
-                                    <a href="#" class="list-group-item list-group-item-success">Make usual user</a>
-                                </div>
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-danger">Block user</a>
-                                    <a href="#" class="list-group-item list-group-item-danger disabled">Unblock user</a>
+                                <div class="panel-body">
+                                    <div class="message-left">
+                                        <form method="post" action="/conversation">
+                                            <input type="hidden" name="userId" value="${profileUser.id}">
+                                            <input type="hidden" name="action" value="unblock">
+                                            <button class="btn btn-success" name="companion" value="${profileUser.id}"
+                                                    type="submit">Make Admin
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="message-left">
+                                        <form method="post" action="/conversation">
+                                            <input type="hidden" name="userId" value="${profileUser.id}">
+                                            <input type="hidden" name="action" value="unblock">
+                                            <button class="btn btn-danger" name="companion" value="${profileUser.id}"
+                                                    type="submit">Block user
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </td>

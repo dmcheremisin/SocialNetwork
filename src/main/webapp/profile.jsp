@@ -67,7 +67,7 @@
                             </div>
                         </td>
                     </tr>
-                    <c:if test="${role eq 'admin'}">
+                    <c:if test="${role eq 'admin' and profileUser.id ne user.id}">
                         <tr>
                             <td></td>
                             <td>
@@ -75,13 +75,39 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Admin menu</h3>
                                     </div>
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-success disabled">Make admin</a>
-                                        <a href="#" class="list-group-item list-group-item-success">Make usual user</a>
-                                    </div>
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-danger">Block user</a>
-                                        <a href="#" class="list-group-item list-group-item-danger disabled">Unblock user</a>
+                                    <div class="panel-body">
+                                        <div class="message-left">
+                                            <c:if test="${profileUserRole ne 'admin'}">
+                                                <form method="post" action="adminAction">
+                                                    <input type="hidden" name="userId" value="${profileUser.id}">
+                                                    <input type="hidden" name="action" value="makeAdmin">
+                                                    <button class="btn btn-success" type="submit">Make Admin</button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${profileUserRole eq 'admin'}">
+                                                <form method="post" action="adminAction">
+                                                    <input type="hidden" name="userId" value="${profileUser.id}">
+                                                    <input type="hidden" name="action" value="makeUsual">
+                                                    <button class="btn btn-success" type="submit">Make Usual User</button>
+                                                </form>
+                                            </c:if>
+                                        </div>
+                                        <div class="message-left">
+                                            <c:if test="${profileUser.blocked}">
+                                                <form method="post" action="adminAction">
+                                                    <input type="hidden" name="userId" value="${profileUser.id}">
+                                                    <input type="hidden" name="action" value="unblock">
+                                                    <button class="btn btn-danger" type="submit">Unblock</button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${!profileUser.blocked}">
+                                                <form method="post" action="adminAction">
+                                                    <input type="hidden" name="userId" value="${profileUser.id}">
+                                                    <input type="hidden" name="action" value="block">
+                                                    <button class="btn btn-danger" type="submit">Block</button>
+                                                </form>
+                                            </c:if>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
