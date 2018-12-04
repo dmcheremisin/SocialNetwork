@@ -75,6 +75,11 @@ public class AuthFilter implements Filter {
             password = Encryption.encryptPassword(password);
 
             if((user = userDao.getUserByCredentials(email, password)) != null) {
+                if(user.getBlocked()) {
+                    response.sendRedirect("service/blocked.jsp");
+                    return;
+                }
+
                 HttpSession newSession = request.getSession();
                 newSession.setAttribute("user", user);
 
