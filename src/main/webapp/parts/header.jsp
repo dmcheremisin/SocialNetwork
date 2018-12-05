@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +44,8 @@
                 </form>
             </c:if>
             <div class="navbar-right">
-                <a href="#" class="navbar-brand">Ru</a>
-                <a href="#" class="navbar-brand">En</a>
+                <a href="/locale?lang=ru" class="navbar-brand">Ru</a>
+                <a href="/locale?lang=en" class="navbar-brand">En</a>
                 <c:if test="${user != null}">
                     <a href="/logout" class="navbar-brand">Logout</a>
                 </c:if>

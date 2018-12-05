@@ -158,4 +158,13 @@
         <url-pattern>/adminAction</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ChooseLocale</servlet-name>
+        <servlet-class>com.social.network.controllers.LocaleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChooseLocale</servlet-name>
+        <url-pattern>/locale</url-pattern>
+    </servlet-mapping>
+
 </web-app>
