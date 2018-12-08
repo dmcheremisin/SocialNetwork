@@ -3,6 +3,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
+<c:set var="accept">
+    <fmt:message key='friends.accept' />
+</c:set>
+<c:set var="decline">
+    <fmt:message key='friends.decline' />
+</c:set>
+<c:set var="remove">
+    <fmt:message key='friends.remove' />
+</c:set>
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -18,7 +32,7 @@
             </div>
 
             <div class="friends-top">
-                <h3>Friends requests</h3>
+                <h3><fmt:message key="friends.requests" /></h3>
                 <c:if test="${not empty friendsRequests}">
                     <table class="table friends">
                         <c:forEach var="friendRequest" items="${friendsRequests}">
@@ -27,25 +41,25 @@
                                     <socialTags:avatar user="${friendRequest.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info">Message</a>
+                                    <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
                                 </td>
                                 <td>
-                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="success" action="accept" name="Accept" />
+                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="success" action="accept" name="${accept}" />
                                 </td>
                                 <td>
-                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="danger" action="decline" name="Decline" />
+                                    <socialTags:friendsActionForm user="${friendRequest.friend}" button="danger" action="decline" name="${decline}" />
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
                 </c:if>
                 <c:if test="${empty friendsRequests}">
-                    <h4>No requests yet...</h4>
+                    <h4><fmt:message key="friends.no.requests" /></h4>
                 </c:if>
             </div>
 
             <div class="friends-top">
-                <h3>Your requests</h3>
+                <h3><fmt:message key="friends.your.requests" /></h3>
                 <c:if test="${not empty usersRequests}">
                     <table class="table friends">
                         <c:forEach var="userRequest" items="${usersRequests}">
@@ -54,7 +68,7 @@
                                     <socialTags:avatar user="${userRequest.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info">Message</a>
+                                    <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
@@ -63,12 +77,12 @@
                     </table>
                 </c:if>
                 <c:if test="${empty usersRequests}">
-                    <h4>No requests yet...</h4>
+                    <h4><fmt:message key="friends.no.requests" /></h4>
                 </c:if>
             </div>
 
             <div class="friends-top">
-                <h3>Your friends</h3>
+                <h3><fmt:message key="friends.your" /></h3>
                 <c:if test="${not empty friends}">
                     <table class="table friends">
                         <c:forEach var="friend" items="${friends}">
@@ -77,10 +91,10 @@
                                     <socialTags:avatar user="${friend.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info">Message</a>
+                                    <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
                                 </td>
                                 <td>
-                                    <socialTags:friendsActionForm user="${friend.friend}" button="danger" action="remove" name="Remove" />
+                                    <socialTags:friendsActionForm user="${friend.friend}" button="danger" action="remove" name="${remove}" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -88,7 +102,7 @@
                     </table>
                 </c:if>
                 <c:if test="${empty friends}">
-                    <h4>No friends yet...</h4>
+                    <h4><fmt:message key="friends.no.friends" /></h4>
                 </c:if>
             </div>
         </div>

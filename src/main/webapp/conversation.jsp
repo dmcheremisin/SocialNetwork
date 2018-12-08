@@ -3,6 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -13,7 +17,7 @@
             <jsp:include page="parts/userMenu.jsp"/>
         </div>
         <div class="col-md-9">
-            <h2>Conversation with
+            <h2><fmt:message key="conversation.with" />
                 <avatar:avatar user="${companionUser}" />
             </h2>
             <c:if test="${not empty conversation}">
@@ -30,7 +34,7 @@
             </c:if>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    New message
+                    <fmt:message key="conversation.new" />
                 </div>
                 <div class="panel-body">
                     <form method="post">
