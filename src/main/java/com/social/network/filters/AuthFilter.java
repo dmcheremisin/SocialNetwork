@@ -56,7 +56,7 @@ public class AuthFilter implements Filter {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         User user;
         if(session != null && session.getAttribute("user") != null) {
             user = (User) session.getAttribute("user");
@@ -80,8 +80,7 @@ public class AuthFilter implements Filter {
                     return;
                 }
 
-                HttpSession newSession = request.getSession();
-                newSession.setAttribute("user", user);
+                session.setAttribute("user", user);
 
                 setRoleToRequest(request, user);
 

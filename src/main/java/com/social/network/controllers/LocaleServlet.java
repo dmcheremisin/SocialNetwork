@@ -16,7 +16,7 @@ public class LocaleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         String lang = request.getParameter("lang");
 
         if (session != null && lang != null) {

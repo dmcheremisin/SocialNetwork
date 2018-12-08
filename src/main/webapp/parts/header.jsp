@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">Social Network</a>
+            <a class="navbar-brand" href="./"><fmt:message key="header" /></a>
         </div>
         <div class="navbar-collapse collapse">
             <c:if test="${user == null}">
@@ -40,14 +42,14 @@
                     <div class="form-group">
                         <input type="password" name="password" placeholder="Password" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success"><fmt:message key="login" /></button>
                 </form>
             </c:if>
             <div class="navbar-right">
-                <a href="/locale?lang=ru" class="navbar-brand">Ru</a>
-                <a href="/locale?lang=en" class="navbar-brand">En</a>
+                <a href="/locale?lang=ru" class="navbar-brand"><fmt:message key="russian" /></a>
+                <a href="/locale?lang=en" class="navbar-brand"><fmt:message key="english" /></a>
                 <c:if test="${user != null}">
-                    <a href="/logout" class="navbar-brand">Logout</a>
+                    <a href="/logout" class="navbar-brand"><fmt:message key="logout" /></a>
                 </c:if>
             </div>
         </div>
