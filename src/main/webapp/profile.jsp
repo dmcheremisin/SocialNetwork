@@ -3,6 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
+<c:set var="addToFriends">
+    <fmt:message key='profile.add.to.friends' />
+</c:set>
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -27,7 +35,7 @@
                                         <c:if test="${profileUser.id != user.id}">
                                             <c:if test="${!usersHaveFriendship}">
                                                 <td>
-                                                    <socialTags:friendsActionForm user="${profileUser}" button="success" action="addToFriends" name="Add to friends" />
+                                                    <socialTags:friendsActionForm user="${profileUser}" button="success" action="addToFriends" name="${addToFriends}" />
                                                 </td>
                                             </c:if>
                                             <c:if test="${usersHaveFriendship}">
@@ -41,7 +49,7 @@
                                         <td>
                                             <form method="get" action="/conversation">
                                                 <button class="btn btn-info" name="companion" value="${profileUser.id}"
-                                                        type="submit">Send message
+                                                        type="submit"><fmt:message key='profile.send.message' />
                                                 </button>
                                             </form>
                                         </td>
@@ -52,17 +60,17 @@
                         <td class="profile-info">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3>Profile Info</h3>
+                                    <h3><fmt:message key='profile.info' /></h3>
                                 </div>
                                 <div class="list-group">
-                                    <p class="list-group-item">First name: ${profileUser.firstName}</p>
-                                    <p class="list-group-item">Last name: ${profileUser.lastName}</p>
-                                    <p class="list-group-item">Birth date: ${profileUser.dob}</p>
-                                    <p class="list-group-item">Gender:
+                                    <p class="list-group-item"><fmt:message key='profile.firstName' />: ${profileUser.firstName}</p>
+                                    <p class="list-group-item"><fmt:message key='profile.lastName' />: ${profileUser.lastName}</p>
+                                    <p class="list-group-item"><fmt:message key='profile.birth.date' />: ${profileUser.dob}</p>
+                                    <p class="list-group-item"><fmt:message key='profile.gender' />:
                                         <socialTags:gender user="${profileUser}" />
                                     </p>
-                                    <p class="list-group-item">Phone: ${profileUser.phone}</p>
-                                    <p class="list-group-item">Email: ${profileUser.email}</p>
+                                    <p class="list-group-item"><fmt:message key='profile.phone' />: ${profileUser.phone}</p>
+                                    <p class="list-group-item"><fmt:message key='profile.email' />: ${profileUser.email}</p>
                                 </div>
                             </div>
                         </td>
@@ -73,7 +81,7 @@
                             <td>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Admin menu</h3>
+                                        <h3 class="panel-title"><fmt:message key='profile.admin.menu' /></h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="message-left">
@@ -81,14 +89,14 @@
                                                 <form method="post" action="adminAction">
                                                     <input type="hidden" name="userId" value="${profileUser.id}">
                                                     <input type="hidden" name="action" value="makeAdmin">
-                                                    <button class="btn btn-success" type="submit">Make Admin</button>
+                                                    <button class="btn btn-success" type="submit"><fmt:message key='profile.make.admin' /></button>
                                                 </form>
                                             </c:if>
                                             <c:if test="${profileUserRole eq 'admin'}">
                                                 <form method="post" action="adminAction">
                                                     <input type="hidden" name="userId" value="${profileUser.id}">
                                                     <input type="hidden" name="action" value="makeUsual">
-                                                    <button class="btn btn-success" type="submit">Make Usual User</button>
+                                                    <button class="btn btn-success" type="submit"><fmt:message key='profile.make.usual' /></button>
                                                 </form>
                                             </c:if>
                                         </div>
@@ -97,14 +105,14 @@
                                                 <form method="post" action="adminAction">
                                                     <input type="hidden" name="userId" value="${profileUser.id}">
                                                     <input type="hidden" name="action" value="unblock">
-                                                    <button class="btn btn-danger" type="submit">Unblock</button>
+                                                    <button class="btn btn-danger" type="submit"><fmt:message key='profile.unblock' /></button>
                                                 </form>
                                             </c:if>
                                             <c:if test="${!profileUser.blocked}">
                                                 <form method="post" action="adminAction">
                                                     <input type="hidden" name="userId" value="${profileUser.id}">
                                                     <input type="hidden" name="action" value="block">
-                                                    <button class="btn btn-danger" type="submit">Block</button>
+                                                    <button class="btn btn-danger" type="submit"><fmt:message key='profile.block' /></button>
                                                 </form>
                                             </c:if>
                                         </div>
@@ -117,7 +125,7 @@
             </div>
             <div class="profile-block">
                 <c:if test="${user.id eq profileUser.id}">
-                    <h3>Recent Message:</h3>
+                    <h3><fmt:message key='profile.recent.message' />:</h3>
                     <c:if test="${not empty message}">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -129,12 +137,12 @@
                         </div>
                     </c:if>
                     <c:if test="${empty message}">
-                        <h4>No messages found</h4>
+                        <h4><fmt:message key='profile.no.message' /></h4>
                     </c:if>
                 </c:if>
             </div>
             <div class="profile-block">
-                <h3>Friends:</h3>
+                <h3><fmt:message key='profile.friends' />:</h3>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <c:if test="${not empty friends}">
@@ -143,7 +151,7 @@
                             </c:forEach>
                         </c:if>
                         <c:if test="${empty friends}">
-                            <h4>No friends yet...</h4>
+                            <h4><fmt:message key='profile.no.friends' /></h4>
                         </c:if>
                     </div>
                 </div>

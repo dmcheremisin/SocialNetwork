@@ -9,7 +9,7 @@
 <div class="sidebar-header"></div>
 <div class="panel panel-default ">
     <div class="panel-heading">
-        <h3 class="panel-title">User menu</h3>
+        <h3 class="panel-title"><fmt:message key="menu.user.menu" /></h3>
     </div>
     <div class="list-group">
         <a href="/profile" class="list-group-item"><fmt:message key="menu.profile" /></a>

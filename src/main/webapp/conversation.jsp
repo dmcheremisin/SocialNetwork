@@ -7,6 +7,10 @@
 <fmt:setLocale value="${lang}" />
 <fmt:setBundle basename="locale" />
 
+<c:set var="send">
+    <fmt:message key='conversation.send' />
+</c:set>
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -43,7 +47,7 @@
                             <input type="hidden" name="companion" value="${companionUser.id}" >
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" value="Send &raquo" class="btn btn-success"/></label>
+                            <input type="submit" name="submit" value="${send} &raquo" class="btn btn-success"/></label>
                         </div>
                     </form>
                 </div>

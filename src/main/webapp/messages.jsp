@@ -3,6 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -13,7 +17,7 @@
             <jsp:include page="parts/userMenu.jsp" />
         </div>
         <div class="col-md-9">
-            <h2>Messages</h2>
+            <h2><fmt:message key="messages.messages" /></h2>
 
             <c:if test="${not empty recentMessages}">
                 <c:forEach items="${recentMessages}" var="message">
@@ -28,7 +32,7 @@
                 </c:forEach>
             </c:if>
             <c:if test="${empty recentMessages}">
-                <h4>No messages yet...</h4>
+                <h4><fmt:message key="messages.no.messages" /></h4>
             </c:if>
         </div>
     </div>
