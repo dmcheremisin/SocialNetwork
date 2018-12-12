@@ -41,7 +41,7 @@
                                     <socialTags:avatar user="${friendRequest.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
+                                    <a href="/conversation?companion=${friendRequest.friend.id}" class="btn btn-info"><fmt:message key="message" /></a>
                                 </td>
                                 <td>
                                     <socialTags:friendsActionForm user="${friendRequest.friend}" button="success" action="accept" name="${accept}" />
@@ -68,7 +68,7 @@
                                     <socialTags:avatar user="${userRequest.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
+                                    <a href="/conversation?companion=${userRequest.friend.id}" class="btn btn-info"><fmt:message key="message" /></a>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
@@ -91,7 +91,7 @@
                                     <socialTags:avatar user="${friend.friend}"/>
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info"><fmt:message key="friends.message" /></a>
+                                    <a href="/conversation?companion=${friend.friend.id}" class="btn btn-info"><fmt:message key="message" /></a>
                                 </td>
                                 <td>
                                     <socialTags:friendsActionForm user="${friend.friend}" button="danger" action="remove" name="${remove}" />

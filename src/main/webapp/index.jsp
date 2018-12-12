@@ -34,7 +34,7 @@
             <div class="form-group">
                 <form action="/register" method="post">
                     <div class="form-group">
-                        <label for="email"><fmt:message key="index.email" />: <input type="text" name="email" class="form-control" id="email" /></label>
+                        <label for="email"><fmt:message key="email" />: <input type="text" name="email" class="form-control" id="email" /></label>
                     </div>
                     <div class="form-group">
                         <label for="password"><fmt:message key="index.password" />: <input type="password" name="password" class="form-control" id="password" /></label>

@@ -63,14 +63,14 @@
                                     <h3><fmt:message key='profile.info' /></h3>
                                 </div>
                                 <div class="list-group">
-                                    <p class="list-group-item"><fmt:message key='profile.firstName' />: ${profileUser.firstName}</p>
-                                    <p class="list-group-item"><fmt:message key='profile.lastName' />: ${profileUser.lastName}</p>
-                                    <p class="list-group-item"><fmt:message key='profile.birth.date' />: ${profileUser.dob}</p>
-                                    <p class="list-group-item"><fmt:message key='profile.gender' />:
+                                    <p class="list-group-item"><fmt:message key='firstName' />: ${profileUser.firstName}</p>
+                                    <p class="list-group-item"><fmt:message key='lastName' />: ${profileUser.lastName}</p>
+                                    <p class="list-group-item"><fmt:message key='birth.date' />: ${profileUser.dob}</p>
+                                    <p class="list-group-item"><fmt:message key='gender' />:
                                         <socialTags:gender user="${profileUser}" />
                                     </p>
-                                    <p class="list-group-item"><fmt:message key='profile.phone' />: ${profileUser.phone}</p>
-                                    <p class="list-group-item"><fmt:message key='profile.email' />: ${profileUser.email}</p>
+                                    <p class="list-group-item"><fmt:message key='phone' />: ${profileUser.phone}</p>
+                                    <p class="list-group-item"><fmt:message key='email' />: ${profileUser.email}</p>
                                 </div>
                             </div>
                         </td>

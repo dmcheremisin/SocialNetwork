@@ -3,6 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -18,7 +22,7 @@
             </div>
 
             <div class="friends-top">
-                <h3>Users:</h3>
+                <h3><fmt:message key='users.header' />:</h3>
                 <c:if test="${not empty users}">
                     <table class="table users">
                         <c:forEach var="user" items="${users}">
@@ -28,27 +32,18 @@
                                     ${user.dob}, <socialTags:gender user="${user}" />
                                 </td>
                                 <td>
-                                    <a href="/conversation?companion=${user.id}" class="btn btn-info">Message</a>
+                                    <a href="/conversation?companion=${user.id}" class="btn btn-info"><fmt:message key='message' /></a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
                 </c:if>
                 <c:if test="${empty users}">
-                    <h4>No users yet...</h4>
+                    <h4><fmt:message key='users.no.users' /></h4>
                 </c:if>
             </div>
         </div>
     </div>
-    <hr/>
-    <footer>
-        <p>&copy; Все права защищены</p>
-    </footer>
 </div>
 
-
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="../js/profile-dnd.js"></script>
-</body>
-</html>
+<jsp:include page="parts/footer.jsp" />

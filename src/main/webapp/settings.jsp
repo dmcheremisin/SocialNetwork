@@ -3,6 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="avatar" tagdir="/WEB-INF/tags" %>
 
+<c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
+<fmt:setLocale value="${lang}" />
+<fmt:setBundle basename="locale" />
+
 <jsp:include page="parts/header.jsp">
     <jsp:param name="title" value="Profile" />
 </jsp:include>
@@ -13,14 +17,14 @@
             <jsp:include page="parts/userMenu.jsp" />
         </div>
         <div class="col-md-9">
-            <h2>Your avatar.</h2>
+            <h2><fmt:message key='settings.avatar' /></h2>
             <div class="profile-block">
                 <div>
                     <div class="image-drop border-dotted" ondrop="dragAndDrop(event)" ondragover="dragEnter(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
-                        <p class="drop-text">Drop your image here.</p>
+                        <p class="drop-text"><fmt:message key='settings.drop.image' /></p>
                     </div>
                     <div class="btn-vertical">
-                        <button class="btn btn-lg btn-success btn-left">Update avatar</button>
+                        <button class="btn btn-lg btn-success btn-left"><fmt:message key='settings.update.avatar' /></button>
                     </div>
                     <div class="image-right">
                         <div class="card">
@@ -30,79 +34,79 @@
                 </div>
             </div>
             <div class="profile-block">
-                <h2>Your profile.</h2>
+                <h2><fmt:message key='settings.your.profile' /></h2>
                 <form action="/settings" method="post">
                     <div class="panel panel-default">
                         <div class="list-group">
 
                             <div class="list-group-item">
-                                <label for="email">Email: <input type="text" name="email" class="form-control"
+                                <label for="email"><fmt:message key='email' />: <input type="text" name="email" class="form-control"
                                                                  id="email" value="${user.email}" disabled/>
                                 </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="firstname">First name: <input type="text" name="firstName"
+                                <label for="firstname"><fmt:message key='firstName' />: <input type="text" name="firstName"
                                                                           class="form-control" value="${user.firstName}"
                                                                           id="firstname"/>
                                 </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="lastname">Last name: <input type="text" name="lastName"
+                                <label for="lastname"><fmt:message key='lastName' />: <input type="text" name="lastName"
                                                                         class="form-control" value="${user.lastName}"
                                                                         id="lastname"/>
                                 </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="datepicker">Birth date:
+                                <label for="datepicker"><fmt:message key='birth.date' />:
                                     <input type="text" name="dob" class="form-control" value="${user.dob}"
                                            id="datepicker">
                                 </label>
                             </div>
-                            <div class="list-group-item"> Gender:
+                            <div class="list-group-item"> <fmt:message key='gender' />:
                                 <label class="radio-inline">
                                     <input type="radio" name="sex" value="2" <c:if test="${user.sex == 2}">checked</c:if> >
-                                    Male
+                                    <fmt:message key='gender.male' />
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="sex" value="3" <c:if test="${user.sex == 3}">checked</c:if> >
-                                    Female
+                                    <fmt:message key='gender.female' />
                                 </label>
                             </div>
                             <div class="list-group-item">
-                                <label for="phone">Phone: <input type="text" name="phone"
+                                <label for="phone"><fmt:message key='phone' />: <input type="text" name="phone"
                                                                  class="form-control" value="${user.phone}"
                                                                  id="phone"/></label>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success">Change profile</button>
+                    <button type="submit" class="btn btn-lg btn-success"><fmt:message key='settings.change.profile' /></button>
                 </form>
             </div>
             <div class="profile-block">
-                <h2>Change password</h2>
+                <h2><fmt:message key='settings.change.password' /></h2>
                 <form action="/updatePassword" method="post">
                     <div class="panel panel-default">
                         <div class="list-group">
 
                             <div class="list-group-item">
-                                <label for="oldpassword">Old Password: <input type="password" name="oldPassword"
+                                <label for="oldpassword"><fmt:message key='settings.old.password' />: <input type="password" name="oldPassword"
                                                                               class="form-control"
                                                                               id="oldpassword"/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="password">New Password: <input type="password" name="password"
+                                <label for="password"><fmt:message key='settings.new.password' />: <input type="password" name="password"
                                                                               class="form-control"
                                                                               id="password"/></label>
                             </div>
                             <div class="list-group-item">
-                                <label for="password-confirm">Repeat Password: <input type="password"
+                                <label for="password-confirm"><fmt:message key='settings.repeat.password' />: <input type="password"
                                                                                     name="password-confirm"
                                                                                     class="form-control"
                                                                                     id="password-confirm"/></label>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success">Change password</button>
+                    <button type="submit" class="btn btn-lg btn-success"><fmt:message key='settings.change.password' /></button>
                 </form>
             </div>
         </div>
