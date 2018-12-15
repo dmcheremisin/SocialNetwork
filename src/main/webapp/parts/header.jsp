@@ -46,8 +46,12 @@
                 </form>
             </c:if>
             <div class="navbar-right">
-                <a href="/locale?lang=ru" class="navbar-brand"><fmt:message key="russian" /></a>
-                <a href="/locale?lang=en" class="navbar-brand"><fmt:message key="english" /></a>
+                <a href="/locale?lang=ru" class="navbar-brand lang <c:if test="${lang ne 'en'}">langSelected</c:if>">
+                    <fmt:message key="russian" />
+                </a>
+                <a href="/locale?lang=en" class="navbar-brand lang <c:if test="${lang eq 'en'}">langSelected</c:if>">
+                    <fmt:message key="english" />
+                </a>
                 <c:if test="${user != null}">
                     <a href="/logout" class="navbar-brand"><fmt:message key="logout" /></a>
                 </c:if>

@@ -160,6 +160,4 @@
     </div>
 </div>
 
-<jsp:include page="parts/footer.jsp" >
-    <jsp:param name="specificScript" value="js/profile.js" />
-</jsp:include>
+<jsp:include page="parts/footer.jsp" />

@@ -120,3 +120,6 @@
 .users > tbody > tr > td {
     vertical-align: middle;
 }
+.lang.langSelected {
+    color: lightgreen;
+}
