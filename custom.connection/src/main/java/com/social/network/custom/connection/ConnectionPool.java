@@ -1,6 +1,5 @@
-package com.social.network.connection.impl;
+package com.social.network.custom.connection;
 
-import com.social.network.connection.Connective;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

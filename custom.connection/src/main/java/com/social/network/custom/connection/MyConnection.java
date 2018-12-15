@@ -1,4 +1,4 @@
-package com.social.network.connection.impl;
+package com.social.network.custom.connection;
 
 import org.apache.log4j.Logger;
 

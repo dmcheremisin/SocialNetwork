@@ -1,6 +1,6 @@
 package com.social.network.listeners;
 
-import com.social.network.connection.impl.ConnectionPool;
+import com.social.network.custom.connection.ConnectionPool;
 import com.social.network.connection.Connective;
 import com.social.network.dao.FriendsDao;
 import com.social.network.dao.InitializationDao;
@@ -13,7 +13,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.SQLException;
 
-import static com.social.network.connection.impl.ConnectionPool.getConnectionPool;
+import static com.social.network.custom.connection.ConnectionPool.getConnectionPool;
 
 /**
  * Created by Dmitrii on 13.11.2018.
