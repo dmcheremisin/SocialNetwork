@@ -1,6 +1,6 @@
 package com.social.network.dao;
 
-import com.social.network.connection.Connective;
+import com.social.network.connective.Connective;
 import com.social.network.models.User;
 import com.social.network.models.UserFriend;
 import org.apache.log4j.Logger;

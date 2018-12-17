@@ -19,21 +19,47 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.social.network</groupId>
+                    <artifactId>custom.connection</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.social.network</groupId>
+                    <artifactId>tomcat.connection</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.197</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -42,15 +68,8 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <version>8.5.23</version>
-        </dependency>
-        <dependency>
-            <groupId>com.social.network</groupId>
-            <artifactId>custom.connection</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -64,6 +83,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

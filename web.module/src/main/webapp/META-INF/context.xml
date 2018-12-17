@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+    <Resource auth="Container"
+              name="jdbc/Prod"
+              type="javax.sql.DataSource"
+              maxTotal="100"
+              maxIdle="30"
+              maxWaitMillis="10000"
+              username=""
+              password=""
+              driverClassName="org.h2.Driver"
+              url="jdbc:h2:mem:users;mode=mysql"
+    />
+
+</Context>

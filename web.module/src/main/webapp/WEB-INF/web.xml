@@ -3,6 +3,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <resource-ref>
+        <description>Prod DB Connection Pool</description>
+        <res-ref-name>jdbc/Prod</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
     <context-param>
         <param-name>allowedUrls</param-name>
         <param-value>/css/,/fonts/,/img/,/js/,/avatars/,/register,/locale</param-value>

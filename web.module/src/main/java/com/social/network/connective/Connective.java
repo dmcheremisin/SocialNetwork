@@ -1,4 +1,4 @@
-package com.social.network.connection;
+package com.social.network.connective;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,6 +9,6 @@ import java.sql.SQLException;
 @FunctionalInterface
 public interface Connective {
 
-    Connection getConnection() throws SQLException;;
+    Connection getConnection() throws SQLException;
 
 }

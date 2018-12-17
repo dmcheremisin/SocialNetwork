@@ -1,7 +1,8 @@
-package com.social.network.custom.connection;
+package com.social.network.connection;
 
 import org.apache.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -45,7 +46,16 @@ public class ConnectionPool {
         logger.info("Connection pool is initialized");
     }
 
-    public static ConnectionPool getConnectionPool() throws SQLException, ClassNotFoundException {
+    /**
+     * Custom connection pool. Singleton method.
+     *
+     * @param ds - unused parameter. It is necessary to propagate in order to have the same method signature with
+     *           with module tomcat.connection.
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static ConnectionPool getConnectionPool(DataSource ds) throws SQLException, ClassNotFoundException {
         if (cp == null) {
             synchronized (ConnectionPool.class) {
                 if(cp == null) {
@@ -59,8 +69,8 @@ public class ConnectionPool {
 
     public Connection getConnection() {
         try {
-            Connection connection = getConnectionPool().freeConnections.poll();
-            getConnectionPool().usedConnections.offer(connection);
+            Connection connection = getConnectionPool(null).freeConnections.poll();
+            getConnectionPool(null).usedConnections.offer(connection);
             return connection;
         } catch (Exception e) {
             logger.error(CAN_T_GET_CONNECTION_FROM_POOL);
@@ -70,8 +80,8 @@ public class ConnectionPool {
 
     public void returnConnection(Connection connection) {
         try {
-            if (getConnectionPool().usedConnections.remove(connection)) {
-                getConnectionPool().freeConnections.add(connection);
+            if (getConnectionPool(null).usedConnections.remove(connection)) {
+                getConnectionPool(null).freeConnections.add(connection);
             }
         } catch (Exception e) {
             logger.error(CAN_RETURN_CONNECTION_TO_THE_POOL);
@@ -94,8 +104,8 @@ public class ConnectionPool {
 
     public void onDestroy(){
         try {
-            closeConnections(getConnectionPool().freeConnections);
-            closeConnections(getConnectionPool().usedConnections);
+            closeConnections(getConnectionPool(null).freeConnections);
+            closeConnections(getConnectionPool(null).usedConnections);
         } catch (SQLException | ClassNotFoundException e) {
             logger.error("Can't close free and used connections");
         }
