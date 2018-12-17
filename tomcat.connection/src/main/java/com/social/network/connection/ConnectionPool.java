@@ -25,7 +25,7 @@ public class ConnectionPool {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public static ConnectionPool getConnectionPool(DataSource ds) throws SQLException, ClassNotFoundException {
+    public static ConnectionPool getConnectionPool(DataSource ds) {
         if (cp == null) {
             synchronized (ConnectionPool.class) {
                 if(cp == null) {
