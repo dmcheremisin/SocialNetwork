@@ -48,10 +48,10 @@ public class AdminMenuServlet extends HttpServlet {
                     userDao.blockUnblock(userActionId, false);
                     break;
                 case "makeAdmin":
-                    userDao.setPriviliges(userActionId, ADMIN);
+                    userDao.setPrivileges(userActionId, ADMIN);
                     break;
                 case "makeUsual":
-                    userDao.setPriviliges(userActionId, MEMBER);
+                    userDao.setPrivileges(userActionId, MEMBER);
                     break;
             }
         } else {

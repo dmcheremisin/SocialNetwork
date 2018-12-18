@@ -1,5 +1,7 @@
+package connection;
+
 import com.social.network.connection.ConnectionPool;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -11,14 +13,14 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class ConnectionPoolTest {
-    private ConnectionPool connectionPool;
-    private Set<Connection> connections;
+public class CustomConnectionPoolTest {
+    private static ConnectionPool connectionPool;
+    private static Set<Connection> connections;
 
     private static ResourceBundle bundle = ResourceBundle.getBundle("connection");
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void init() {
         try {
             connectionPool = ConnectionPool.getConnectionPool(null);
         } catch (SQLException | ClassNotFoundException e) {
@@ -32,18 +34,5 @@ public class ConnectionPoolTest {
         Connection connection = connectionPool.getConnection();
         assertNotNull(connection);
         connectionPool.returnConnection(connection);
-    }
-
-    @Test
-    public void testConnectionPoolSize(){
-        int poolSize = Integer.parseInt(bundle.getString("poolSize"));
-        for(int i=0; i < 50; i++) {
-            try {
-                connections.add(connectionPool.getConnection());
-            } catch (Exception ignored) {}
-        }
-        assertEquals(poolSize, connections.size());
-
-        connections.forEach(c -> connectionPool.returnConnection(c));
     }
 }

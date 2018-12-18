@@ -35,7 +35,7 @@ public class UserDao{
     private static final String SELECT_USER = "SELECT * FROM users WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET firstname=?, lastname=?, dob=?, sex=?, phone=? WHERE id=?";
     private static final String DELETE_USER = "DELETE FROM users WHERE id=?";
-    private static final String INSERT_USER = "INSERT INTO users VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, 2, 'false', NULL);";
+    private static final String INSERT_USER = "INSERT INTO users VALUES(NULL, NULL, NULL, NULL, 1, NULL, ?, ?, 2, 'false', NULL);";
     private static final String SELECT_FROM_USERS_WHERE_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE email=? AND password=?";
     private static final String UPDATE_USERS_SET_IMAGE_WHERE_ID = "UPDATE USERS SET image=? WHERE id=?";
     private static final String UPDATE_USERS_SET_PASSWORD_WHERE_ID = "UPDATE USERS SET password=? WHERE id=?";
@@ -67,8 +67,8 @@ public class UserDao{
     public User insert(User entity) {
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);) {
-            stm.setString(6, entity.getEmail());
-            stm.setString(7, entity.getPassword());
+            stm.setString(1, entity.getEmail());
+            stm.setString(2, entity.getPassword());
             stm.executeUpdate();
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -179,7 +179,7 @@ public class UserDao{
         }
     }
 
-    public void setPriviliges(Integer userId, Role role) {
+    public void setPrivileges(Integer userId, Role role) {
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(SET_PRIVILEGES_USER)) {
             stm.setInt(1, role.getKey());
