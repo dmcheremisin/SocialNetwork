@@ -1,11 +1,15 @@
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE roles (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   role VARCHAR(15)
 );
+DROP TABLE IF EXISTS `sexes`;
 CREATE TABLE sexes (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   sex VARCHAR(10)
 );
+
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE users(
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(100),
@@ -22,6 +26,8 @@ CREATE TABLE users(
   FOREIGN KEY (role) REFERENCES roles(id),
   FOREIGN KEY (sex) REFERENCES sexes(id)
 );
+
+DROP TABLE IF EXISTS `friendship`;
 CREATE TABLE friendship (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   usersender int,
@@ -32,6 +38,8 @@ CREATE TABLE friendship (
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (userreceiver) REFERENCES users(id)
 );
+
+DROP TABLE IF EXISTS `messages`;
 CREATE TABLE messages (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   dt DATETIME,
@@ -43,6 +51,8 @@ CREATE TABLE messages (
   FOREIGN KEY (usersender) REFERENCES users(id),
   FOREIGN KEY (userreceiver) REFERENCES users(id)
 );
+
+DROP VIEW IF EXISTS `user_message`;
 CREATE VIEW user_message AS
   SELECT m.id, m.dt as dt, m.message as message, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
          r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
@@ -50,6 +60,7 @@ CREATE VIEW user_message AS
     join users as s on m.usersender =  s.id
     join users as r on m.userreceiver = r.id;
 
+DROP VIEW IF EXISTS `last_user_message`;
 CREATE VIEW last_user_message AS
   SELECT m.id, m.dt as dt, m.message as message, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
                r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage
@@ -63,6 +74,7 @@ CREATE VIEW last_user_message AS
           GROUP BY usersender, userreceiver
         );
 
+DROP VIEW IF EXISTS `user_friends_requests`;
 CREATE VIEW user_friends_requests AS
   SELECT f.id, f.accepted as accepted, s.id as sid, s.firstname as sfirstname, s.lastname as slastname, s.image as simage,
                r.id as rid, r.firstname as rfirstname, r.lastname as rlastname, r.image as rimage

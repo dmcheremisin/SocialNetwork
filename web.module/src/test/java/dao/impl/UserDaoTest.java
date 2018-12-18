@@ -1,15 +1,9 @@
-package dao;
+package dao.impl;
 
-import com.social.network.connective.Connective;
-import com.social.network.dao.InitializationDao;
-import com.social.network.dao.UserDao;
 import com.social.network.models.User;
-import org.junit.BeforeClass;
+import dao.BaseDaoTest;
 import org.junit.Test;
 
-import java.sql.SQLException;
-
-import static com.social.network.connection.ConnectionPool.getConnectionPool;
 import static com.social.network.constants.Role.ADMIN;
 import static com.social.network.constants.Role.MEMBER;
 import static com.social.network.utils.ServerUtils.isNotBlank;
@@ -19,22 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public class UserDaoTest {
-    private static Connective connective;
-    private static UserDao userDao;
-
-    @BeforeClass
-    public static void init() {
-        try {
-            connective = getConnectionPool(null)::getConnection;
-            InitializationDao initializationDao = new InitializationDao(connective);
-            initializationDao.initializeStubData();
-
-            userDao = new UserDao(connective);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+public class UserDaoTest extends BaseDaoTest {
 
     @Test
     public void testAdmin() {
