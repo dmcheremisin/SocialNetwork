@@ -1,5 +1,6 @@
 package com.social.network.connection;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
@@ -56,7 +57,7 @@ public class ConnectionPool {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public static ConnectionPool getConnectionPool(DataSource ds) throws SQLException, ClassNotFoundException {
+    public static ConnectionPool getConnectionPool(@Ignore DataSource ds) throws SQLException, ClassNotFoundException {
         return getConnectionPool();
     }
 

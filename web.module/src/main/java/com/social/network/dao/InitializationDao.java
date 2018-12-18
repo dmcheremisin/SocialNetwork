@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import static com.social.network.initialization.InitializationBatchFilter.addBatchToStatement;
+
 /**
  * Created by Dmitrii on 13.11.2018.
  */
@@ -35,9 +37,8 @@ public class InitializationDao {
              Statement stmt = con.createStatement();) {
 
             StringBuilder schemaBatch = fileToSqlBatch(sqlSchema);
-            stmt.addBatch(schemaBatch.toString());
             StringBuilder dumpBatch = fileToSqlBatch(sqlDump);
-            stmt.addBatch(dumpBatch.toString());
+            addBatchToStatement(stmt, schemaBatch, dumpBatch);
 
             stmt.executeBatch();
             logger.info("All data is initialized successfully");
