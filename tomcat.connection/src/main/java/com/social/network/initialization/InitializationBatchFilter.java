@@ -10,6 +10,13 @@ public class InitializationBatchFilter {
     private static final Logger logger = Logger.getLogger(InitializationBatchFilter.class);
     private static final String CAN_T_ADD_BATCH_TO_STATEMENT = "Batch filter: can't add batch to statement";
 
+    /**
+     * tomcat.connection module is supposed to be used in production environment, so it should not load dump batch.
+     *
+     * @param stmt   - Statement
+     * @param schema - database schema
+     * @param dump   - dump data
+     */
     public static void addBatchToStatement(Statement stmt, StringBuilder schema, @Ignore StringBuilder dump) {
         try {
             stmt.addBatch(schema.toString());

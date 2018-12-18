@@ -51,7 +51,8 @@ public class ConnectionPool {
      * Custom connection pool. Delegate pattern.
      *
      * @param ds - unused parameter. It is necessary to propagate in order to have the same method signature with
-     *           ConnectionPool from module tomcat.connection.
+     *           ConnectionPool from module tomcat.connection. During compilation time proper module will be used
+     *           based on chosen maven profile.
      *
      * @return ConnectionPool
      * @throws SQLException

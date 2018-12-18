@@ -9,6 +9,13 @@ public class InitializationBatchFilter {
     private static final Logger logger = Logger.getLogger(InitializationBatchFilter.class);
     private static final String CAN_T_ADD_BATCH_TO_STATEMENT = "Batch filter: can't add batch to statement";
 
+    /**
+     * custom.connection module is supposed to be used in dev environment, so it should load dump batch.
+     *
+     * @param stmt   - Statement
+     * @param schema - database schema
+     * @param dump   - dump data
+     */
     public static void addBatchToStatement(Statement stmt, StringBuilder schema, StringBuilder dump) {
         try {
             stmt.addBatch(schema.toString());
