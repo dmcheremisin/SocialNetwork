@@ -58,10 +58,6 @@ public class ServerUtils {
         request.setAttribute("role", roleModel.getRoleString());
     }
 
-    public static boolean notEmpty(Collection collection){
-        return !(collection == null || collection.size() == 0);
-    }
-
     public static User getUserFromSession(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         return (User) session.getAttribute("user");
