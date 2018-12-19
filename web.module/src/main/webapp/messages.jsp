@@ -24,7 +24,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="card">
-                                <avatar:avatar user="${message.sender}" />&nbsp; to &nbsp;<avatar:avatar user="${message.receiver}" />
+                                <avatar:avatar user="${message.sender}" />&nbsp; <fmt:message key='to' /> &nbsp;<avatar:avatar user="${message.receiver}" />
                             </div>
                         </div>
                         <div class="panel-body"><a href="/conversation?companion=${message.companion}">${message.date} ${message.message}</a></div>

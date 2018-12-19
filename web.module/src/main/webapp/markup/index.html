@@ -63,26 +63,27 @@
         <div class="col-md-4">
             <h1>Register today!</h1>
             <div class="form-group">
-                <form action="/register" method="post">
-                    <div class="form-group has-error">
+                <form action="/register" method="post" id="register">
+                    <div class="form-group">
                         <label for="email">
-                            Email: <input type="email" name="email" class="form-control" id="email" required/>
+                            Email: <input type="email" name="email" class="form-control email" id="email" required/>
                         </label>
-                        <div class="help-block">sfdsfdsf</div>
+                        <div class="help-block email-error hidden">Please, provide valid email</div>
                     </div>
                     <div class="form-group">
                         <label for="password">
-                            Password: <input type="password" name="password" class="form-control" id="password" required/>
+                            Password: <input type="password" name="password" class="form-control password" id="password" required/>
                         </label>
+                        <div class="help-block password-error hidden">Please, use all characters: letters and numbers at least once, minimum 6 symbols</div>
                     </div>
                     <div class="form-group">
                         <label for="conf-password">
-                            Confirm Password: <input type="password" name="password-confirm" class="form-control" id="conf-password" required/>
+                            Confirm Password: <input type="password" name="password-confirm" class="form-control password-conf" id="conf-password" required/>
                         </label>
-                        <div class="help-block hidden">sfdsfdsf</div>
+                        <div class="help-block password-conf-error hidden">Passwords don't match</div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="submit" value="Зарегистрироваться &raquo" class="btn btn-lg btn-success"/>
+                        <input type="submit" name="submit" value="Register &raquo" class="btn btn-lg btn-success submit"/>
                     </div>
                 </form>
             </div>
@@ -92,12 +93,13 @@
     </div>
     <hr/>
     <footer>
-        <p>&copy; Все права защищены</p>
+        <p>&copy; All rights reserved</p>
     </footer>
 </div>
 
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/validation.js"></script>
 </body>
 </html>

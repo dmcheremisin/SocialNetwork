@@ -42,10 +42,10 @@
                         <nav>
                             <ul class="pagination">
                                 <li class='page-item <c:if test="${page == 0}">disabled</c:if>'>
-                                    <a class="page-link" href="/users?page=${page - 1}&search=${search}">Previous</a>
+                                    <a class="page-link" href="/users?page=${page - 1}&search=${search}"><fmt:message key='previous' /></a>
                                 </li>
                                 <li class='page-item <c:if test="${fn:length(users) lt 10}">disabled</c:if>'>
-                                    <a class="page-link" href="/users?page=${page + 1}&search=${search}">Next</a>
+                                    <a class="page-link" href="/users?page=${page + 1}&search=${search}"><fmt:message key='next' /></a>
                                 </li>
                             </ul>
                         </nav>

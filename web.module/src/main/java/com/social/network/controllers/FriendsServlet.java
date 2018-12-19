@@ -88,7 +88,7 @@ public class FriendsServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-    private static boolean searchByName(String name, User u) {
+    private boolean searchByName(String name, User u) {
         return (u.getFirstName().toLowerCase() + " " + u.getLastName().toLowerCase()).contains(name) ||
                 (u.getLastName().toLowerCase() + " " + u.getFirstName().toLowerCase()).contains(name);
     }
