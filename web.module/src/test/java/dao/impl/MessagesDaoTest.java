@@ -6,6 +6,7 @@ import dao.BaseDaoTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -36,8 +37,11 @@ public class MessagesDaoTest extends BaseDaoTest {
         List<Message> recentMessages = messagesDao.getRecentMessages(one.getId());
         assertNotNull(recentMessages);
         assertTrue(recentMessages.size() > 0);
+        Message message = recentMessages.stream()
+                .sorted(Comparator.comparing(Message::getId))
+                .reduce((one, two) -> two)
+                .orElse(null);
 
-        Message message = recentMessages.get(0);
         assertNotNull(message);
         assertEquals("Three", message.getMessage());
         assertEquals(one.getId(), message.getSender().getId());

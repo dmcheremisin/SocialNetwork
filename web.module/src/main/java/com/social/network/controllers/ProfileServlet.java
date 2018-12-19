@@ -65,7 +65,7 @@ public class ProfileServlet extends HttpServlet {
 
         List<Message> recentMessages = messagesDao.getRecentMessages(profileUser.getId());
         Message recent = recentMessages.stream()
-                .sorted(Comparator.comparing(Message::getDate))
+                .sorted(Comparator.comparing(Message::getId))
                 .reduce((one, two) -> two)
                 .orElse(null);
         if(recent != null) {

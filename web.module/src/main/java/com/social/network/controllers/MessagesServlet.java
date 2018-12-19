@@ -37,15 +37,14 @@ public class MessagesServlet extends HttpServlet {
 
         List<Message> recentMessages = messagesDao.getRecentMessages(userId);
         recentMessages = recentMessages.stream()
-                .sorted(Comparator.comparing(Message::getDate))
+                .sorted(Comparator.comparing(Message::getId))
                 .collect(Collectors.toList());
 
         Map<Integer, Message> filteredMessages = new HashMap<>();
         recentMessages.forEach(m -> {
             int companion = setCompanionToMessage(userId, m);
-                    filteredMessages.put(companion, m);
-                }
-        );
+            filteredMessages.put(companion, m);
+        });
 
         req.setAttribute("recentMessages", filteredMessages.values());
         req.getRequestDispatcher("messages.jsp").forward(req, resp);
