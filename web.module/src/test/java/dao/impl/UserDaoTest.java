@@ -2,6 +2,7 @@ package dao.impl;
 
 import com.social.network.models.User;
 import dao.BaseDaoTest;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.social.network.constants.Role.ADMIN;
@@ -14,6 +15,17 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class UserDaoTest extends BaseDaoTest {
+    private User user;
+
+    @Before
+    public void createUser() {
+        int random = (int) (Math.random() * 1000);
+        user = new User();
+        user.setEmail(random + "@test.ru");
+        user.setPassword("123");
+        user = userDao.insert(user);
+    }
+
 
     @Test
     public void testAdmin() {
@@ -70,7 +82,7 @@ public class UserDaoTest extends BaseDaoTest {
         User user = new User();
         user.setEmail("get@test.ru");
         user.setPassword("1234567890");
-        User insert = userDao.insert(user);
+        userDao.insert(user);
 
         User userByCredentials = userDao.getUserByCredentials("get@test.ru", "1234567890");
         assertNotNull(userByCredentials);
@@ -82,41 +94,27 @@ public class UserDaoTest extends BaseDaoTest {
 
     @Test
     public void testUpdateImage() {
-        User user = new User();
-        user.setEmail("image@test.ru");
-        user.setPassword("123");
-        User inserted = userDao.insert(user);
-
-        inserted.setImage("image.jpg");
-        User userWithImage = userDao.updateImage(inserted);
+        user.setImage("image.jpg");
+        User userWithImage = userDao.updateImage(user);
 
         assertNotNull(userWithImage.getImage());
-        assertEquals(inserted.getImage(), userWithImage.getImage());
+        assertEquals(user.getImage(), userWithImage.getImage());
     }
 
     @Test
     public void testUpdatePassword() {
-        User user = new User();
-        user.setEmail("password@test.ru");
-        user.setPassword("123");
-        User inserted = userDao.insert(user);
-
-        inserted.setPassword("456");
-        User updated = userDao.updatePassword(inserted);
+        user.setPassword("456");
+        User updated = userDao.updatePassword(user);
 
         assertNotNull(updated.getPassword());
-        assertEquals(inserted.getPassword(), updated.getPassword());
+        assertEquals(user.getPassword(), updated.getPassword());
     }
 
     @Test
     public void testBlockUnblock() {
-        User user = new User();
-        user.setEmail("blockUnblock@test.ru");
-        user.setPassword("123");
-        User inserted = userDao.insert(user);
-        assertFalse(inserted.getBlocked());
+        assertFalse(user.getBlocked());
 
-        int userId = inserted.getId();
+        int userId = user.getId();
         userDao.blockUnblock(userId, true);
         User updated = userDao.get(userId);
         assertTrue(updated.getBlocked());
@@ -128,13 +126,9 @@ public class UserDaoTest extends BaseDaoTest {
 
     @Test
     public void testSetPriveleges() {
-        User user = new User();
-        user.setEmail("privileges@test.ru");
-        user.setPassword("123");
-        User inserted = userDao.insert(user);
-        assertEquals(MEMBER.getKey(), (int) inserted.getRole());
+        assertEquals(MEMBER.getKey(), (int) user.getRole());
 
-        int userId = inserted.getId();
+        int userId = user.getId();
         userDao.setPrivileges(userId, ADMIN);
         User updated = userDao.get(userId);
         assertEquals(ADMIN.getKey(), (int) updated.getRole());
