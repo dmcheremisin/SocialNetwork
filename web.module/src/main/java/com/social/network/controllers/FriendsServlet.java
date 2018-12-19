@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.social.network.controllers.UsersServlet.searchByName;
 import static com.social.network.utils.ServerUtils.getUserFromSession;
 import static com.social.network.utils.ServerUtils.isInteger;
 import static com.social.network.utils.ServerUtils.isNotBlank;
@@ -87,5 +86,10 @@ public class FriendsServlet extends HttpServlet {
             logger.error(String.format(FRIEND_WRONG_ACTION_REQUEST, action, friend));
         }
         doGet(req, resp);
+    }
+
+    private static boolean searchByName(String name, User u) {
+        return (u.getFirstName().toLowerCase() + " " + u.getLastName().toLowerCase()).contains(name) ||
+                (u.getLastName().toLowerCase() + " " + u.getFirstName().toLowerCase()).contains(name);
     }
 }

@@ -31,7 +31,8 @@ public class UserDao{
     private static final String CAN_T_SET_PRIVILEGES_USER = "Can't set privileges to user with id=% and role=%s";
     private static final String CAN_T_PARSE_USER_RESULT_SET = "Can't parse user result set";
     
-    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users WHERE id != ? LIMIT 10 OFFSET ?";
+    private static final String SEARCH_USERS = "SELECT * FROM users WHERE id != ? AND LOWER(concat((firstname), ' ', lastname)) LIKE ? LIMIT 10 OFFSET ?;";
     private static final String SELECT_USER = "SELECT * FROM users WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET firstname=?, lastname=?, dob=?, sex=?, phone=? WHERE id=?";
     private static final String DELETE_USER = "DELETE FROM users WHERE id=?";
@@ -110,10 +111,25 @@ public class UserDao{
         }
     }
 
-
-    public List<User> getAll() {
+    public List<User> getAll(int userId, int page) {
         try(Connection con = connective.getConnection();
             PreparedStatement stm = con.prepareStatement(SELECT_ALL_USERS);) {
+            stm.setInt(1, userId);
+            stm.setInt(2, page * 10);
+            ResultSet rs = stm.executeQuery();
+            return parseResultSet(rs);
+        } catch (SQLException e) {
+            logger.error(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
+            throw new RuntimeException(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
+        }
+    }
+
+    public List<User> searchAll(int userId, int page, String search) {
+        try(Connection con = connective.getConnection();
+            PreparedStatement stm = con.prepareStatement(SEARCH_USERS);) {
+            stm.setInt(1, userId);
+            stm.setString(2, '%' + search + '%');
+            stm.setInt(3, page);
             ResultSet rs = stm.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {

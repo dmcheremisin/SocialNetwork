@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="socialTags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
 <fmt:setLocale value="${lang}" />
@@ -37,6 +38,18 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <div>
+                        <nav>
+                            <ul class="pagination">
+                                <li class='page-item <c:if test="${page == 0}">disabled</c:if>'>
+                                    <a class="page-link" href="/users?page=${page - 1}&search=${search}">Previous</a>
+                                </li>
+                                <li class='page-item <c:if test="${fn:length(users) lt 10}">disabled</c:if>'>
+                                    <a class="page-link" href="/users?page=${page + 1}&search=${search}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </c:if>
                 <c:if test="${empty users}">
                     <h4><fmt:message key='users.no.users' /></h4>

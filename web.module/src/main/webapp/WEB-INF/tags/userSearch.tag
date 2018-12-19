@@ -3,11 +3,11 @@
 
 <form action="/${url}" method="get">
     <div class="input-group stylish-input-group">
-        <input type="text" class="form-control" name="search" placeholder="Search">
+        <input type="text" class="form-control" name="search" placeholder="Search" value="${search}">
         <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+            <button type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
     </div>
 </form>

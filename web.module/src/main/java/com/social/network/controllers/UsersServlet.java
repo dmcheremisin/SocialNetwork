@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.social.network.utils.ServerUtils.getUserFromSession;
+import static com.social.network.utils.ServerUtils.isInteger;
 import static com.social.network.utils.ServerUtils.isNotBlank;
 
 /**
@@ -31,27 +32,22 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User userFromSession = getUserFromSession(req);
-        List<User> users = userDao.getAll();
         String search = req.getParameter("search");
+        String page = req.getParameter("page");
+        int pageNum = isInteger(page) ? Integer.parseInt(page) : 0;
 
-        Stream<User> filterSessionUser = users.stream()
-                .filter(user -> user.getId() != userFromSession.getId());
-        if(isNotBlank(search)){
+        List<User> users;
+        if(isNotBlank(search)) {
             logger.info("User search request: " + search);
-            String name = search.toLowerCase();
-            users = filterSessionUser
-                    .filter(u -> searchByName(name, u))
-                    .collect(Collectors.toList());
+            users = userDao.searchAll(userFromSession.getId(), pageNum, search);
         } else {
-            users = filterSessionUser.collect(Collectors.toList());
+            users = userDao.getAll(userFromSession.getId(), pageNum);
         }
 
         req.setAttribute("users", users);
+        req.setAttribute("page", pageNum);
+        req.setAttribute("search", search);
         req.getRequestDispatcher("users.jsp").forward(req, resp);
     }
 
-    static boolean searchByName(String name, User u) {
-        return (u.getFirstName().toLowerCase() + " " + u.getLastName().toLowerCase()).contains(name) ||
-                (u.getLastName().toLowerCase() + " " + u.getFirstName().toLowerCase()).contains(name);
-    }
 }
