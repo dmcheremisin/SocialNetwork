@@ -64,37 +64,25 @@
             <h1>Register today!</h1>
             <div class="form-group">
                 <form action="/register" method="post">
-                    <div class="form-group">
-                        <label for="firstname">First name: <input type="text" name="firstname" class="form-control"
-                                                                  id="firstname"/></label>
+                    <div class="form-group has-error">
+                        <label for="email">
+                            Email: <input type="email" name="email" class="form-control" id="email" required/>
+                        </label>
+                        <div class="help-block">sfdsfdsf</div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Last name: <input type="text" name="lastname" class="form-control"
-                                                                id="lastname"/></label>
+                        <label for="password">
+                            Password: <input type="password" name="password" class="form-control" id="password" required/>
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="dob">Birth date: <input type="date" name="dob" class="form-control"
-                                                            id="dob"/></label>
-                    </div>
-                    <div class="form-group"> Gender:
-                        <label class="radio-inline"><input type="radio" name="sex" value="1">M</label>
-                        <label class="radio-inline"><input type="radio" name="sex" value="2">F</label>
+                        <label for="conf-password">
+                            Confirm Password: <input type="password" name="password-confirm" class="form-control" id="conf-password" required/>
+                        </label>
+                        <div class="help-block hidden">sfdsfdsf</div>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone: <input type="text" name="phone" class="form-control"
-                                                         id="phone"/></label>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email: <input type="text" name="email" class="form-control"
-                                                         id="email"/></label>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password: <input type="password" name="password" class="form-control"
-                                                               id="password"/></label>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" name="submit" value="Зарегистрироваться &raquo"
-                               class="btn btn-lg btn-success"/></label>
+                        <input type="submit" name="submit" value="Зарегистрироваться &raquo" class="btn btn-lg btn-success"/>
                     </div>
                 </form>
             </div>
