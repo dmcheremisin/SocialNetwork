@@ -45,6 +45,9 @@
                     <version>1.0-SNAPSHOT</version>
                 </dependency>
             </dependencies>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
         </profile>
     </profiles>
 
