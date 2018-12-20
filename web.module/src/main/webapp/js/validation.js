@@ -4,10 +4,10 @@ $(document).ready(function () {
     });
     $(".password").on('change', function (e) {
         showError(".password", checkPassword(), ".password-error");
-        showError(".password-conf", checkPasswordConf(), ".password-conf-error");
+        showError(".password-confirm", checkPasswordConf(), ".password-confirm-error");
     });
-    $(".password-conf").on('change', function (e) {
-        showError(".password-conf", checkPasswordConf(), ".password-conf-error");
+    $(".password-confirm").on('change', function (e) {
+        showError(".password-confirm", checkPasswordConf(), ".password-confirm-error");
     });
     $(".submit").on("click", function (e) {
         var emailTest = checkEmail();
@@ -17,7 +17,7 @@ $(document).ready(function () {
             e.preventDefault();
             showError(".email", emailTest, ".email-error");
             showError(".password", passwordTest, ".password-error");
-            showError(".password-conf", passwordConfTest, ".password-conf-error");
+            showError(".password-confirm", passwordConfTest, ".password-confirm-error");
             $(".submit").prop('disabled', true);
         }
     })
@@ -33,13 +33,13 @@ function showError(element, result, selector) {
     }
 }
 function checkPasswordConf() {
-    var conf = $(".password-conf").val();
+    var conf = $(".password-confirm").val();
     var password = $(".password").val();
     return conf === password;
 }
 function checkEmail() {
     var value = $(".email").val();
-    var emailRegexp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([\.]*[a-zA-Z0-9-]+)+$/;
+    var emailRegexp = /^[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_]+\.([.]*[a-zA-Z0-9-_]+)+$/;
     return emailRegexp.test(value);
 }
 function checkPassword() {

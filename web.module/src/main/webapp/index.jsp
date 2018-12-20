@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sc" tagdir="/WEB-INF/tags" %>
 
 <c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
 <fmt:setLocale value="${lang}" />
@@ -33,24 +34,9 @@
             <h1><fmt:message key="index.register.today" /></h1>
             <div class="form-group">
                 <form action="/register" method="post" id="register">
-                    <div class="form-group">
-                        <label for="email">
-                            <fmt:message key="email" />: <input type="text" name="email" class="form-control email" id="email" />
-                        </label>
-                        <div class="help-block email-error hidden">Please, provide valid email</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">
-                            <fmt:message key="index.password" />: <input type="password" name="password password" class="form-control password" id="password" />
-                        </label>
-                        <div class="help-block password-error hidden">Please, use all characters: letters and numbers at least once, minimum 6 symbols</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password-conf">
-                            <fmt:message key="index.confirm.password" />: <input type="password" name="password-confirm" class="form-control password-conf" id="password-conf" />
-                        </label>
-                        <div class="help-block password-conf-error hidden">Passwords don't match</div>
-                    </div>
+                    <sc:input name="email" localizationName="email" type="text" errorMessage="provide.email" value="${emailValue}" />
+                    <sc:input name="password" localizationName="index.password" type="password" errorMessage="provide.password" value="${passwordValue}" />
+                    <sc:input name="password-confirm" localizationName="index.confirm.password" type="password" errorMessage="provide.pas.conf" value="${passwordConfirmValue}" />
                     <div class="form-group">
                         <input type="submit" name="submit" value="<fmt:message key="index.register" /> &raquo" class="btn btn-lg btn-success submit" /></label>
                     </div>

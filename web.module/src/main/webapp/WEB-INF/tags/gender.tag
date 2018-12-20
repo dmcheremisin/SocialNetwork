@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ attribute name="user" required="true" type="com.social.network.models.User" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ attribute name="user" required="true" type="com.social.network.models.User" %>
 
 <c:set var="lang" value="${not empty language ? language : 'en'}" scope="session" />
 <fmt:setLocale value="${lang}" />
