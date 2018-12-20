@@ -10,17 +10,15 @@ $(document).ready(function () {
         showError(".password-conf", checkPasswordConf(), ".password-conf-error");
     });
     $(".submit").on("click", function (e) {
-        //e.preventDefault();
         var emailTest = checkEmail();
         var passwordTest = checkPassword();
         var passwordConfTest = checkPasswordConf();
         if(!emailTest || !passwordTest || !passwordConfTest) {
+            e.preventDefault();
             showError(".email", emailTest, ".email-error");
             showError(".password", passwordTest, ".password-error");
             showError(".password-conf", passwordConfTest, ".password-conf-error");
             $(".submit").prop('disabled', true);
-        } else {
-            $("#register").submit();
         }
     })
 });
