@@ -27,12 +27,12 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input type="text" placeholder="Email" class="form-control login_email">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" placeholder="Password" class="form-control login_password">
                 </div>
-                <button type="submit" class="btn btn-success">Вход</button>
+                <button type="submit" class="btn btn-success login_submit">Вход</button>
             </form>
             <div class="navbar-right">
                 <a href="#" class="navbar-brand lang">Ru</a>
@@ -65,25 +65,25 @@
             <div class="form-group">
                 <form action="/register" method="post" id="register">
                     <div class="form-group">
-                        <label for="email">
-                            Email: <input type="email" name="email" class="form-control email" id="email" required/>
+                        <label for="register_email">
+                            Email: <input type="email" name="register_email" class="form-control register_email" id="register_email" required/>
                         </label>
-                        <div class="help-block email-error hidden">Please, provide valid email</div>
+                        <div class="help-block register_email_error hidden">Please, provide valid email</div>
                     </div>
                     <div class="form-group">
-                        <label for="password">
-                            Password: <input type="password" name="password" class="form-control password" id="password" required/>
+                        <label for="register_password">
+                            Password: <input type="password" name="register_password" class="form-control register_password" id="register_password" required/>
                         </label>
-                        <div class="help-block password-error hidden">Please, use all characters: letters and numbers at least once, minimum 6 symbols</div>
+                        <div class="help-block register_password_error hidden">Please, use all characters: letters and numbers at least once, minimum 6 symbols</div>
                     </div>
                     <div class="form-group">
-                        <label for="conf-password">
-                            Confirm Password: <input type="password" name="password-confirm" class="form-control password-conf" id="conf-password" required/>
+                        <label for="register_password_confirm">
+                            Confirm Password: <input type="password" name="register_password_confirm" class="form-control register_password_confirm" id="register_password_confirm" required/>
                         </label>
-                        <div class="help-block password-conf-error hidden">Passwords don't match</div>
+                        <div class="help-block register_password_confirm_error hidden">Passwords don't match</div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="submit" value="Register &raquo" class="btn btn-lg btn-success submit"/>
+                        <input type="submit" name="submit" value="Register &raquo" class="btn btn-lg btn-success register_submit"/>
                     </div>
                 </form>
             </div>

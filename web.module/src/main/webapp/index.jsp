@@ -34,11 +34,11 @@
             <h1><fmt:message key="index.register.today" /></h1>
             <div class="form-group">
                 <form action="/register" method="post" id="register">
-                    <sc:input name="email" localizationName="email" type="text" errorMessage="provide.email" value="${emailValue}" />
-                    <sc:input name="password" localizationName="index.password" type="password" errorMessage="provide.password" value="${passwordValue}" />
-                    <sc:input name="password-confirm" localizationName="index.confirm.password" type="password" errorMessage="provide.pas.conf" value="${passwordConfirmValue}" />
+                    <sc:input name="register_email" localizationName="email" type="text" errorMessage="provide.email" value="${emailValue}" />
+                    <sc:input name="register_password" localizationName="index.password" type="password" errorMessage="provide.password" value="${passwordValue}" />
+                    <sc:input name="register_password_confirm" localizationName="index.confirm.password" type="password" errorMessage="provide.pas.conf" value="${passwordConfirmValue}" />
                     <div class="form-group">
-                        <input type="submit" name="submit" value="<fmt:message key="index.register" /> &raquo" class="btn btn-lg btn-success submit" /></label>
+                        <input type="submit" name="submit" value="<fmt:message key="index.register" /> &raquo" class="btn btn-lg btn-success register_submit" /></label>
                     </div>
                 </form>
             </div>

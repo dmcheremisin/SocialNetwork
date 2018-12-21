@@ -15,7 +15,7 @@
     <label for="${name}">
         <fmt:message key='${localizationName}' />: <input type="${type}" name="${name}" class="form-control ${name}" id="${name}" value="${value}" />
     </label>
-    <div class="help-block ${name}-error <c:if test="${empty error or error ne name}">hidden</c:if>">
+    <div class="help-block ${name}_error <c:if test="${empty error or error ne name}">hidden</c:if>">
         <fmt:message key='${errorMessage}' />
     </div>
 </div>

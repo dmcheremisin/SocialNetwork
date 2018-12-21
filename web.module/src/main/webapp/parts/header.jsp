@@ -37,12 +37,12 @@
             <c:if test="${user == null}">
                 <form action="/login" method="post" class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" name="email" placeholder="Email" class="form-control">
+                        <input type="text" name="email" placeholder="Email" class="form-control login_email">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" placeholder="Password" class="form-control">
+                        <input type="password" name="password" placeholder="Password" class="form-control login_password">
                     </div>
-                    <button type="submit" class="btn btn-success"><fmt:message key="login" /></button>
+                    <button type="submit" class="btn btn-success login_submit"><fmt:message key="login" /></button>
                 </form>
             </c:if>
             <div class="navbar-right">
