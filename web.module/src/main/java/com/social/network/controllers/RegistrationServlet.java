@@ -31,20 +31,20 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String passwordConfirmation = req.getParameter("password_confirm");
+        String email = req.getParameter("register_email");
+        String password = req.getParameter("register_password");
+        String passwordConfirmation = req.getParameter("register_password_confirm");
         addAttributesToRequest(req, email, password, passwordConfirmation);
         if(!validateEmail(email)) {
-            showValidationMessage("email", req, resp);
+            showValidationMessage("register_email", req, resp);
             return;
         }
         if (!validatePassword(password)) {
-            showValidationMessage("password", req, resp);
+            showValidationMessage("register_password", req, resp);
             return;
         }
         if (isBlank(passwordConfirmation) || !password.equals(password)) {
-            showValidationMessage("password_confirm", req, resp);
+            showValidationMessage("register_password_confirm", req, resp);
             return;
         }
 
