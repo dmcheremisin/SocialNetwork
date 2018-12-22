@@ -89,4 +89,4 @@ INSERT INTO sexes VALUES (null, 'undefined');
 INSERT INTO sexes VALUES (null, 'male');
 INSERT INTO sexes VALUES (null, 'female');
 
-INSERT INTO USERS VALUES (null, 'Tyrion', 'Lannister', '1987-09-28', 2, '+7 999 999 99 99', 'tyrion@adm.ru', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 1, 'false', '1.jpg');
+INSERT INTO USERS VALUES (null, 'Tyrion', 'Lannister', '1987-09-28', 2, '+7 999 999 99 99', 'tyrion@adm.ru', '4fdde5d31eabc83bdf7ef9e1470119f3875f22f10c18ac3cfa7116ad86e01c7b07c5342c85cb1accdc72af08932cc98ad4f910b3094d1d51d7be5fbc6c306752', 1, 'false', '1.jpg');
