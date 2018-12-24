@@ -11,6 +11,13 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
+    <session-config>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>true</secure>
+        </cookie-config>
+    </session-config>
+
     <context-param>
         <param-name>allowedUrls</param-name>
         <param-value>/css/,/fonts/,/img/,/js/,/avatars/,/register,/locale</param-value>
