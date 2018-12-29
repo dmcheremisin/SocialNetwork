@@ -44,7 +44,7 @@ public class InitializationDao {
             logger.info("All data is initialized successfully");
         } catch (SQLException e) {
             logger.error(SOMETHING_WENT_WRONG_WITH_INITIALIZATION);
-            throw new RuntimeException(SOMETHING_WENT_WRONG_WITH_INITIALIZATION);
+            throw new RuntimeException(e);
         }
     }
 
@@ -56,7 +56,7 @@ public class InitializationDao {
             return sb;
         } catch (IOException e) {
             logger.error(CAN_T_READ_SQL_BATCH);
-            throw new RuntimeException(CAN_T_READ_SQL_BATCH);
+            throw new RuntimeException(e);
         }
     }
 

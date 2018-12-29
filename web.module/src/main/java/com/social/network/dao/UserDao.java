@@ -61,7 +61,7 @@ public class UserDao{
             return list.get(0);
         } catch (SQLException e) {
             logger.error(String.format("Can't get object with id=%s in the database", id));
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -80,10 +80,9 @@ public class UserDao{
                 }
             }
         } catch (SQLException e) {
+            logger.error(CAN_T_INSERT_USER_IN_THE_DATABASE + entity);
             logger.error(e.getMessage());
-            String message = CAN_T_INSERT_USER_IN_THE_DATABASE + entity;
-            logger.error(message);
-            throw new RuntimeException(message);
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,9 +92,8 @@ public class UserDao{
             prepareStatementForUpdate(stm, entity);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_UPDATE_USER_WITH_ID_S_IN_THE_DATABASE, entity.getId());
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_UPDATE_USER_WITH_ID_S_IN_THE_DATABASE, entity.getId()));
+            throw new RuntimeException(e);
         }
     }
 
@@ -105,9 +103,8 @@ public class UserDao{
             stm.setInt(1, entity.getId());
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_DELETE_USER_WITH_ID_S_FROM_THE_DATABASE, entity.getId());
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error( String.format(CAN_T_DELETE_USER_WITH_ID_S_FROM_THE_DATABASE, entity.getId()));
+            throw new RuntimeException(e);
         }
     }
 
@@ -120,7 +117,7 @@ public class UserDao{
             return parseResultSet(rs);
         } catch (SQLException e) {
             logger.error(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
-            throw new RuntimeException(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
+            throw new RuntimeException(e);
         }
     }
 
@@ -134,7 +131,7 @@ public class UserDao{
             return parseResultSet(rs);
         } catch (SQLException e) {
             logger.error(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
-            throw new RuntimeException(CAN_T_GET_ALL_USERS_FROM_THE_DATABASE);
+            throw new RuntimeException(e);
         }
     }
 
@@ -162,9 +159,8 @@ public class UserDao{
             stm.executeUpdate();
             return get(user.getId());
         } catch (SQLException e) {
-            String message = String.format(CAN_T_UPDATE_IMAGE, user.getId());
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_UPDATE_IMAGE, user.getId()));
+            throw new RuntimeException(e);
         }
     }
 
@@ -176,9 +172,8 @@ public class UserDao{
             stm.executeUpdate();
             return get(user.getId());
         } catch (SQLException e) {
-            String message = String.format(CAN_T_UPDATE_USER_PASSWORD, user.getId());
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_UPDATE_USER_PASSWORD, user.getId()));
+            throw new RuntimeException(e);
         }
     }
 
@@ -189,9 +184,8 @@ public class UserDao{
             stm.setInt(2, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_BLOCK_UNBLOCK_USER, userId, blocked);
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_BLOCK_UNBLOCK_USER, userId, blocked));
+            throw new RuntimeException(e);
         }
     }
 
@@ -202,9 +196,8 @@ public class UserDao{
             stm.setInt(2, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_SET_PRIVILEGES_USER, userId, role.getRoleString());
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_SET_PRIVILEGES_USER, userId, role.getRoleString()));
+            throw new RuntimeException(e);
         }
     }
 

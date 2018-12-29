@@ -69,7 +69,7 @@ public class SettingsServlet extends HttpServlet {
             doGet(req, resp);
         } catch (Exception e) {
             logger.error(CAN_T_PARSE_USER_DATA_PARAMETERS);
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 }

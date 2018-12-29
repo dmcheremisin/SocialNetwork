@@ -21,7 +21,7 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>custom</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -34,7 +34,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>prod</id>
+            <id>tomcat</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>

@@ -48,9 +48,8 @@ public class FriendsDao {
             friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
             return friends;
         } catch (SQLException e) {
-            String message = CAN_T_GET_ALL_USER_FRIENDS_ENTITIES + userId;
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(CAN_T_GET_ALL_USER_FRIENDS_ENTITIES + userId);
+            throw new RuntimeException(e);
         }
     }
 
@@ -64,9 +63,8 @@ public class FriendsDao {
             friends.forEach(f -> f.setFriend(f.getUserSender().getId() == userId ? f.getUserReceiver() : f.getUserSender()));
             return friends;
         } catch (SQLException e) {
-            String message = CAN_T_GET_ALL_USER_FRIENDS_REQUESTS + userId;
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(CAN_T_GET_ALL_USER_FRIENDS_REQUESTS + userId);
+            throw new RuntimeException(e);
         }
     }
 
@@ -80,9 +78,8 @@ public class FriendsDao {
             ResultSet rs = stm.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_CHECK_FRIENDSHIP, user, friend);
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_CHECK_FRIENDSHIP, user, friend));
+            throw new RuntimeException(e);
         }
     }
     
@@ -93,9 +90,8 @@ public class FriendsDao {
             stm.setInt(2, friendId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_INSERT_ADD_TO_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_INSERT_ADD_TO_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId));
+            throw new RuntimeException(e);
         }
     }
 
@@ -108,9 +104,8 @@ public class FriendsDao {
             stm.setInt(4, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_ACCEPT_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_ACCEPT_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId));
+            throw new RuntimeException(e);
         }
     }
 
@@ -123,9 +118,8 @@ public class FriendsDao {
             stm.setInt(4, userId);
             stm.executeUpdate();
         } catch (SQLException e) {
-            String message = String.format(CAN_T_REMOVE_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId);
-            logger.error(message);
-            throw new RuntimeException(message);
+            logger.error(String.format(CAN_T_REMOVE_FRIEND_REQUEST_USER_S_FRIEND_S, userId, friendId));
+            throw new RuntimeException(e);
         }
     }
 

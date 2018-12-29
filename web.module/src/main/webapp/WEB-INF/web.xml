@@ -14,7 +14,8 @@
     <session-config>
         <cookie-config>
             <http-only>true</http-only>
-            <secure>true</secure>
+            <!--Uncomment next line for production-->
+            <!--<secure>true</secure>-->
         </cookie-config>
     </session-config>
 

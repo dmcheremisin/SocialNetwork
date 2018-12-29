@@ -21,7 +21,7 @@ public class Encryption {
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             logger.error(CAN_T_ENCRYPT_PASSWORD);
-            throw new RuntimeException(CAN_T_ENCRYPT_PASSWORD);
+            throw new RuntimeException(e);
         }
     }
 }

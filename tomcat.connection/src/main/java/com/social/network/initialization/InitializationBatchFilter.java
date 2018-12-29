@@ -19,10 +19,17 @@ public class InitializationBatchFilter {
      */
     public static void addBatchToStatement(Statement stmt, StringBuilder schema, @Ignore StringBuilder dump) {
         try {
-            stmt.addBatch(schema.toString());
+            splitAndAddSql(stmt, schema);
         } catch (SQLException e) {
             logger.error(CAN_T_ADD_BATCH_TO_STATEMENT);
-            throw new RuntimeException(CAN_T_ADD_BATCH_TO_STATEMENT);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void splitAndAddSql(Statement stmt, StringBuilder sqlBatch) throws SQLException {
+        String[] schemaSql = sqlBatch.toString().split(";");
+        for (String sql : schemaSql) {
+            stmt.addBatch(sql);
         }
     }
 }

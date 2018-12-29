@@ -45,7 +45,7 @@ public class ContextListener implements ServletContextListener {
 
         } catch (SQLException | ClassNotFoundException e) {
             logger.error(CAN_T_INITIALIZE_DATABASE_SCHEMA_AND_DATA);
-            throw new RuntimeException(CAN_T_INITIALIZE_DATABASE_SCHEMA_AND_DATA);
+            throw new RuntimeException(e);
         }
     }
 

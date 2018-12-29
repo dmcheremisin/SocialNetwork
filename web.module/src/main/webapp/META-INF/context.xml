@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Context>
 
+    <!--h2 connection properties-->
     <Resource auth="Container"
               name="jdbc/Prod"
               type="javax.sql.DataSource"
@@ -12,5 +13,18 @@
               driverClassName="org.h2.Driver"
               url="jdbc:h2:mem:users;mode=mysql"
     />
+
+    <!--mysql connection properties-->
+    <!--<Resource auth="Container"-->
+              <!--name="jdbc/Prod"-->
+              <!--type="javax.sql.DataSource"-->
+              <!--maxTotal="100"-->
+              <!--maxIdle="30"-->
+              <!--maxWaitMillis="10000"-->
+              <!--username="dmch"-->
+              <!--password="123456"-->
+              <!--driverClassName="com.mysql.jdbc.Driver"-->
+              <!--url="jdbc:mysql://127.0.0.1:3306/dcsocial?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"-->
+    <!--/>-->
 
 </Context>

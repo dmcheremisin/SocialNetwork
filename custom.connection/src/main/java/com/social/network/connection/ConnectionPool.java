@@ -88,7 +88,7 @@ public class ConnectionPool {
             return connection;
         } catch (Exception e) {
             logger.error(CAN_T_GET_CONNECTION_FROM_POOL);
-            throw new RuntimeException(CAN_T_GET_CONNECTION_FROM_POOL);
+            throw new RuntimeException(e);
         }
     }
 
@@ -99,7 +99,7 @@ public class ConnectionPool {
             }
         } catch (Exception e) {
             logger.error(CAN_RETURN_CONNECTION_TO_THE_POOL);
-            throw new RuntimeException(CAN_RETURN_CONNECTION_TO_THE_POOL);
+            throw new RuntimeException(e);
         }
     }
 

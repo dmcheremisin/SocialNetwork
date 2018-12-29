@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class ConnectionPool {
     private static final Logger logger = Logger.getLogger(ConnectionPool.class);
     private static final String CAN_T_GET_CONNECTION_FROM_POOL = "Can't get tomcat connection from the pool";
+    private static final String RETURN_CONNECTION_ERROR = "Return connection error";
 
     private static ConnectionPool cp;
     private final DataSource ds;
@@ -42,7 +43,7 @@ public class ConnectionPool {
             return ds.getConnection();
         } catch (SQLException e) {
             logger.error(CAN_T_GET_CONNECTION_FROM_POOL);
-            throw new RuntimeException(CAN_T_GET_CONNECTION_FROM_POOL);
+            throw new RuntimeException(e);
         }
     }
 
@@ -54,7 +55,8 @@ public class ConnectionPool {
         try {
             c.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(RETURN_CONNECTION_ERROR);
+            throw new RuntimeException(e);
         }
     }
 }
