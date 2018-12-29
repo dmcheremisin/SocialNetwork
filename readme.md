@@ -77,6 +77,7 @@ production environment.
 
 ### TODO
 A lot of things should be done to make this project ready for a real production including testing.
-But my aim was to prototype social network project based on Servlets and Jsp technologies.
+But my aim was to prototype social network project based on Servlets and Jsp technologies. I made here everything I wanted to use.
 
-And....I have no time and a great will to make something interesting using Spring.
+And....I have no time. 
+...But I have a great will to make something interesting using Spring in the next project.
