@@ -2,7 +2,7 @@ package dao;
 
 import com.social.network.connective.Connective;
 import com.social.network.dao.FriendsDao;
-import com.social.network.dao.InitializationDao;
+import com.social.network.init.Initialization;
 import com.social.network.dao.MessagesDao;
 import com.social.network.dao.UserDao;
 
@@ -18,8 +18,8 @@ public class BaseDaoTest {
     static {
         try {
             Connective connective = getConnectionPool(null)::getConnection;
-            InitializationDao initializationDao = new InitializationDao(connective);
-            initializationDao.initializeStubData();
+            Initialization initialization = new Initialization(connective);
+            initialization.initializeStubData();
 
             userDao = new UserDao(connective);
             messagesDao = new MessagesDao(connective);

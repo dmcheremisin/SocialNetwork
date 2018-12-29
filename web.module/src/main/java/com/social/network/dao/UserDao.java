@@ -32,7 +32,7 @@ public class UserDao{
     private static final String CAN_T_PARSE_USER_RESULT_SET = "Can't parse user result set";
     
     private static final String SELECT_ALL_USERS = "SELECT * FROM users WHERE id != ? LIMIT 10 OFFSET ?";
-    private static final String SEARCH_USERS = "SELECT * FROM users WHERE id != ? AND LOWER(concat((firstname), ' ', lastname)) LIKE ? LIMIT 10 OFFSET ?;";
+    private static final String SEARCH_USERS = "SELECT * FROM users WHERE id != ? AND LOWER(concat((firstname), ' ', lastname)) LIKE LOWER(?) LIMIT 10 OFFSET ?;";
     private static final String SELECT_USER = "SELECT * FROM users WHERE id=?";
     private static final String UPDATE_USER = "UPDATE users SET firstname=?, lastname=?, dob=?, sex=?, phone=? WHERE id=?";
     private static final String DELETE_USER = "DELETE FROM users WHERE id=?";
