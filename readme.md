@@ -74,7 +74,7 @@ depending on the data obtained.
 For disabling possibility of session hijacking and man in the middle attacks some preferences were written in the web.xml file.
 A block "\<session-config\>" contains two lines "\<http-only\>" and "\<secure\>", one of them "\<secure\>" blocks local development
 because it requires https connection. It is the reason why it is commented by default, but it supposed to be uncommented in
-production environment. Actually, Maven may pack different web.xml file depending profile, but I did not want to do this.
+production environment. Actually, Maven may pack different web.xml file depending on profile used, but I did not want to do this.
 
 
 ### TODO
