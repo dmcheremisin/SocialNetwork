@@ -72,14 +72,21 @@ An authorization filter is used for security of the web application. It checks u
 depending on the data obtained.
 
 For disabling possibility of session hijacking and man in the middle attacks some preferences were written in the web.xml file.
-A block "<session-config>" contains two lines "<http-only>" and "<secure>", one of them "<secure>" may block local development
+A block "\<session-config\>" contains two lines "\<http-only\>" and "\<secure\>", one of them "\<secure\>" blocks local development
 because it requires https connection. It is the reason why it is commented by default, but it supposed to be uncommented in
-production environment.
+production environment. Actually, Maven may pack different web.xml file depending profile, but I did not want to do this.
 
 
 ### TODO
 A lot of things should be done to make this project ready for a real production including testing.
-But my aim was to prototype social network project based on Servlets and Jsp technologies. I made here everything I wanted to use.
+But my aim was to prototype social network project based on Servlets and Jsp technologies. 
+I made here everything I wanted to use.
 
 And....I have no time. 
-...But I have a great will to make something interesting using Spring in the next project.
+
++ expand test coverage
++ expand validation and error messages for not only index.jsp page, but also for other pages
++ make a new module for JSON objects requesting and responding. It is a good idea to write something like a custom lib for 
+information exchange in JSON format using Jackson or Gson. But it will require to change all templates. 
+Additionally, all js code should be updated for parsing and sending json objects.
++ add screenshots of the project and update readme.md
