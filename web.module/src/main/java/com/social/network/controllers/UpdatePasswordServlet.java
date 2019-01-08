@@ -30,7 +30,7 @@ public class UpdatePasswordServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         User user = getUserFromSession(req);
         String oldPassword = user.getPassword();

@@ -30,7 +30,7 @@ public class UsersServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User userFromSession = getUserFromSession(req);
         String search = req.getParameter("search");
         String page = req.getParameter("page");

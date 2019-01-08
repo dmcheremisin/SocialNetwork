@@ -30,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("register_email");
         String password = req.getParameter("register_password");
         String passwordConfirmation = req.getParameter("register_password_confirm");

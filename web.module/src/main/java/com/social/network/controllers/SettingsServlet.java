@@ -36,12 +36,12 @@ public class SettingsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = getUserFromSession(req);
         try {
             String firstName = req.getParameter("firstName");
             if (ServerUtils.isNotBlank(firstName)){
-                user.setFirstName(req.getParameter("firstName"));
+                user.setFirstName(firstName);
             }
 
             String lastName = req.getParameter("lastName");

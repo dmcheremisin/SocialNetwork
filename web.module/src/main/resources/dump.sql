@@ -21,7 +21,7 @@ INSERT INTO friendship VALUES (null, 4, 6, true);
 INSERT INTO messages VALUES (null, '2018-07-09 10:11:12', 1, 2, 'Привет! Как дела?');
 INSERT INTO messages VALUES (null, '2018-07-10 10:11:12', 2, 1, 'Привет! Спасибо, хорошо=)');
 INSERT INTO messages VALUES (null, '2018-07-11 10:11:12', 3, 1, 'Привет! Отец недоволен тобой! Он хочет тебя казнить');
-INSERT INTO messages VALUES (null, '2018-07-11 10:12:34', 1, 3, 'Что мне делать? Я не хочу умирать! У меня есть арбалет. Может из арбалета его?');
+INSERT INTO messages VALUES (null, '2018-07-11 10:12:34', 1, 3, 'Что мне делать? Я не хочу умирать! У меня есть арбалет!');
 INSERT INTO messages VALUES (null, '2018-07-12 10:11:12', 3, 2, 'Привет! Я помогу тебе с Вестерросом! Ведь Lannisterы всегда платят свои долги=)!');
 INSERT INTO messages VALUES (null, '2018-07-13 10:11:12', 1, 2, 'Чего делаешь?');
 INSERT INTO messages VALUES (null, '2018-07-14 10:11:12', 2, 1, 'Вестеррос захватываю! Ах-ха-хаа-хааа');

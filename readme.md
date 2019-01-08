@@ -16,7 +16,9 @@ take some time for the application initialization and start.
 * Jsp as template engine
 * Javascript, jQuery as client-side language/library
 * CSS, Bootstrap 3.3.7 for markup
-* JUnit for testing
+* JUnit for unit testing
+* Mockito for servlets testing
+* Jacoco for checking test coverage
 * Git as version control system
 
 ## Environment
