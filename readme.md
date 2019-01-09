@@ -15,7 +15,10 @@ take some time for the application initialization and start.
 * Servlets 
 * Jsp as template engine
 * Javascript, jQuery as client-side language/library
-* CSS, Bootstrap 3.3.7 for markup
+* Java API for WebSocket(JSR 356) for notifications
+* Bootstrap 3.3.7 framework for UI
+* CSS for markup
+* Bootstrap-notify plugin for push notifications
 * JUnit for unit testing
 * Mockito for servlets testing
 * Jacoco for checking test coverage
@@ -44,6 +47,7 @@ take some time for the application initialization and start.
 * Administrator user with facilities to block/unblock user or make him(her) admin
 * Change user settings(avatar, first name, last name, date of birth,...)
 * Messages
+* Push notifications about recent messages
 * User search by first name and last name 
 * Users pagination
 * Friends requests and friendship acceptance
@@ -84,6 +88,7 @@ I made here everything I wanted to use.
 
 And....I have no time. 
 
++ move project to SPA(single page application)
 + expand test coverage
 + expand validation and error messages for not only index.jsp page, but also for other pages
 + make a new module for JSON objects requesting and responding. It is a good idea to write something like a custom lib for 

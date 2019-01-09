@@ -15,6 +15,8 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-notify.min.js"></script>
+<script src="js/notification.js"></script>
 
 <c:if test="${param.specificScript != null}">
     <script src="${param.specificScript}"></script>

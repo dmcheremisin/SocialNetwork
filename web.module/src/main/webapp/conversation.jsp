@@ -41,13 +41,13 @@
                     <fmt:message key="conversation.new" />
                 </div>
                 <div class="panel-body">
-                    <form method="post">
+                    <form method="post" action="/conversation">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" name="message"></textarea>
-                            <input type="hidden" name="companion" value="${companionUser.id}" >
+                            <textarea class="form-control message-body" rows="5" name="message"></textarea>
+                            <input type="hidden" name="companion" value="${companionUser.id}" class="companion-user">
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" value="${send} &raquo" class="btn btn-success"/></label>
+                            <input type="submit" name="submit" value="${send} &raquo" class="btn btn-success submit-message"/></label>
                         </div>
                     </form>
                 </div>
@@ -56,6 +56,4 @@
     </div>
 </div>
 
-<jsp:include page="parts/footer.jsp" >
-    <jsp:param name="specificScript" value="js/profile.js" />
-</jsp:include>
+<jsp:include page="parts/footer.jsp" />
