@@ -1,4 +1,4 @@
-# Social Network Project
+# Social Network Jsp and Servlets Project
 Maven multi-module project that simulates social network of Game of Thrones creatures.
 Admin user for any profile is Tyrion Lannister as the most smart character. 
 
